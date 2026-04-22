@@ -657,14 +657,18 @@ function search() {
 // Initial render
 renderCards(KANJI);
 </script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>
+const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+
+(function raf(time) { lenis.raf(time); requestAnimationFrame(raf); })(0);
+
 const header = document.querySelector('header');
 let lastY = 0;
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  header.classList.toggle('hidden', y > lastY && y > 80);
-  lastY = y;
-}, { passive: true });
+lenis.on('scroll', ({ scroll }) => {
+  header.classList.toggle('hidden', scroll > lastY && scroll > 80);
+  lastY = scroll;
+});
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
