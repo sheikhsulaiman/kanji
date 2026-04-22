@@ -51,6 +51,11 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+  }
+  header.hidden {
+    transform: translateY(-100%);
   }
   header h1 {
     font-family: 'Bebas Neue', sans-serif;
@@ -653,6 +658,14 @@ function search() {
 renderCards(KANJI);
 </script>
 <script>
+const header = document.querySelector('header');
+let lastY = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  header.classList.toggle('hidden', y > lastY && y > 80);
+  lastY = y;
+}, { passive: true });
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/kanji/sw.js').catch(() => {});
