@@ -1,0 +1,25 @@
+{
+  "name": "KANJI — N5 & N4 Reference",
+  "short_name": "KANJI",
+  "description": "Japanese kanji reference for JLPT N5 and N4 levels",
+  "start_url": "/kanji/",
+  "scope": "/kanji/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0a0a0a",
+  "background_color": "#f5f0e8",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
