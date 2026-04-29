@@ -91,6 +91,22 @@
         text-transform: uppercase;
         letter-spacing: 0.1em;
       }
+      .header-app {
+        display: none;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+        background: var(--yellow);
+        color: var(--black);
+        padding: 6px 12px;
+        border: 2px solid var(--black);
+        text-decoration: none;
+        box-shadow: 3px 3px 0 var(--black);
+      }
+      .header-app:active {
+        transform: translate(2px, 2px);
+        box-shadow: none;
+      }
 
       /* HAMBURGER */
       .hamburger {
@@ -164,6 +180,17 @@
       .tab-btn.active.all {
         background: var(--red);
         color: var(--white);
+      }
+      .tab-row {
+        display: contents;
+      }
+      .tab-btn.app-link {
+        background: var(--yellow);
+        color: var(--black);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        margin-left: auto;
       }
 
       .search-wrap {
@@ -367,6 +394,13 @@
         .hamburger {
           display: flex;
         }
+        .header-app {
+          display: inline-flex;
+          align-items: center;
+        }
+        .header-badge {
+          display: none;
+        }
         .controls {
           padding: 0 20px;
           max-height: 0;
@@ -402,6 +436,16 @@
           width: 100%;
           text-align: center;
         }
+        .controls .tab-row {
+          display: flex;
+          gap: 10px;
+          width: 100%;
+        }
+        .controls .tab-row .tab-btn {
+          flex: 1 1 0;
+          width: auto;
+          padding: 10px 4px;
+        }
         .grid {
           padding: 20px;
           gap: 16px;
@@ -431,6 +475,7 @@
       </div>
       <div class="header-right">
         <div class="header-badge">286 Kanji</div>
+        <a class="header-app" href="app.html" aria-label="Open app">APP →</a>
         <button
           class="hamburger"
           id="hamburger"
@@ -447,11 +492,13 @@
     </header>
 
     <div class="controls" id="controls">
-      <button class="tab-btn active all" onclick="filter('all', this)">
-        ALL
-      </button>
-      <button class="tab-btn n5" onclick="filter('n5', this)">N5</button>
-      <button class="tab-btn n4" onclick="filter('n4', this)">N4</button>
+      <div class="tab-row">
+        <button class="tab-btn active all" onclick="filter('all', this)">
+          ALL
+        </button>
+        <button class="tab-btn n5" onclick="filter('n5', this)">N5</button>
+        <button class="tab-btn n4" onclick="filter('n4', this)">N4</button>
+      </div>
       <div class="search-wrap">
         <input
           type="text"
@@ -461,6 +508,7 @@
         />
       </div>
       <div class="count-badge" id="countBadge">286 shown</div>
+      <a class="tab-btn app-link" href="app.html">APP →</a>
     </div>
 
     <div class="grid" id="grid"></div>

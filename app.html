@@ -18,6 +18,9 @@ body{background:var(--white);color:var(--black);font-family:'Space Mono',monospa
 
 /* ── TOPBAR ── */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--top-h);background:var(--black);border-bottom:3px solid var(--yellow);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:200}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.topbar-back{color:var(--yellow);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;line-height:1;padding:2px 8px;border:2px solid var(--yellow);transition:background 0.15s,color 0.15s}
+.topbar-back:active{background:var(--yellow);color:var(--black)}
 .topbar-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--yellow);letter-spacing:0.08em}
 .topbar-title span{color:var(--red)}
 .topbar-badge{background:var(--yellow);color:var(--black);font-size:0.6rem;font-weight:700;padding:3px 8px;border:2px solid var(--yellow);letter-spacing:0.08em}
@@ -36,6 +39,7 @@ body{background:var(--white);color:var(--black);font-family:'Space Mono',monospa
 
 /* ── BROWSE TAB ── */
 .filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filter-row{display:contents}
 .filter-btn{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding:7px 16px;border:var(--border);background:var(--white);cursor:pointer;box-shadow:var(--shadow);transition:all 0.1s}
 .filter-btn:active{transform:translate(2px,2px);box-shadow:none}
 .filter-btn.active-all{background:var(--red);color:var(--white)}
@@ -169,9 +173,31 @@ body{background:var(--white);color:var(--black);font-family:'Space Mono',monospa
 @media (max-width:600px){
   body[data-tab="browse"] .hamburger{display:flex}
   body[data-tab="browse"] .topbar-badge{display:none}
-  #panel-browse .filter-bar{max-height:0;overflow:hidden;margin-bottom:0;transition:max-height 0.3s ease,margin-bottom 0.3s ease}
-  #panel-browse .filter-bar.open{max-height:400px;margin-bottom:16px}
-  #panel-browse .filter-bar > *{flex:1 0 100%}
+  #panel-browse .filter-bar{
+    position:fixed;
+    top:var(--top-h);
+    left:0;
+    right:0;
+    z-index:150;
+    background:var(--black);
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+    margin:0;
+    padding:0 16px;
+    max-height:0;
+    overflow:hidden;
+    border-bottom:0 solid var(--yellow);
+    transition:max-height 0.3s ease,padding 0.3s ease,border-bottom-width 0.3s ease;
+  }
+  #panel-browse .filter-bar.open{
+    max-height:400px;
+    padding:14px 16px;
+    border-bottom-width:3px;
+  }
+  #panel-browse .filter-bar > *{width:100%;text-align:center}
+  #panel-browse .filter-bar .filter-row{display:flex;gap:8px;width:100%}
+  #panel-browse .filter-bar .filter-row .filter-btn{flex:1 1 0;width:auto;padding:7px 4px}
 }
 
 /* stripe bg */
@@ -188,7 +214,10 @@ body{background:var(--white);color:var(--black);font-family:'Space Mono',monospa
 <div class="stripe-bg"></div>
 
 <div class="topbar">
-  <div class="topbar-title">漢字 <span>MASTER</span></div>
+  <div class="topbar-left">
+    <a class="topbar-back" href="index.html" aria-label="Back">←</a>
+    <div class="topbar-title">漢字 <span>MASTER</span></div>
+  </div>
   <div class="topbar-right">
     <div class="topbar-badge">286 KANJI</div>
     <button class="hamburger" id="hamburger" aria-label="Toggle filters" aria-expanded="false" onclick="toggleMenu()">
@@ -202,9 +231,11 @@ body{background:var(--white);color:var(--black);font-family:'Space Mono',monospa
   <!-- ── BROWSE ── -->
   <div class="tab-panel active" id="panel-browse">
     <div class="filter-bar">
-      <button class="filter-btn active-all" id="fb-all" onclick="filterCards('all',this)">ALL</button>
-      <button class="filter-btn" id="fb-n5" onclick="filterCards('n5',this)">N5</button>
-      <button class="filter-btn" id="fb-n4" onclick="filterCards('n4',this)">N4</button>
+      <div class="filter-row">
+        <button class="filter-btn active-all" id="fb-all" onclick="filterCards('all',this)">ALL</button>
+        <button class="filter-btn" id="fb-n5" onclick="filterCards('n5',this)">N5</button>
+        <button class="filter-btn" id="fb-n4" onclick="filterCards('n4',this)">N4</button>
+      </div>
       <input class="search-box" id="searchBox" placeholder="Search kanji, meaning..." oninput="searchCards()">
       <div class="count-tag" id="countTag">286</div>
     </div>
