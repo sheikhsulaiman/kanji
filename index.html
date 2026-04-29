@@ -1,613 +1,3898 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0a0a0a">
-<meta name="description" content="Japanese kanji reference for JLPT N5 and N4 levels. Search readings, meanings, and example words.">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="KANJI">
-<link rel="manifest" href="site.webmanifest">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<title>KANJI — N5 & N4 Reference</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --black: #0a0a0a;
-    --white: #f5f0e8;
-    --yellow: #FFE000;
-    --red: #FF2D00;
-    --blue: #0047FF;
-    --green: #00C853;
-    --pink: #FF6EC7;
-    --border: 3px solid var(--black);
-    --shadow: 5px 5px 0px var(--black);
-    --shadow-lg: 8px 8px 0px var(--black);
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta
+      name="description"
+      content="Japanese kanji reference for JLPT N5 and N4 levels. Search readings, meanings, and example words."
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="KANJI" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <title>KANJI — N5 & N4 Reference</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --black: #0a0a0a;
+        --white: #f5f0e8;
+        --yellow: #ffe000;
+        --red: #ff2d00;
+        --blue: #00b8c4;
+        --green: #00c853;
+        --pink: #ff6ec7;
+        --border: 3px solid var(--black);
+        --shadow: 5px 5px 0px var(--black);
+        --shadow-lg: 8px 8px 0px var(--black);
+      }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  body {
-    background: var(--white);
-    color: var(--black);
-    font-family: 'Space Mono', monospace;
-    overflow-x: hidden;
-  }
+      body {
+        background: var(--white);
+        color: var(--black);
+        font-family: "Space Mono", monospace;
+        overflow-x: hidden;
+      }
 
-  /* HEADER */
-  header {
-    background: var(--black);
-    color: var(--yellow);
-    padding: 32px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 4px solid var(--yellow);
-    position: sticky;
+      /* HEADER */
+      header {
+        background: var(--black);
+        color: var(--yellow);
+        padding: 32px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 4px solid var(--yellow);
+        /* position: sticky;
     top: 0;
-    z-index: 100;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-  }
-  header.hidden {
-    transform: translateY(-100%);
-  }
-  header h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2rem, 5vw, 4rem);
-    letter-spacing: 0.08em;
-    line-height: 1;
-  }
-  header h1 span { color: var(--red); }
-  .header-badge {
-    font-size: 0.75rem;
-    font-weight: 700;
-    background: var(--yellow);
-    color: var(--black);
-    padding: 6px 12px;
-    border: 2px solid var(--yellow);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
+    z-index: 100; */
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+      }
+      header.hidden {
+        transform: translateY(-100%);
+      }
+      header h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(2rem, 5vw, 4rem);
+        letter-spacing: 0.08em;
+        line-height: 1;
+      }
+      header h1 span {
+        color: var(--red);
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .header-badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        background: var(--yellow);
+        color: var(--black);
+        padding: 6px 12px;
+        border: 2px solid var(--yellow);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
 
-  /* CONTROLS */
-  .controls {
-    padding: 24px 40px;
-    background: var(--white);
-    border-bottom: var(--border);
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .tab-btn {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 0.05em;
-    padding: 10px 28px;
-    border: var(--border);
-    background: var(--white);
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: transform 0.1s, box-shadow 0.1s;
-  }
-  .tab-btn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--black); }
-  .tab-btn.active.n5 { background: var(--yellow); }
-  .tab-btn.active.n4 { background: var(--blue); color: var(--white); }
-  .tab-btn.active.all { background: var(--red); color: var(--white); }
+      /* HAMBURGER */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 36px;
+        height: 28px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
+      .hamburger span {
+        display: block;
+        width: 100%;
+        height: 4px;
+        background: var(--yellow);
+        transition:
+          transform 0.25s ease,
+          opacity 0.2s ease;
+        transform-origin: center;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(12px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-12px) rotate(-45deg);
+      }
 
-  .search-wrap {
-    flex: 1;
-    min-width: 200px;
-    position: relative;
-  }
-  .search-wrap input {
-    width: 100%;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.9rem;
-    padding: 10px 16px;
-    border: var(--border);
-    background: var(--white);
-    box-shadow: var(--shadow);
-    outline: none;
-  }
-  .search-wrap input:focus { box-shadow: 7px 7px 0 var(--black); }
+      /* CONTROLS */
+      .controls {
+        padding: 24px 40px;
+        background: var(--white);
+        border-bottom: var(--border);
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .tab-btn {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.4rem;
+        letter-spacing: 0.05em;
+        padding: 10px 28px;
+        border: var(--border);
+        background: var(--white);
+        cursor: pointer;
+        box-shadow: var(--shadow);
+        transition:
+          transform 0.1s,
+          box-shadow 0.1s;
+      }
+      .tab-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 7px 7px 0 var(--black);
+      }
+      .tab-btn.active.n5 {
+        background: var(--yellow);
+      }
+      .tab-btn.active.n4 {
+        background: var(--blue);
+        color: var(--white);
+      }
+      .tab-btn.active.all {
+        background: var(--red);
+        color: var(--white);
+      }
 
-  .count-badge {
-    font-size: 0.75rem;
-    font-weight: 700;
-    background: var(--pink);
-    color: var(--black);
-    padding: 6px 12px;
-    border: var(--border);
-    white-space: nowrap;
-  }
+      .search-wrap {
+        flex: 1;
+        min-width: 200px;
+        position: relative;
+      }
+      .search-wrap input {
+        width: 100%;
+        font-family: "Space Mono", monospace;
+        font-size: 0.9rem;
+        padding: 10px 16px;
+        border: var(--border);
+        background: var(--white);
+        box-shadow: var(--shadow);
+        outline: none;
+      }
+      .search-wrap input:focus {
+        box-shadow: 7px 7px 0 var(--black);
+      }
 
-  /* GRID */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 0;
-    padding: 40px;
-    gap: 24px;
-  }
+      .count-badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        background: var(--pink);
+        color: var(--black);
+        padding: 6px 12px;
+        border: var(--border);
+        white-space: nowrap;
+      }
 
-  /* CARD */
-  .card {
-    border: var(--border);
-    background: var(--white);
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    transition: transform 0.15s, box-shadow 0.15s;
-    overflow: hidden;
-  }
-  .card:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 12px 12px 0 var(--black);
-  }
-  .card.n5 { --accent: var(--yellow); }
-  .card.n4 { --accent: var(--blue); }
+      /* GRID */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 0;
+        padding: 40px;
+        gap: 24px;
+      }
 
-  .card-top {
-    background: var(--accent);
-    padding: 20px 20px 12px;
-    border-bottom: var(--border);
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-  .kanji-char {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 4rem;
-    font-weight: 900;
-    line-height: 1;
-    color: var(--black);
-  }
-  .card-meta {
-    text-align: right;
-  }
-  .level-tag {
-    display: inline-block;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    padding: 3px 10px;
-    border: 2px solid var(--black);
-    background: var(--black);
-    color: var(--accent);
-    margin-bottom: 4px;
-  }
-  .romaji {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--black);
-    background: rgba(255,255,255,0.5);
-    padding: 2px 6px;
-    border: 1px solid var(--black);
-    display: inline-block;
-    max-width: 140px;
-    text-align: center;
-    word-break: break-word;
-  }
+      /* CARD */
+      .card {
+        border: var(--border);
+        background: var(--white);
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+        overflow: hidden;
+      }
+      .card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0 var(--black);
+      }
+      .card.n5 {
+        --accent: var(--yellow);
+      }
+      .card.n4 {
+        --accent: var(--blue);
+      }
 
-  .card-body { padding: 16px 20px; }
-  .meaning {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
-    letter-spacing: 0.04em;
-    margin-bottom: 12px;
-    color: var(--black);
-    border-left: 4px solid var(--accent, var(--black));
-    padding-left: 8px;
-  }
-  .words-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #666;
-    margin-bottom: 8px;
-  }
-  .words { display: flex; flex-direction: column; gap: 6px; }
-  .word-item {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    font-size: 0.8rem;
-    padding: 6px 10px;
-    border: 2px solid var(--black);
-    background: var(--white);
-    position: relative;
-  }
-  .word-item::before {
-    content: '→';
-    font-weight: 700;
-    color: var(--red);
-    flex-shrink: 0;
-  }
-  .word-jp {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-  }
-  .word-rom {
-    color: #555;
-    font-size: 0.7rem;
-    flex-shrink: 0;
-  }
-  .word-en {
-    margin-left: auto;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-align: right;
-    color: var(--black);
-  }
+      .card-top {
+        background: var(--accent);
+        padding: 20px 20px 12px;
+        border-bottom: var(--border);
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      .kanji-char {
+        font-family: "Noto Sans JP", sans-serif;
+        font-size: 4rem;
+        font-weight: 900;
+        line-height: 1;
+        color: var(--black);
+      }
+      .card-meta {
+        text-align: right;
+      }
+      .level-tag {
+        display: inline-block;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+        padding: 3px 10px;
+        border: 2px solid var(--black);
+        background: var(--black);
+        color: var(--accent);
+        margin-bottom: 4px;
+      }
+      .romaji {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--black);
+        background: rgba(255, 255, 255, 0.5);
+        padding: 2px 6px;
+        border: 1px solid var(--black);
+        display: inline-block;
+        max-width: 140px;
+        text-align: center;
+        word-break: break-word;
+      }
 
-  /* No results */
-  .no-results {
-    grid-column: 1/-1;
-    text-align: center;
-    padding: 80px 20px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: #ccc;
-  }
+      .card-body {
+        padding: 16px 20px;
+      }
+      .meaning {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.3rem;
+        letter-spacing: 0.04em;
+        margin-bottom: 12px;
+        color: var(--black);
+        border-left: 4px solid var(--accent, var(--black));
+        padding-left: 8px;
+      }
+      .words-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #666;
+        margin-bottom: 8px;
+      }
+      .words {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .word-item {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        border: 2px solid var(--black);
+        background: var(--white);
+        position: relative;
+      }
+      .word-item::before {
+        content: "→";
+        font-weight: 700;
+        color: var(--red);
+        flex-shrink: 0;
+      }
+      .word-jp {
+        font-family: "Noto Sans JP", sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .word-rom {
+        color: #555;
+        font-size: 0.7rem;
+        flex-shrink: 0;
+      }
+      .word-en {
+        margin-left: auto;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-align: right;
+        color: var(--black);
+      }
 
-  /* STRIPE PATTERN bg elements */
-  .stripe-bg {
-    position: fixed;
-    top: 0; right: 0;
-    width: 200px; height: 100%;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba(0,0,0,0.03) 10px,
-      rgba(0,0,0,0.03) 20px
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
+      /* No results */
+      .no-results {
+        grid-column: 1/-1;
+        text-align: center;
+        padding: 80px 20px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 3rem;
+        color: #ccc;
+      }
 
-  @media(max-width:600px){
-    header { padding: 20px; }
-    .controls { padding: 16px 20px; }
-    .grid { padding: 20px; gap: 16px; }
-    .kanji-char { font-size: 3rem; }
-  }
-</style>
-</head>
-<body>
-<div class="stripe-bg"></div>
+      /* STRIPE PATTERN bg elements */
+      .stripe-bg {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 100%;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(0, 0, 0, 0.03) 10px,
+          rgba(0, 0, 0, 0.03) 20px
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
 
-<header>
-  <div>
-    <h1>漢字 <span>REF</span></h1>
-    <div style="font-size:0.7rem;color:#aaa;margin-top:4px;letter-spacing:0.1em;">JLPT N5 + N4 KANJI DICTIONARY</div>
-  </div>
-  <div class="header-badge">286 Kanji</div>
-</header>
+      @media (max-width: 600px) {
+        header {
+          padding: 20px;
+          position: sticky;
+          top: 0;
+          z-index: 101;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .controls {
+          padding: 0 20px;
+          max-height: 0;
+          overflow: hidden;
+          padding-top: 0;
+          padding-bottom: 0;
+          border-bottom: none;
+          transition:
+            max-height 0.3s ease,
+            padding 0.3s ease,
+            border-color 0.3s ease,
+            transform 0.3s ease;
+          position: fixed;
+          top: var(--header-h, 100px);
+          left: 0;
+          right: 0;
+          z-index: 100;
+          background: var(--black);
+          flex-direction: column;
+          align-items: stretch;
+        }
+        header.hidden + .controls {
+          transform: translateY(calc(-1 * var(--header-h, 100px)));
+        }
+        .controls.open {
+          max-height: 400px;
+          padding: 16px 20px;
+          border-bottom: var(--border);
+        }
+        .controls .tab-btn,
+        .controls .search-wrap,
+        .controls .count-badge {
+          width: 100%;
+          text-align: center;
+        }
+        .grid {
+          padding: 20px;
+          gap: 16px;
+        }
+        .kanji-char {
+          font-size: 3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stripe-bg"></div>
 
-<div class="controls">
-  <button class="tab-btn active all" onclick="filter('all',this)">ALL</button>
-  <button class="tab-btn n5" onclick="filter('n5',this)">N5</button>
-  <button class="tab-btn n4" onclick="filter('n4',this)">N4</button>
-  <div class="search-wrap">
-    <input type="text" id="searchBox" placeholder="Search kanji, meaning, or word..." oninput="search()">
-  </div>
-  <div class="count-badge" id="countBadge">286 shown</div>
-</div>
+    <header>
+      <div>
+        <h1>漢字 <span>REF</span></h1>
+        <div
+          style="
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 4px;
+            letter-spacing: 0.1em;
+          "
+        >
+          JLPT N5 + N4 KANJI DICTIONARY
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="header-badge">286 Kanji</div>
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="controls"
+          onclick="toggleMenu()"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
 
-<div class="grid" id="grid"></div>
+    <div class="controls" id="controls">
+      <button class="tab-btn active all" onclick="filter('all', this)">
+        ALL
+      </button>
+      <button class="tab-btn n5" onclick="filter('n5', this)">N5</button>
+      <button class="tab-btn n4" onclick="filter('n4', this)">N4</button>
+      <div class="search-wrap">
+        <input
+          type="text"
+          id="searchBox"
+          placeholder="Search kanji, meaning, or word..."
+          oninput="search()"
+        />
+      </div>
+      <div class="count-badge" id="countBadge">286 shown</div>
+    </div>
 
-<script>
-const KANJI = [
-  // ===== N5 =====
-  {k:"一",r:"ichi / hito-",m:"One",l:"n5",w:[{j:"一人",r:"hitori",e:"one person"},{j:"一日",r:"tsuitachi",e:"1st of month"},{j:"一番",r:"ichiban",e:"number one"},{j:"一緒",r:"issho",e:"together"}]},
-  {k:"二",r:"ni / futa-",m:"Two",l:"n5",w:[{j:"二人",r:"futari",e:"two people"},{j:"二月",r:"nigatsu",e:"February"},{j:"二階",r:"nikai",e:"second floor"},{j:"二十",r:"nijuu",e:"twenty"}]},
-  {k:"三",r:"san / mit-",m:"Three",l:"n5",w:[{j:"三月",r:"sangatsu",e:"March"},{j:"三人",r:"sannin",e:"three people"},{j:"三角",r:"sankaku",e:"triangle"},{j:"三日",r:"mikka",e:"3rd / 3 days"}]},
-  {k:"四",r:"shi / yon",m:"Four",l:"n5",w:[{j:"四月",r:"shigatsu",e:"April"},{j:"四人",r:"yonin",e:"four people"},{j:"四角",r:"shikaku",e:"square"},{j:"四日",r:"yokka",e:"4th / 4 days"}]},
-  {k:"五",r:"go / itsu-",m:"Five",l:"n5",w:[{j:"五月",r:"gogatsu",e:"May"},{j:"五人",r:"gonin",e:"five people"},{j:"五日",r:"itsuka",e:"5th / 5 days"},{j:"五十",r:"gojuu",e:"fifty"}]},
-  {k:"六",r:"roku / mut-",m:"Six",l:"n5",w:[{j:"六月",r:"rokugatsu",e:"June"},{j:"六人",r:"rokunin",e:"six people"},{j:"六日",r:"muika",e:"6th / 6 days"},{j:"六十",r:"rokujuu",e:"sixty"}]},
-  {k:"七",r:"shichi / nana",m:"Seven",l:"n5",w:[{j:"七月",r:"shichigatsu",e:"July"},{j:"七人",r:"shichinin",e:"seven people"},{j:"七日",r:"nanoka",e:"7th / 7 days"},{j:"七夕",r:"tanabata",e:"Star Festival"}]},
-  {k:"八",r:"hachi / ya-",m:"Eight",l:"n5",w:[{j:"八月",r:"hachigatsu",e:"August"},{j:"八人",r:"hachinin",e:"eight people"},{j:"八日",r:"youka",e:"8th / 8 days"},{j:"八百屋",r:"yaoya",e:"greengrocer"}]},
-  {k:"九",r:"kyuu / ku",m:"Nine",l:"n5",w:[{j:"九月",r:"kugatsu",e:"September"},{j:"九人",r:"kyuunin",e:"nine people"},{j:"九日",r:"kokonoka",e:"9th / 9 days"},{j:"九十",r:"kyuujuu",e:"ninety"}]},
-  {k:"十",r:"juu / too",m:"Ten",l:"n5",w:[{j:"十月",r:"juugatsu",e:"October"},{j:"十分",r:"juubun",e:"enough / 10 min"},{j:"十日",r:"tooka",e:"10th / 10 days"},{j:"十字",r:"juuji",e:"cross shape"}]},
-  {k:"百",r:"hyaku",m:"Hundred",l:"n5",w:[{j:"百円",r:"hyakuen",e:"100 yen"},{j:"百点",r:"hyakuten",e:"100 points"},{j:"三百",r:"sanbyaku",e:"300"},{j:"百科",r:"hyouka",e:"encyclopedia"}]},
-  {k:"千",r:"sen / chi",m:"Thousand",l:"n5",w:[{j:"千円",r:"senen",e:"1000 yen"},{j:"千葉",r:"chiba",e:"Chiba (place)"},{j:"三千",r:"sanzen",e:"3000"},{j:"千鳥",r:"chidori",e:"plover bird"}]},
-  {k:"万",r:"man / ban",m:"Ten thousand",l:"n5",w:[{j:"一万",r:"ichiman",e:"10,000"},{j:"万年筆",r:"mannenhitsu",e:"fountain pen"},{j:"万全",r:"banzen",e:"perfect"},{j:"万国",r:"bankoku",e:"all nations"}]},
-  {k:"大",r:"dai / oo-",m:"Big / Large",l:"n5",w:[{j:"大学",r:"daigaku",e:"university"},{j:"大人",r:"otona",e:"adult"},{j:"大切",r:"taisetsu",e:"important"},{j:"大好き",r:"daisuki",e:"love very much"}]},
-  {k:"中",r:"chuu / naka",m:"Middle / Inside",l:"n5",w:[{j:"中学校",r:"chuugakkou",e:"middle school"},{j:"中国",r:"chuugoku",e:"China"},{j:"中心",r:"chuushin",e:"center"},{j:"中に",r:"naka ni",e:"inside"}]},
-  {k:"小",r:"shou / ko-",m:"Small",l:"n5",w:[{j:"小学校",r:"shougakkou",e:"elementary school"},{j:"小さい",r:"chiisai",e:"small"},{j:"小説",r:"shousetsu",e:"novel"},{j:"小鳥",r:"kotori",e:"small bird"}]},
-  {k:"上",r:"jou / ue",m:"Up / Above",l:"n5",w:[{j:"上手",r:"jouzu",e:"skillful"},{j:"上着",r:"uwagi",e:"jacket"},{j:"上がる",r:"agaru",e:"to go up"},{j:"上司",r:"joushi",e:"superior/boss"}]},
-  {k:"下",r:"ka / shita",m:"Down / Below",l:"n5",w:[{j:"下手",r:"heta",e:"unskillful"},{j:"下着",r:"shitagi",e:"underwear"},{j:"地下",r:"chika",e:"underground"},{j:"下がる",r:"sagaru",e:"to go down"}]},
-  {k:"左",r:"sa / hidari",m:"Left",l:"n5",w:[{j:"左手",r:"hidarite",e:"left hand"},{j:"左側",r:"hidarigawa",e:"left side"},{j:"左折",r:"sasetsu",e:"left turn"},{j:"左右",r:"sayuu",e:"left and right"}]},
-  {k:"右",r:"u / migi",m:"Right",l:"n5",w:[{j:"右手",r:"migite",e:"right hand"},{j:"右側",r:"migigawa",e:"right side"},{j:"右折",r:"usetsu",e:"right turn"},{j:"左右",r:"sayuu",e:"left and right"}]},
-  {k:"人",r:"jin / hito",m:"Person",l:"n5",w:[{j:"人々",r:"hitobito",e:"people"},{j:"外国人",r:"gaikokujin",e:"foreigner"},{j:"人気",r:"ninki",e:"popular"},{j:"一人",r:"hitori",e:"alone"}]},
-  {k:"入",r:"nyuu / i-",m:"Enter",l:"n5",w:[{j:"入口",r:"iriguchi",e:"entrance"},{j:"入学",r:"nyuugaku",e:"school entry"},{j:"入る",r:"hairu",e:"to enter"},{j:"入院",r:"nyuuin",e:"hospitalization"}]},
-  {k:"出",r:"shutsu / de-",m:"Exit / Leave",l:"n5",w:[{j:"出口",r:"deguchi",e:"exit"},{j:"出発",r:"shuppatsu",e:"departure"},{j:"出る",r:"deru",e:"to leave"},{j:"出張",r:"shutchou",e:"business trip"}]},
-  {k:"来",r:"rai / ku-",m:"Come",l:"n5",w:[{j:"来年",r:"rainen",e:"next year"},{j:"来月",r:"raigetsu",e:"next month"},{j:"来る",r:"kuru",e:"to come"},{j:"出来る",r:"dekiru",e:"can do"}]},
-  {k:"行",r:"kou / i-",m:"Go",l:"n5",w:[{j:"行く",r:"iku",e:"to go"},{j:"旅行",r:"ryokou",e:"travel"},{j:"行動",r:"koudou",e:"action"},{j:"銀行",r:"ginkou",e:"bank"}]},
-  {k:"男",r:"dan / otoko",m:"Man / Male",l:"n5",w:[{j:"男の人",r:"otoko no hito",e:"man"},{j:"男性",r:"dansei",e:"male"},{j:"男子",r:"danshi",e:"boy"},{j:"長男",r:"chounan",e:"eldest son"}]},
-  {k:"女",r:"jo / onna",m:"Woman / Female",l:"n5",w:[{j:"女の人",r:"onna no hito",e:"woman"},{j:"女性",r:"josei",e:"female"},{j:"女子",r:"joshi",e:"girl"},{j:"彼女",r:"kanojo",e:"girlfriend / she"}]},
-  {k:"子",r:"shi / ko",m:"Child",l:"n5",w:[{j:"子供",r:"kodomo",e:"child"},{j:"女子",r:"joshi",e:"girl"},{j:"様子",r:"yousu",e:"situation"},{j:"親子",r:"oyako",e:"parent and child"}]},
-  {k:"外",r:"gai / soto",m:"Outside",l:"n5",w:[{j:"外国",r:"gaikoku",e:"foreign country"},{j:"外出",r:"gaishutsu",e:"going out"},{j:"外側",r:"sotogawa",e:"outside"},{j:"以外",r:"igai",e:"other than"}]},
-  {k:"何",r:"ka / nani",m:"What",l:"n5",w:[{j:"何か",r:"nanika",e:"something"},{j:"何人",r:"nannin",e:"how many people"},{j:"何時",r:"nanji",e:"what time"},{j:"何でも",r:"nandemo",e:"anything"}]},
-  {k:"先",r:"sen / saki",m:"Before / Ahead",l:"n5",w:[{j:"先生",r:"sensei",e:"teacher"},{j:"先週",r:"senshuu",e:"last week"},{j:"先月",r:"sengetsu",e:"last month"},{j:"先ほど",r:"sakihodo",e:"a while ago"}]},
-  {k:"今",r:"kon / ima",m:"Now",l:"n5",w:[{j:"今日",r:"kyou",e:"today"},{j:"今週",r:"konshuu",e:"this week"},{j:"今月",r:"kongetsu",e:"this month"},{j:"今年",r:"kotoshi",e:"this year"}]},
-  {k:"休",r:"kyuu / yasu-",m:"Rest",l:"n5",w:[{j:"休む",r:"yasumu",e:"to rest"},{j:"休日",r:"kyuujitsu",e:"holiday"},{j:"夏休み",r:"natsuyasumi",e:"summer break"},{j:"休憩",r:"kyuukei",e:"break/rest"}]},
-  {k:"山",r:"san / yama",m:"Mountain",l:"n5",w:[{j:"山登り",r:"yamanobori",e:"mountain climbing"},{j:"富士山",r:"fujisan",e:"Mt. Fuji"},{j:"山道",r:"yamamichi",e:"mountain path"},{j:"火山",r:"kazan",e:"volcano"}]},
-  {k:"川",r:"sen / kawa",m:"River",l:"n5",w:[{j:"川岸",r:"kawagishi",e:"riverbank"},{j:"小川",r:"ogawa",e:"stream"},{j:"川上",r:"kawakami",e:"upstream"},{j:"河川",r:"kasen",e:"rivers"}]},
-  {k:"高",r:"kou / taka-",m:"High / Tall",l:"n5",w:[{j:"高校",r:"koukou",e:"high school"},{j:"高い",r:"takai",e:"tall / expensive"},{j:"高速",r:"kousoku",e:"highway / fast"},{j:"最高",r:"saikou",e:"best / maximum"}]},
-  {k:"日",r:"nichi / hi",m:"Day / Sun",l:"n5",w:[{j:"日本",r:"nihon",e:"Japan"},{j:"日曜日",r:"nichiyoubi",e:"Sunday"},{j:"今日",r:"kyou",e:"today"},{j:"毎日",r:"mainichi",e:"every day"}]},
-  {k:"月",r:"getsu / tsuki",m:"Month / Moon",l:"n5",w:[{j:"月曜日",r:"getsuyoubi",e:"Monday"},{j:"来月",r:"raigetsu",e:"next month"},{j:"月光",r:"gekkou",e:"moonlight"},{j:"三日月",r:"mikazuki",e:"crescent moon"}]},
-  {k:"火",r:"ka / hi",m:"Fire",l:"n5",w:[{j:"火曜日",r:"kayoubi",e:"Tuesday"},{j:"火事",r:"kaji",e:"fire accident"},{j:"花火",r:"hanabi",e:"fireworks"},{j:"火山",r:"kazan",e:"volcano"}]},
-  {k:"水",r:"sui / mizu",m:"Water",l:"n5",w:[{j:"水曜日",r:"suiyoubi",e:"Wednesday"},{j:"水道",r:"suidou",e:"waterworks"},{j:"お水",r:"omizu",e:"water (polite)"},{j:"水泳",r:"suiei",e:"swimming"}]},
-  {k:"木",r:"moku / ki",m:"Tree / Wood",l:"n5",w:[{j:"木曜日",r:"mokuyoubi",e:"Thursday"},{j:"木村",r:"kimura",e:"Kimura (surname)"},{j:"木登り",r:"kinobori",e:"tree climbing"},{j:"木材",r:"mokuzai",e:"lumber"}]},
-  {k:"金",r:"kin / kane",m:"Gold / Money",l:"n5",w:[{j:"金曜日",r:"kin'youbi",e:"Friday"},{j:"お金",r:"okane",e:"money"},{j:"金色",r:"kin'iro",e:"golden color"},{j:"金属",r:"kinzoku",e:"metal"}]},
-  {k:"土",r:"do / tsuchi",m:"Earth / Soil",l:"n5",w:[{j:"土曜日",r:"doyoubi",e:"Saturday"},{j:"土地",r:"tochi",e:"land"},{j:"土台",r:"dodai",e:"foundation"},{j:"国土",r:"kokudo",e:"national territory"}]},
-  {k:"本",r:"hon / moto",m:"Book / Origin",l:"n5",w:[{j:"本当",r:"hontou",e:"truth / really"},{j:"日本",r:"nihon",e:"Japan"},{j:"本屋",r:"hon'ya",e:"bookstore"},{j:"基本",r:"kihon",e:"basics"}]},
-  {k:"年",r:"nen / toshi",m:"Year",l:"n5",w:[{j:"今年",r:"kotoshi",e:"this year"},{j:"来年",r:"rainen",e:"next year"},{j:"年齢",r:"nenrei",e:"age"},{j:"毎年",r:"maitoshi",e:"every year"}]},
-  {k:"友",r:"yuu / tomo",m:"Friend",l:"n5",w:[{j:"友達",r:"tomodachi",e:"friend"},{j:"友人",r:"yuujin",e:"friend (formal)"},{j:"親友",r:"shin'yuu",e:"best friend"},{j:"友好",r:"yuukou",e:"friendship"}]},
-  {k:"時",r:"ji / toki",m:"Time",l:"n5",w:[{j:"時間",r:"jikan",e:"time / duration"},{j:"何時",r:"nanji",e:"what time"},{j:"時々",r:"tokidoki",e:"sometimes"},{j:"時代",r:"jidai",e:"era / age"}]},
-  {k:"天",r:"ten / ama",m:"Sky / Heaven",l:"n5",w:[{j:"天気",r:"tenki",e:"weather"},{j:"天国",r:"tengoku",e:"heaven"},{j:"天才",r:"tensai",e:"genius"},{j:"天井",r:"tenjou",e:"ceiling"}]},
-  {k:"雨",r:"u / ame",m:"Rain",l:"n5",w:[{j:"雨天",r:"uten",e:"rainy weather"},{j:"大雨",r:"oame",e:"heavy rain"},{j:"梅雨",r:"tsuyu",e:"rainy season"},{j:"雨傘",r:"amegasa",e:"umbrella"}]},
-  {k:"北",r:"hoku / kita",m:"North",l:"n5",w:[{j:"北海道",r:"hokkaidou",e:"Hokkaido"},{j:"北口",r:"kitaguchi",e:"north exit"},{j:"北風",r:"kitakaze",e:"north wind"},{j:"北極",r:"hokkyoku",e:"North Pole"}]},
-  {k:"南",r:"nan / minami",m:"South",l:"n5",w:[{j:"南口",r:"minamiguchi",e:"south exit"},{j:"南側",r:"minamigawa",e:"south side"},{j:"南極",r:"nankyoku",e:"South Pole"},{j:"南米",r:"nanbei",e:"South America"}]},
-  {k:"東",r:"tou / higashi",m:"East",l:"n5",w:[{j:"東京",r:"toukyou",e:"Tokyo"},{j:"東口",r:"higashiguchi",e:"east exit"},{j:"東洋",r:"touyou",e:"the Orient"},{j:"東南",r:"tounан",e:"southeast"}]},
-  {k:"西",r:"sei / nishi",m:"West",l:"n5",w:[{j:"西口",r:"nishiguchi",e:"west exit"},{j:"関西",r:"kansai",e:"Kansai region"},{j:"西洋",r:"seiyou",e:"the West"},{j:"西側",r:"nishigawa",e:"west side"}]},
-  {k:"前",r:"zen / mae",m:"Front / Before",l:"n5",w:[{j:"前に",r:"mae ni",e:"in front / before"},{j:"名前",r:"namae",e:"name"},{j:"午前",r:"gozen",e:"morning / AM"},{j:"前日",r:"zenjitsu",e:"previous day"}]},
-  {k:"後",r:"go / ato",m:"Behind / After",l:"n5",w:[{j:"後で",r:"ato de",e:"later"},{j:"午後",r:"gogo",e:"afternoon / PM"},{j:"最後",r:"saigo",e:"last / final"},{j:"後ろ",r:"ushiro",e:"behind"}]},
-  {k:"半",r:"han",m:"Half",l:"n5",w:[{j:"半分",r:"hanbun",e:"half"},{j:"一時半",r:"ichiji han",e:"one thirty"},{j:"半島",r:"hantou",e:"peninsula"},{j:"前半",r:"zenhan",e:"first half"}]},
-  {k:"食",r:"shoku / ta-",m:"Eat / Food",l:"n5",w:[{j:"食べる",r:"taberu",e:"to eat"},{j:"食事",r:"shokuji",e:"meal"},{j:"食堂",r:"shokudou",e:"cafeteria"},{j:"朝食",r:"choushoku",e:"breakfast"}]},
-  {k:"見",r:"ken / mi-",m:"See / Look",l:"n5",w:[{j:"見る",r:"miru",e:"to see"},{j:"見える",r:"mieru",e:"can be seen"},{j:"見物",r:"kenbutsu",e:"sightseeing"},{j:"意見",r:"iken",e:"opinion"}]},
-  {k:"車",r:"sha / kuruma",m:"Car / Wheel",l:"n5",w:[{j:"電車",r:"densha",e:"electric train"},{j:"自動車",r:"jidousha",e:"automobile"},{j:"自転車",r:"jitensha",e:"bicycle"},{j:"車道",r:"shadou",e:"roadway"}]},
-  {k:"長",r:"chou / naga-",m:"Long / Chief",l:"n5",w:[{j:"長い",r:"nagai",e:"long"},{j:"社長",r:"shachou",e:"company president"},{j:"身長",r:"shinchou",e:"height"},{j:"長所",r:"chousho",e:"strong point"}]},
-  {k:"国",r:"koku / kuni",m:"Country",l:"n5",w:[{j:"外国",r:"gaikoku",e:"foreign country"},{j:"国語",r:"kokugo",e:"national language"},{j:"国内",r:"kokunai",e:"domestic"},{j:"中国",r:"chuugoku",e:"China"}]},
-  {k:"白",r:"haku / shiro",m:"White",l:"n5",w:[{j:"白い",r:"shiroi",e:"white"},{j:"白紙",r:"hakushi",e:"blank paper"},{j:"白黒",r:"shirokuro",e:"black and white"},{j:"告白",r:"kokuhaku",e:"confession"}]},
-  {k:"名",r:"mei / na",m:"Name / Famous",l:"n5",w:[{j:"名前",r:"namae",e:"name"},{j:"有名",r:"yuumei",e:"famous"},{j:"名刺",r:"meishi",e:"business card"},{j:"名所",r:"meisho",e:"famous place"}]},
-  {k:"学",r:"gaku / mana-",m:"Study / Learn",l:"n5",w:[{j:"学校",r:"gakkou",e:"school"},{j:"大学",r:"daigaku",e:"university"},{j:"学生",r:"gakusei",e:"student"},{j:"学ぶ",r:"manabu",e:"to learn"}]},
-  {k:"生",r:"sei / i-",m:"Life / Birth",l:"n5",w:[{j:"学生",r:"gakusei",e:"student"},{j:"先生",r:"sensei",e:"teacher"},{j:"生まれる",r:"umareru",e:"to be born"},{j:"生活",r:"seikatsu",e:"daily life"}]},
-  {k:"気",r:"ki / ke",m:"Spirit / Energy",l:"n5",w:[{j:"天気",r:"tenki",e:"weather"},{j:"元気",r:"genki",e:"energetic"},{j:"気持ち",r:"kimochi",e:"feeling"},{j:"人気",r:"ninki",e:"popularity"}]},
-  {k:"校",r:"kou",m:"School",l:"n5",w:[{j:"学校",r:"gakkou",e:"school"},{j:"高校",r:"koukou",e:"high school"},{j:"校長",r:"kouchou",e:"principal"},{j:"登校",r:"toukou",e:"attending school"}]},
-  {k:"父",r:"fu / chichi",m:"Father",l:"n5",w:[{j:"父親",r:"chichioya",e:"father"},{j:"お父さん",r:"otousan",e:"dad"},{j:"父母",r:"fubo",e:"father and mother"},{j:"祖父",r:"sofu",e:"grandfather"}]},
-  {k:"母",r:"bo / haha",m:"Mother",l:"n5",w:[{j:"母親",r:"hahaoya",e:"mother"},{j:"お母さん",r:"okaasan",e:"mom"},{j:"父母",r:"fubo",e:"father and mother"},{j:"祖母",r:"sobo",e:"grandmother"}]},
-  {k:"分",r:"fun / bun",m:"Minute / Divide",l:"n5",w:[{j:"十分",r:"juubun",e:"enough"},{j:"自分",r:"jibun",e:"oneself"},{j:"三分",r:"sanpun",e:"3 minutes"},{j:"半分",r:"hanbun",e:"half"}]},
-  {k:"少",r:"shou / suko-",m:"Few / Little",l:"n5",w:[{j:"少し",r:"sukoshi",e:"a little"},{j:"少年",r:"shounen",e:"boy"},{j:"少女",r:"shoujo",e:"girl"},{j:"少ない",r:"sukunai",e:"few"}]},
-  {k:"多",r:"ta / oo-",m:"Many / Much",l:"n5",w:[{j:"多い",r:"ooi",e:"many"},{j:"多分",r:"tabun",e:"probably"},{j:"多数",r:"tasuu",e:"majority"},{j:"多様",r:"tayou",e:"diverse"}]},
-  {k:"目",r:"moku / me",m:"Eye",l:"n5",w:[{j:"目玉",r:"medama",e:"eyeball"},{j:"目的",r:"mokuteki",e:"purpose"},{j:"注目",r:"chuumoku",e:"attention"},{j:"目標",r:"mokuhyou",e:"goal"}]},
-  {k:"口",r:"kou / kuchi",m:"Mouth",l:"n5",w:[{j:"出口",r:"deguchi",e:"exit"},{j:"入口",r:"iriguchi",e:"entrance"},{j:"口座",r:"kouza",e:"bank account"},{j:"窓口",r:"madoguchi",e:"window / counter"}]},
-  {k:"耳",r:"ji / mimi",m:"Ear",l:"n5",w:[{j:"耳元",r:"mimamoto",e:"near one's ear"},{j:"耳鳴り",r:"miminari",e:"ringing in ears"},{j:"耳打ち",r:"mimiuchi",e:"whisper"},{j:"中耳炎",r:"chuujien",e:"otitis media"}]},
-  {k:"手",r:"shu / te",m:"Hand",l:"n5",w:[{j:"手紙",r:"tegami",e:"letter"},{j:"上手",r:"jouzu",e:"skillful"},{j:"選手",r:"senshu",e:"athlete"},{j:"握手",r:"akushu",e:"handshake"}]},
-  {k:"足",r:"soku / ashi",m:"Foot / Leg",l:"n5",w:[{j:"足りる",r:"tariru",e:"to be enough"},{j:"手足",r:"teashi",e:"limbs"},{j:"足元",r:"ashimoto",e:"at one's feet"},{j:"裸足",r:"hadashi",e:"barefoot"}]},
-  {k:"安",r:"an / yasu-",m:"Cheap / Safe",l:"n5",w:[{j:"安全",r:"anzen",e:"safety"},{j:"安心",r:"anshin",e:"relief"},{j:"安い",r:"yasui",e:"cheap"},{j:"不安",r:"fuan",e:"anxiety"}]},
-  {k:"飲",r:"in / no-",m:"Drink",l:"n5",w:[{j:"飲む",r:"nomu",e:"to drink"},{j:"飲み物",r:"nomimono",e:"beverage"},{j:"飲食",r:"inshoku",e:"eating and drinking"},{j:"飲み会",r:"nomikai",e:"drinking party"}]},
-  {k:"買",r:"bai / ka-",m:"Buy",l:"n5",w:[{j:"買う",r:"kau",e:"to buy"},{j:"買い物",r:"kaimono",e:"shopping"},{j:"売買",r:"baibai",e:"buying and selling"},{j:"買い手",r:"kaite",e:"buyer"}]},
-  {k:"言",r:"gen / i-",m:"Say / Word",l:"n5",w:[{j:"言う",r:"iu",e:"to say"},{j:"言葉",r:"kotoba",e:"word / language"},{j:"言語",r:"gengo",e:"language"},{j:"発言",r:"hatsugen",e:"statement"}]},
-  {k:"会",r:"kai / a-",m:"Meet / Society",l:"n5",w:[{j:"会社",r:"kaisha",e:"company"},{j:"会議",r:"kaigi",e:"meeting"},{j:"会う",r:"au",e:"to meet"},{j:"社会",r:"shakai",e:"society"}]},
-  {k:"社",r:"sha",m:"Company / Society",l:"n5",w:[{j:"会社",r:"kaisha",e:"company"},{j:"社長",r:"shachou",e:"president"},{j:"社会",r:"shakai",e:"society"},{j:"神社",r:"jinja",e:"shrine"}]},
-  {k:"道",r:"dou / michi",m:"Road / Way",l:"n5",w:[{j:"道路",r:"douro",e:"road"},{j:"北海道",r:"hokkaidou",e:"Hokkaido"},{j:"道具",r:"dougu",e:"tool"},{j:"柔道",r:"juudou",e:"judo"}]},
-  {k:"新",r:"shin / atara-",m:"New",l:"n5",w:[{j:"新しい",r:"atarashii",e:"new"},{j:"新聞",r:"shinbun",e:"newspaper"},{j:"新幹線",r:"shinkansen",e:"bullet train"},{j:"新年",r:"shinnen",e:"new year"}]},
-  {k:"店",r:"ten / mise",m:"Shop / Store",l:"n5",w:[{j:"お店",r:"omise",e:"shop"},{j:"書店",r:"shoten",e:"bookstore"},{j:"喫茶店",r:"kissaten",e:"café"},{j:"店員",r:"ten'in",e:"store clerk"}]},
-  {k:"魚",r:"gyo / sakana",m:"Fish",l:"n5",w:[{j:"魚屋",r:"sakanaya",e:"fish shop"},{j:"金魚",r:"kingyo",e:"goldfish"},{j:"魚介",r:"gyokai",e:"seafood"},{j:"魚類",r:"gyorui",e:"fish species"}]},
-  {k:"古",r:"ko / furu-",m:"Old",l:"n5",w:[{j:"古い",r:"furui",e:"old"},{j:"古代",r:"kodai",e:"ancient times"},{j:"古典",r:"koten",e:"classics"},{j:"中古",r:"chuuko",e:"used / secondhand"}]},
-  {k:"円",r:"en / maru",m:"Yen / Circle",l:"n5",w:[{j:"円高",r:"endaka",e:"strong yen"},{j:"円形",r:"enkei",e:"circular"},{j:"百円",r:"hyakuen",e:"100 yen"},{j:"半円",r:"han'en",e:"semicircle"}]},
-  {k:"立",r:"ritsu / ta-",m:"Stand",l:"n5",w:[{j:"立つ",r:"tatsu",e:"to stand"},{j:"立場",r:"tachiba",e:"position/standpoint"},{j:"国立",r:"kokuritsu",e:"national"},{j:"独立",r:"dokuritsu",e:"independence"}]},
-  {k:"週",r:"shuu",m:"Week",l:"n5",w:[{j:"今週",r:"konshuu",e:"this week"},{j:"来週",r:"raishuu",e:"next week"},{j:"先週",r:"senshuu",e:"last week"},{j:"週末",r:"shuumatsu",e:"weekend"}]},
-  {k:"毎",r:"mai",m:"Every",l:"n5",w:[{j:"毎日",r:"mainichi",e:"every day"},{j:"毎朝",r:"maiasa",e:"every morning"},{j:"毎週",r:"maishuu",e:"every week"},{j:"毎月",r:"maitsuki",e:"every month"}]},
-  {k:"午",r:"go",m:"Noon",l:"n5",w:[{j:"午前",r:"gozen",e:"AM / morning"},{j:"午後",r:"gogo",e:"PM / afternoon"},{j:"正午",r:"shougo",e:"noon"},{j:"午前中",r:"gozenchuu",e:"during the morning"}]},
-  {k:"花",r:"ka / hana",m:"Flower",l:"n5",w:[{j:"花火",r:"hanabi",e:"fireworks"},{j:"花見",r:"hanami",e:"flower viewing"},{j:"桜花",r:"ouka",e:"cherry blossom"},{j:"花壇",r:"kadan",e:"flowerbed"}]},
-  {k:"空",r:"kuu / sora",m:"Sky / Empty",l:"n5",w:[{j:"空港",r:"kuukou",e:"airport"},{j:"空気",r:"kuuki",e:"air"},{j:"青空",r:"aozora",e:"blue sky"},{j:"空白",r:"kuuhaku",e:"blank space"}]},
-  {k:"話",r:"wa / hana-",m:"Talk / Story",l:"n5",w:[{j:"話す",r:"hanasu",e:"to speak"},{j:"電話",r:"denwa",e:"telephone"},{j:"会話",r:"kaiwa",e:"conversation"},{j:"童話",r:"douwa",e:"fairy tale"}]},
-  {k:"読",r:"doku / yo-",m:"Read",l:"n5",w:[{j:"読む",r:"yomu",e:"to read"},{j:"読書",r:"dokusho",e:"reading books"},{j:"音読",r:"ondoku",e:"reading aloud"},{j:"読者",r:"dokusha",e:"reader"}]},
-  {k:"語",r:"go / kata-",m:"Language / Word",l:"n5",w:[{j:"日本語",r:"nihongo",e:"Japanese"},{j:"英語",r:"eigo",e:"English"},{j:"語学",r:"gogaku",e:"language study"},{j:"物語",r:"monogatari",e:"story/tale"}]},
-  {k:"書",r:"sho / ka-",m:"Write",l:"n5",w:[{j:"書く",r:"kaku",e:"to write"},{j:"書類",r:"shorui",e:"documents"},{j:"教科書",r:"kyoukasho",e:"textbook"},{j:"図書館",r:"toshokan",e:"library"}]},
-  {k:"聞",r:"bun / ki-",m:"Listen / Hear",l:"n5",w:[{j:"聞く",r:"kiku",e:"to listen/ask"},{j:"新聞",r:"shinbun",e:"newspaper"},{j:"聞こえる",r:"kikoeru",e:"can hear"},{j:"見聞",r:"kenbun",e:"knowledge/experience"}]},
-  {k:"間",r:"kan / ma",m:"Between / Space",l:"n5",w:[{j:"時間",r:"jikan",e:"time"},{j:"人間",r:"ningen",e:"human being"},{j:"間違い",r:"machigai",e:"mistake"},{j:"仲間",r:"nakama",e:"companion"}]},
-  {k:"電",r:"den",m:"Electricity",l:"n5",w:[{j:"電車",r:"densha",e:"electric train"},{j:"電話",r:"denwa",e:"telephone"},{j:"電気",r:"denki",e:"electricity"},{j:"電子",r:"denshi",e:"electron"}]},
-  {k:"駅",r:"eki",m:"Station",l:"n5",w:[{j:"駅前",r:"ekimae",e:"in front of station"},{j:"駅員",r:"ekiin",e:"station staff"},{j:"終点駅",r:"shuuten eki",e:"terminal station"},{j:"乗換駅",r:"norikaee ki",e:"transfer station"}]},
+    <div class="grid" id="grid"></div>
 
-  // ===== N4 =====
-  {k:"止",r:"shi / to-",m:"Stop",l:"n4",w:[{j:"止まる",r:"tomaru",e:"to stop"},{j:"禁止",r:"kinshi",e:"prohibition"},{j:"中止",r:"chuushi",e:"cancellation"},{j:"止血",r:"shiketsu",e:"stop bleeding"}]},
-  {k:"売",r:"bai / u-",m:"Sell",l:"n4",w:[{j:"売る",r:"uru",e:"to sell"},{j:"売り場",r:"uriba",e:"sales counter"},{j:"販売",r:"hanbai",e:"sales"},{j:"売上",r:"uriage",e:"sales revenue"}]},
-  {k:"帰",r:"ki / kae-",m:"Return Home",l:"n4",w:[{j:"帰る",r:"kaeru",e:"to return"},{j:"帰国",r:"kikoku",e:"return to country"},{j:"帰宅",r:"kitaku",e:"return home"},{j:"帰り道",r:"kaerimichi",e:"way home"}]},
-  {k:"方",r:"hou / kata",m:"Direction / Way",l:"n4",w:[{j:"方法",r:"houhou",e:"method"},{j:"方向",r:"houkou",e:"direction"},{j:"地方",r:"chihou",e:"region"},{j:"仕方",r:"shikata",e:"way of doing"}]},
-  {k:"体",r:"tai / karada",m:"Body",l:"n4",w:[{j:"体育",r:"taiiku",e:"physical education"},{j:"体験",r:"taiken",e:"experience"},{j:"身体",r:"shintai",e:"body"},{j:"体力",r:"tairyoku",e:"physical strength"}]},
-  {k:"力",r:"ryoku / chikara",m:"Strength / Power",l:"n4",w:[{j:"力強い",r:"chikarazuyoi",e:"powerful"},{j:"体力",r:"tairyoku",e:"physical strength"},{j:"努力",r:"doryoku",e:"effort"},{j:"電力",r:"denryoku",e:"electric power"}]},
-  {k:"強",r:"kyou / tsuyo-",m:"Strong",l:"n4",w:[{j:"強い",r:"tsuyoi",e:"strong"},{j:"勉強",r:"benkyou",e:"study"},{j:"強化",r:"kyouka",e:"strengthening"},{j:"最強",r:"saikyou",e:"strongest"}]},
-  {k:"弱",r:"jaku / yowa-",m:"Weak",l:"n4",w:[{j:"弱い",r:"yowai",e:"weak"},{j:"弱点",r:"jakuten",e:"weak point"},{j:"弱者",r:"jakusha",e:"the weak"},{j:"強弱",r:"kyoujaku",e:"strength and weakness"}]},
-  {k:"色",r:"shoku / iro",m:"Color",l:"n4",w:[{j:"色々",r:"iroiro",e:"various"},{j:"景色",r:"keshiki",e:"scenery"},{j:"白色",r:"hakushoku",e:"white color"},{j:"原色",r:"genshoku",e:"primary color"}]},
-  {k:"海",r:"kai / umi",m:"Sea / Ocean",l:"n4",w:[{j:"海外",r:"kaigai",e:"overseas"},{j:"海岸",r:"kaigan",e:"coast"},{j:"海水浴",r:"kaisuiyoku",e:"sea bathing"},{j:"日本海",r:"nihonkai",e:"Sea of Japan"}]},
-  {k:"門",r:"mon / kado",m:"Gate",l:"n4",w:[{j:"正門",r:"seimon",e:"main gate"},{j:"専門",r:"senmon",e:"specialty"},{j:"門限",r:"mongen",e:"curfew"},{j:"入門",r:"nyuumon",e:"introduction"}]},
-  {k:"田",r:"den / ta",m:"Rice field",l:"n4",w:[{j:"田舎",r:"inaka",e:"countryside"},{j:"田んぼ",r:"tanbo",e:"rice paddy"},{j:"水田",r:"suiden",e:"paddy field"},{j:"田園",r:"den'en",e:"rural area"}]},
-  {k:"好",r:"kou / su-",m:"Like / Good",l:"n4",w:[{j:"好き",r:"suki",e:"like"},{j:"好む",r:"konomu",e:"to prefer"},{j:"好意",r:"koui",e:"goodwill"},{j:"好奇心",r:"koukishin",e:"curiosity"}]},
-  {k:"私",r:"shi / watashi",m:"I / Private",l:"n4",w:[{j:"私立",r:"shiritsu",e:"private (school)"},{j:"私生活",r:"shiseikatsu",e:"private life"},{j:"私的",r:"shiteki",e:"private/personal"},{j:"公私",r:"koushi",e:"public and private"}]},
-  {k:"家",r:"ka / ie",m:"House / Home",l:"n4",w:[{j:"家族",r:"kazoku",e:"family"},{j:"家庭",r:"katei",e:"home/household"},{j:"家賃",r:"yachin",e:"rent"},{j:"帰宅",r:"kitaku",e:"return home"}]},
-  {k:"元",r:"gen / moto",m:"Origin / Former",l:"n4",w:[{j:"元気",r:"genki",e:"energetic"},{j:"元日",r:"ganjitsu",e:"New Year's Day"},{j:"元々",r:"motomoto",e:"originally"},{j:"地元",r:"jimoto",e:"local"}]},
-  {k:"同",r:"dou / ona-",m:"Same",l:"n4",w:[{j:"同じ",r:"onaji",e:"same"},{j:"同時",r:"douji",e:"simultaneous"},{j:"同僚",r:"douryou",e:"colleague"},{j:"共同",r:"kyoudou",e:"cooperative"}]},
-  {k:"茶",r:"cha",m:"Tea",l:"n4",w:[{j:"お茶",r:"ocha",e:"tea"},{j:"喫茶店",r:"kissaten",e:"café"},{j:"緑茶",r:"ryokucha",e:"green tea"},{j:"茶色",r:"chairo",e:"brown color"}]},
-  {k:"開",r:"kai / a-",m:"Open",l:"n4",w:[{j:"開く",r:"hiraku",e:"to open"},{j:"開発",r:"kaihatsu",e:"development"},{j:"公開",r:"koukai",e:"public release"},{j:"開始",r:"kaishi",e:"start"}]},
-  {k:"低",r:"tei / hiku-",m:"Low",l:"n4",w:[{j:"低い",r:"hikui",e:"low"},{j:"低下",r:"teika",e:"decline"},{j:"最低",r:"saitei",e:"minimum/worst"},{j:"低気圧",r:"teikiatsu",e:"low pressure"}]},
-  {k:"心",r:"shin / kokoro",m:"Heart / Mind",l:"n4",w:[{j:"心配",r:"shinpai",e:"worry"},{j:"心理",r:"shinri",e:"psychology"},{j:"安心",r:"anshin",e:"relief"},{j:"中心",r:"chuushin",e:"center"}]},
-  {k:"思",r:"shi / omo-",m:"Think",l:"n4",w:[{j:"思う",r:"omou",e:"to think"},{j:"思い出",r:"omoide",e:"memory"},{j:"思想",r:"shisou",e:"thought/ideology"},{j:"不思議",r:"fushigi",e:"mysterious"}]},
-  {k:"牛",r:"gyuu / ushi",m:"Cow",l:"n4",w:[{j:"牛肉",r:"gyuuniku",e:"beef"},{j:"牛乳",r:"gyuunyuu",e:"milk"},{j:"牛丼",r:"gyuudon",e:"beef bowl"},{j:"水牛",r:"suigyuu",e:"water buffalo"}]},
-  {k:"教",r:"kyou / oshi-",m:"Teach",l:"n4",w:[{j:"教える",r:"oshieru",e:"to teach"},{j:"教育",r:"kyouiku",e:"education"},{j:"教室",r:"kyoushitsu",e:"classroom"},{j:"宗教",r:"shuukyou",e:"religion"}]},
-  {k:"朝",r:"chou / asa",m:"Morning",l:"n4",w:[{j:"朝食",r:"choushoku",e:"breakfast"},{j:"毎朝",r:"maiasa",e:"every morning"},{j:"朝日",r:"asahi",e:"morning sun"},{j:"今朝",r:"kesa",e:"this morning"}]},
-  {k:"昼",r:"chuu / hiru",m:"Noon / Daytime",l:"n4",w:[{j:"昼食",r:"chuushoku",e:"lunch"},{j:"昼間",r:"hiruma",e:"daytime"},{j:"昼休み",r:"hiruyasumi",e:"lunch break"},{j:"昼寝",r:"hirune",e:"nap"}]},
-  {k:"夕",r:"yuu / yu",m:"Evening",l:"n4",w:[{j:"夕食",r:"yuushoku",e:"dinner"},{j:"夕方",r:"yuugata",e:"evening"},{j:"夕日",r:"yuuhi",e:"evening sun"},{j:"夕暮れ",r:"yuugure",e:"twilight"}]},
-  {k:"夜",r:"ya / yoru",m:"Night",l:"n4",w:[{j:"夜中",r:"yonaka",e:"midnight"},{j:"今夜",r:"kon'ya",e:"tonight"},{j:"夜行",r:"yakou",e:"night travel"},{j:"深夜",r:"shin'ya",e:"late night"}]},
-  {k:"英",r:"ei",m:"England / Brilliant",l:"n4",w:[{j:"英語",r:"eigo",e:"English"},{j:"英国",r:"eikoku",e:"England"},{j:"英雄",r:"eiyuu",e:"hero"},{j:"英才",r:"eisai",e:"prodigy"}]},
-  {k:"文",r:"bun / fumi",m:"Writing / Sentence",l:"n4",w:[{j:"文章",r:"bunshou",e:"sentence/text"},{j:"文化",r:"bunka",e:"culture"},{j:"作文",r:"sakubun",e:"composition"},{j:"文法",r:"bunpou",e:"grammar"}]},
-  {k:"漢",r:"kan",m:"Chinese / Kanji",l:"n4",w:[{j:"漢字",r:"kanji",e:"Chinese characters"},{j:"漢方",r:"kanpou",e:"herbal medicine"},{j:"漢文",r:"kanbun",e:"classical Chinese"},{j:"漢語",r:"kango",e:"Sino-Japanese word"}]},
-  {k:"字",r:"ji",m:"Character / Letter",l:"n4",w:[{j:"漢字",r:"kanji",e:"kanji"},{j:"文字",r:"moji",e:"character"},{j:"数字",r:"suuji",e:"number/digit"},{j:"字幕",r:"jimaku",e:"subtitles"}]},
-  {k:"合",r:"gou / a-",m:"Combine / Fit",l:"n4",w:[{j:"合う",r:"au",e:"to fit/match"},{j:"合格",r:"goukaku",e:"pass (exam)"},{j:"場合",r:"baai",e:"case/situation"},{j:"組み合わせ",r:"kumiawase",e:"combination"}]},
-  {k:"音",r:"on / oto",m:"Sound",l:"n4",w:[{j:"音楽",r:"ongaku",e:"music"},{j:"発音",r:"hatsuon",e:"pronunciation"},{j:"騒音",r:"souon",e:"noise"},{j:"音声",r:"onsei",e:"voice/sound"}]},
-  {k:"早",r:"sou / haya-",m:"Early / Fast",l:"n4",w:[{j:"早い",r:"hayai",e:"early/fast"},{j:"早起き",r:"hayaoki",e:"early rising"},{j:"早速",r:"sassoku",e:"immediately"},{j:"最早",r:"mohaya",e:"no longer/already"}]},
-  {k:"仕",r:"shi",m:"Serve / Work",l:"n4",w:[{j:"仕事",r:"shigoto",e:"work/job"},{j:"仕方",r:"shikata",e:"way of doing"},{j:"仕組み",r:"shikumi",e:"mechanism"},{j:"給仕",r:"kyuuji",e:"waiter"}]},
-  {k:"事",r:"ji / koto",m:"Thing / Fact",l:"n4",w:[{j:"仕事",r:"shigoto",e:"work"},{j:"大事",r:"daiji",e:"important"},{j:"事故",r:"jiko",e:"accident"},{j:"事実",r:"jijitsu",e:"fact"}]},
-  {k:"正",r:"sei / tada-",m:"Correct / Right",l:"n4",w:[{j:"正しい",r:"tadashii",e:"correct"},{j:"正直",r:"shoujiki",e:"honest"},{j:"正式",r:"seishiki",e:"formal/official"},{j:"修正",r:"shuusei",e:"correction"}]},
-  {k:"歩",r:"ho / aru-",m:"Walk / Step",l:"n4",w:[{j:"歩く",r:"aruku",e:"to walk"},{j:"一歩",r:"ippo",e:"one step"},{j:"散歩",r:"sanpo",e:"walk/stroll"},{j:"進歩",r:"shinpo",e:"progress"}]},
-  {k:"走",r:"sou / hashi-",m:"Run",l:"n4",w:[{j:"走る",r:"hashiru",e:"to run"},{j:"競走",r:"kyousou",e:"race"},{j:"逃走",r:"tousou",e:"escape/flight"},{j:"走行",r:"soukou",e:"running/traveling"}]},
-  {k:"声",r:"sei / koe",m:"Voice",l:"n4",w:[{j:"声楽",r:"seigaku",e:"vocal music"},{j:"大声",r:"oogoe",e:"loud voice"},{j:"声優",r:"seiyuu",e:"voice actor"},{j:"音声",r:"onsei",e:"voice/sound"}]},
-  {k:"犬",r:"ken / inu",m:"Dog",l:"n4",w:[{j:"子犬",r:"koinu",e:"puppy"},{j:"番犬",r:"banken",e:"guard dog"},{j:"野犬",r:"yaken",e:"stray dog"},{j:"犬小屋",r:"inugoya",e:"doghouse"}]},
-  {k:"近",r:"kin / chika-",m:"Near",l:"n4",w:[{j:"近い",r:"chikai",e:"near"},{j:"最近",r:"saikin",e:"recently"},{j:"近所",r:"kinjo",e:"neighborhood"},{j:"近代",r:"kindai",e:"modern era"}]},
-  {k:"遠",r:"en / too-",m:"Far",l:"n4",w:[{j:"遠い",r:"tooi",e:"far"},{j:"遠足",r:"ensoku",e:"excursion"},{j:"遠慮",r:"enryo",e:"hesitation/restraint"},{j:"永遠",r:"eien",e:"eternity"}]},
-  {k:"短",r:"tan / mijika-",m:"Short",l:"n4",w:[{j:"短い",r:"mijikai",e:"short"},{j:"短所",r:"tansho",e:"weak point"},{j:"短期",r:"tanki",e:"short term"},{j:"短縮",r:"tanshuku",e:"shortening"}]},
-  {k:"広",r:"kou / hiro-",m:"Wide / Broad",l:"n4",w:[{j:"広い",r:"hiroi",e:"wide"},{j:"広場",r:"hiroba",e:"plaza/square"},{j:"広告",r:"koukoku",e:"advertisement"},{j:"拡広",r:"kakukou",e:"expansion"}]},
-  {k:"世",r:"sei / yo",m:"World / Generation",l:"n4",w:[{j:"世界",r:"sekai",e:"world"},{j:"世紀",r:"seiki",e:"century"},{j:"世話",r:"sewa",e:"care/help"},{j:"世代",r:"sedai",e:"generation"}]},
-  {k:"界",r:"kai",m:"World / Boundary",l:"n4",w:[{j:"世界",r:"sekai",e:"world"},{j:"限界",r:"genkai",e:"limit"},{j:"業界",r:"gyoukai",e:"industry"},{j:"境界",r:"kyoukai",e:"boundary"}]},
-  {k:"青",r:"sei / ao-",m:"Blue / Green",l:"n4",w:[{j:"青い",r:"aoi",e:"blue/green"},{j:"青空",r:"aozora",e:"blue sky"},{j:"青春",r:"seishun",e:"youth"},{j:"青年",r:"seinen",e:"young person"}]},
-  {k:"黒",r:"koku / kuro",m:"Black",l:"n4",w:[{j:"黒い",r:"kuroi",e:"black"},{j:"黒板",r:"kokuban",e:"blackboard"},{j:"黒字",r:"kuroji",e:"profit/surplus"},{j:"黒白",r:"shirokuro",e:"black and white"}]},
-  {k:"赤",r:"seki / aka",m:"Red",l:"n4",w:[{j:"赤い",r:"akai",e:"red"},{j:"赤ちゃん",r:"akachan",e:"baby"},{j:"赤字",r:"akaji",e:"deficit/loss"},{j:"真っ赤",r:"makka",e:"bright red"}]},
-  {k:"銀",r:"gin",m:"Silver",l:"n4",w:[{j:"銀行",r:"ginkou",e:"bank"},{j:"銀色",r:"gin'iro",e:"silver color"},{j:"銀座",r:"ginza",e:"Ginza (place)"},{j:"水銀",r:"suigin",e:"mercury"}]},
-  {k:"肉",r:"niku",m:"Meat / Flesh",l:"n4",w:[{j:"牛肉",r:"gyuuniku",e:"beef"},{j:"豚肉",r:"butaniku",e:"pork"},{j:"肉体",r:"nikutai",e:"physical body"},{j:"肉親",r:"nikushin",e:"blood relative"}]},
-  {k:"屋",r:"oku / ya",m:"Shop / Roof",l:"n4",w:[{j:"部屋",r:"heya",e:"room"},{j:"本屋",r:"hon'ya",e:"bookshop"},{j:"八百屋",r:"yaoya",e:"greengrocer"},{j:"屋根",r:"yane",e:"roof"}]},
-  {k:"味",r:"mi / aji",m:"Taste / Flavor",l:"n4",w:[{j:"味方",r:"mikata",e:"ally"},{j:"趣味",r:"shumi",e:"hobby"},{j:"味わう",r:"ajiwau",e:"to taste/savor"},{j:"調味料",r:"choumiryou",e:"seasoning"}]},
-  {k:"料",r:"ryou",m:"Fee / Material",l:"n4",w:[{j:"料理",r:"ryouri",e:"cooking"},{j:"材料",r:"zairyou",e:"material"},{j:"無料",r:"muryou",e:"free of charge"},{j:"料金",r:"ryoukin",e:"charge/fee"}]},
-  {k:"理",r:"ri",m:"Reason / Logic",l:"n4",w:[{j:"料理",r:"ryouri",e:"cooking"},{j:"理由",r:"riyuu",e:"reason"},{j:"理解",r:"rikai",e:"understanding"},{j:"地理",r:"chiri",e:"geography"}]},
-  {k:"作",r:"saku / tsuku-",m:"Make / Create",l:"n4",w:[{j:"作る",r:"tsukuru",e:"to make"},{j:"作品",r:"sakuhin",e:"work/piece"},{j:"作文",r:"sakubun",e:"composition"},{j:"製作",r:"seisaku",e:"production"}]},
-  {k:"使",r:"shi / tsuka-",m:"Use",l:"n4",w:[{j:"使う",r:"tsukau",e:"to use"},{j:"使用",r:"shiyou",e:"usage"},{j:"使い方",r:"tsukaikata",e:"how to use"},{j:"大使",r:"taishi",e:"ambassador"}]},
-  {k:"引",r:"in / hi-",m:"Pull / Attract",l:"n4",w:[{j:"引く",r:"hiku",e:"to pull"},{j:"引っ越し",r:"hikkoshi",e:"moving house"},{j:"引退",r:"intai",e:"retirement"},{j:"取引",r:"torihiki",e:"transaction"}]},
-  {k:"用",r:"you / mo-",m:"Use / Purpose",l:"n4",w:[{j:"使用",r:"shiyou",e:"usage"},{j:"用意",r:"youi",e:"preparation"},{j:"用事",r:"youji",e:"errand"},{j:"利用",r:"riyou",e:"utilization"}]},
-  {k:"品",r:"hin / shina",m:"Goods / Quality",l:"n4",w:[{j:"商品",r:"shouhin",e:"product"},{j:"品質",r:"hinshitsu",e:"quality"},{j:"作品",r:"sakuhin",e:"artwork"},{j:"食品",r:"shokuhin",e:"food item"}]},
-  {k:"春",r:"shun / haru",m:"Spring",l:"n4",w:[{j:"春休み",r:"haruyasumi",e:"spring break"},{j:"青春",r:"seishun",e:"youth"},{j:"春分",r:"shunbun",e:"spring equinox"},{j:"春先",r:"harusaki",e:"early spring"}]},
-  {k:"夏",r:"ka / natsu",m:"Summer",l:"n4",w:[{j:"夏休み",r:"natsuyasumi",e:"summer break"},{j:"夏至",r:"geshi",e:"summer solstice"},{j:"真夏",r:"manatsu",e:"midsummer"},{j:"夏祭り",r:"natsumatsuri",e:"summer festival"}]},
-  {k:"秋",r:"shuu / aki",m:"Autumn",l:"n4",w:[{j:"秋分",r:"shuubun",e:"autumn equinox"},{j:"秋田",r:"akita",e:"Akita (place)"},{j:"晩秋",r:"banshuu",e:"late autumn"},{j:"秋空",r:"akizora",e:"autumn sky"}]},
-  {k:"冬",r:"tou / fuyu",m:"Winter",l:"n4",w:[{j:"冬休み",r:"fuyuyasumi",e:"winter break"},{j:"冬至",r:"touji",e:"winter solstice"},{j:"真冬",r:"mafuyu",e:"midwinter"},{j:"冬服",r:"fuyufuku",e:"winter clothes"}]},
-  {k:"暑",r:"sho / atsu-",m:"Hot (weather)",l:"n4",w:[{j:"暑い",r:"atsui",e:"hot (weather)"},{j:"暑さ",r:"atsusa",e:"heat"},{j:"猛暑",r:"mousho",e:"intense heat"},{j:"暑中",r:"shocchuu",e:"midsummer"}]},
-  {k:"寒",r:"kan / samu-",m:"Cold",l:"n4",w:[{j:"寒い",r:"samui",e:"cold"},{j:"寒さ",r:"samusa",e:"coldness"},{j:"厳寒",r:"genkan",e:"severe cold"},{j:"寒気",r:"kanki",e:"cold weather"}]},
-  {k:"風",r:"fuu / kaze",m:"Wind",l:"n4",w:[{j:"台風",r:"taifuu",e:"typhoon"},{j:"風景",r:"fuukei",e:"scenery"},{j:"北風",r:"kitakaze",e:"north wind"},{j:"風邪",r:"kaze",e:"cold (illness)"}]},
-  {k:"悪",r:"aku / waru-",m:"Bad / Evil",l:"n4",w:[{j:"悪い",r:"warui",e:"bad"},{j:"最悪",r:"saiaku",e:"worst"},{j:"悪化",r:"akka",e:"worsening"},{j:"罪悪",r:"zaiaku",e:"crime/evil"}]},
-  {k:"考",r:"kou / kanga-",m:"Think / Consider",l:"n4",w:[{j:"考える",r:"kangaeru",e:"to think"},{j:"考え方",r:"kangaekata",e:"way of thinking"},{j:"参考",r:"sankou",e:"reference"},{j:"思考",r:"shikou",e:"thought"}]},
-  {k:"知",r:"chi / shi-",m:"Know",l:"n4",w:[{j:"知る",r:"shiru",e:"to know"},{j:"知識",r:"chishiki",e:"knowledge"},{j:"知らせ",r:"shirase",e:"notice/news"},{j:"知人",r:"chijin",e:"acquaintance"}]},
-  {k:"不",r:"fu / bu",m:"Not / Un-",l:"n4",w:[{j:"不安",r:"fuan",e:"anxiety"},{j:"不便",r:"fuben",e:"inconvenient"},{j:"不満",r:"fuman",e:"dissatisfied"},{j:"不可能",r:"fukanou",e:"impossible"}]},
-  {k:"便",r:"ben / tayo-",m:"Convenient",l:"n4",w:[{j:"便利",r:"benri",e:"convenient"},{j:"不便",r:"fuben",e:"inconvenient"},{j:"郵便",r:"yuubin",e:"mail/post"},{j:"便所",r:"benjo",e:"restroom"}]},
-  {k:"住",r:"juu / su-",m:"Live / Reside",l:"n4",w:[{j:"住む",r:"sumu",e:"to live"},{j:"住所",r:"juusho",e:"address"},{j:"住民",r:"juumin",e:"resident"},{j:"移住",r:"ijuu",e:"migration"}]},
-  {k:"所",r:"sho / tokoro",m:"Place",l:"n4",w:[{j:"所",r:"tokoro",e:"place"},{j:"住所",r:"juusho",e:"address"},{j:"場所",r:"basho",e:"location"},{j:"研究所",r:"kenkyuujo",e:"research institute"}]},
-  {k:"物",r:"butsu / mono",m:"Thing / Object",l:"n4",w:[{j:"買い物",r:"kaimono",e:"shopping"},{j:"動物",r:"doubutsu",e:"animal"},{j:"食べ物",r:"tabemono",e:"food"},{j:"荷物",r:"nimotsu",e:"luggage"}]},
-  {k:"軽",r:"kei / karu-",m:"Light (weight)",l:"n4",w:[{j:"軽い",r:"karui",e:"light"},{j:"軽食",r:"keishoku",e:"light meal"},{j:"軽減",r:"keigen",e:"reduction"},{j:"気軽",r:"kigaru",e:"casual/easy-going"}]},
-  {k:"重",r:"juu / omo-",m:"Heavy",l:"n4",w:[{j:"重い",r:"omoi",e:"heavy"},{j:"重要",r:"juuyou",e:"important"},{j:"体重",r:"taijuu",e:"body weight"},{j:"重力",r:"juryoku",e:"gravity"}]},
-  {k:"送",r:"sou / oku-",m:"Send",l:"n4",w:[{j:"送る",r:"okuru",e:"to send"},{j:"放送",r:"housou",e:"broadcast"},{j:"送料",r:"souryou",e:"shipping fee"},{j:"見送り",r:"miokuri",e:"send-off"}]},
-  {k:"明",r:"mei / aki-",m:"Bright / Clear",l:"n4",w:[{j:"明るい",r:"akarui",e:"bright"},{j:"説明",r:"setsumei",e:"explanation"},{j:"明日",r:"ashita",e:"tomorrow"},{j:"発明",r:"hatsumei",e:"invention"}]},
-  {k:"暗",r:"an / kura-",m:"Dark",l:"n4",w:[{j:"暗い",r:"kurai",e:"dark"},{j:"暗記",r:"anki",e:"memorization"},{j:"暗号",r:"angou",e:"code/cipher"},{j:"薄暗い",r:"usugurai",e:"dim/gloomy"}]},
-  {k:"待",r:"tai / ma-",m:"Wait",l:"n4",w:[{j:"待つ",r:"matsu",e:"to wait"},{j:"待合室",r:"machiaishitsu",e:"waiting room"},{j:"期待",r:"kitai",e:"expectation"},{j:"招待",r:"shoutai",e:"invitation"}]},
-  {k:"持",r:"ji / mo-",m:"Hold / Have",l:"n4",w:[{j:"持つ",r:"motsu",e:"to hold"},{j:"気持ち",r:"kimochi",e:"feeling"},{j:"所持",r:"shoji",e:"possession"},{j:"持参",r:"jisan",e:"bringing along"}]},
-  {k:"産",r:"san / u-",m:"Produce / Birth",l:"n4",w:[{j:"産業",r:"sangyou",e:"industry"},{j:"生産",r:"seisan",e:"production"},{j:"産地",r:"sanchi",e:"place of origin"},{j:"出産",r:"shussan",e:"childbirth"}]},
-  {k:"勉",r:"ben",m:"Diligent / Study",l:"n4",w:[{j:"勉強",r:"benkyou",e:"study"},{j:"勤勉",r:"kinben",e:"industrious"},{j:"勉学",r:"bengaku",e:"academic study"},{j:"勉励",r:"benrei",e:"diligence"}]},
-  {k:"曜",r:"you",m:"Day of week",l:"n4",w:[{j:"月曜日",r:"getsuyoubi",e:"Monday"},{j:"火曜日",r:"kayoubi",e:"Tuesday"},{j:"曜日",r:"youbi",e:"day of the week"},{j:"何曜日",r:"nanyoubi",e:"what day"}]},
-  {k:"通",r:"tsuu / too-",m:"Pass Through",l:"n4",w:[{j:"通る",r:"tooru",e:"to pass through"},{j:"交通",r:"koutsuu",e:"traffic/transport"},{j:"通勤",r:"tsuukin",e:"commuting"},{j:"普通",r:"futsuu",e:"ordinary"}]},
-  {k:"習",r:"shuu / nara-",m:"Learn / Practice",l:"n4",w:[{j:"習う",r:"narau",e:"to learn"},{j:"練習",r:"renshuu",e:"practice"},{j:"予習",r:"yoshuu",e:"preview study"},{j:"習慣",r:"shuukan",e:"habit/custom"}]},
-  {k:"研",r:"ken",m:"Research / Sharpen",l:"n4",w:[{j:"研究",r:"kenkyuu",e:"research"},{j:"研修",r:"kenshuu",e:"training"},{j:"研究所",r:"kenkyuujo",e:"research institute"},{j:"研磨",r:"kenma",e:"polishing"}]},
-  {k:"究",r:"kyuu / kiwa-",m:"Investigate",l:"n4",w:[{j:"研究",r:"kenkyuu",e:"research"},{j:"究明",r:"kyuumei",e:"investigation"},{j:"追究",r:"tsuikyuu",e:"pursuit"},{j:"究極",r:"kyuukyoku",e:"ultimate"}]},
-  {k:"試",r:"shi / kokoro-",m:"Try / Test",l:"n4",w:[{j:"試験",r:"shiken",e:"exam"},{j:"試合",r:"shiai",e:"match/game"},{j:"試す",r:"tamesu",e:"to try"},{j:"試食",r:"shishoku",e:"taste test"}]},
-  {k:"験",r:"ken / gen",m:"Experience / Test",l:"n4",w:[{j:"試験",r:"shiken",e:"exam"},{j:"経験",r:"keiken",e:"experience"},{j:"体験",r:"taiken",e:"hands-on experience"},{j:"実験",r:"jikken",e:"experiment"}]},
-  {k:"質",r:"shitsu / shichi",m:"Quality / Nature",l:"n4",w:[{j:"品質",r:"hinshitsu",e:"quality"},{j:"質問",r:"shitsumon",e:"question"},{j:"性質",r:"seishitsu",e:"nature/character"},{j:"素質",r:"soshitsu",e:"talent"}]},
-  {k:"問",r:"mon / to-",m:"Question / Problem",l:"n4",w:[{j:"質問",r:"shitsumon",e:"question"},{j:"問題",r:"mondai",e:"problem"},{j:"問い合わせ",r:"toiawase",e:"inquiry"},{j:"訪問",r:"houmon",e:"visit"}]},
-  {k:"題",r:"dai",m:"Topic / Title",l:"n4",w:[{j:"問題",r:"mondai",e:"problem"},{j:"題名",r:"daimei",e:"title"},{j:"宿題",r:"shukudai",e:"homework"},{j:"話題",r:"wadai",e:"topic"}]},
-  {k:"回",r:"kai / mawa-",m:"Turn / Times",l:"n4",w:[{j:"回す",r:"mawasu",e:"to turn"},{j:"今回",r:"konkai",e:"this time"},{j:"回答",r:"kaitou",e:"answer"},{j:"回数",r:"kaisuu",e:"number of times"}]},
-  {k:"計",r:"kei / haka-",m:"Measure / Plan",l:"n4",w:[{j:"時計",r:"tokei",e:"clock/watch"},{j:"計画",r:"keikaku",e:"plan"},{j:"合計",r:"goukei",e:"total"},{j:"計算",r:"keisan",e:"calculation"}]},
-  {k:"借",r:"shaku / ka-",m:"Borrow",l:"n4",w:[{j:"借りる",r:"kariru",e:"to borrow"},{j:"借金",r:"shakkin",e:"debt"},{j:"賃借",r:"chinshaku",e:"lease"},{j:"借家",r:"shakuya",e:"rented house"}]},
-  {k:"貸",r:"tai / ka-",m:"Lend",l:"n4",w:[{j:"貸す",r:"kasu",e:"to lend"},{j:"貸し出し",r:"kashidashi",e:"loan/lending"},{j:"貸家",r:"kashiya",e:"house for rent"},{j:"賃貸",r:"chintai",e:"rental"}]},
-  {k:"急",r:"kyuu / iso-",m:"Urgent / Rush",l:"n4",w:[{j:"急ぐ",r:"isogu",e:"to hurry"},{j:"急行",r:"kyuukou",e:"express"},{j:"急に",r:"kyuu ni",e:"suddenly"},{j:"緊急",r:"kinkyuu",e:"emergency"}]},
-  {k:"切",r:"setsu / ki-",m:"Cut",l:"n4",w:[{j:"切る",r:"kiru",e:"to cut"},{j:"大切",r:"taisetsu",e:"important"},{j:"切符",r:"kippu",e:"ticket"},{j:"締め切り",r:"shimekiri",e:"deadline"}]},
-  {k:"代",r:"dai / ka-",m:"Replace / Era",l:"n4",w:[{j:"時代",r:"jidai",e:"era"},{j:"代わり",r:"kawari",e:"substitute"},{j:"代金",r:"daikin",e:"price/cost"},{j:"現代",r:"gendai",e:"modern times"}]},
-  {k:"乗",r:"jou / no-",m:"Ride / Board",l:"n4",w:[{j:"乗る",r:"noru",e:"to ride"},{j:"乗客",r:"joukyaku",e:"passenger"},{j:"乗り換え",r:"norikae",e:"transfer"},{j:"乗車",r:"jousha",e:"boarding"}]},
-  {k:"着",r:"chaku / ki-",m:"Wear / Arrive",l:"n4",w:[{j:"着る",r:"kiru",e:"to wear"},{j:"着く",r:"tsuku",e:"to arrive"},{j:"到着",r:"touchaku",e:"arrival"},{j:"着替え",r:"kigae",e:"change of clothes"}]},
-  {k:"地",r:"chi / ji",m:"Ground / Earth",l:"n4",w:[{j:"地図",r:"chizu",e:"map"},{j:"地下",r:"chika",e:"underground"},{j:"地球",r:"chikyuu",e:"Earth"},{j:"土地",r:"tochi",e:"land"}]},
-  {k:"図",r:"zu / to",m:"Map / Diagram",l:"n4",w:[{j:"地図",r:"chizu",e:"map"},{j:"図書館",r:"toshokan",e:"library"},{j:"図形",r:"zukei",e:"figure/shape"},{j:"意図",r:"ito",e:"intention"}]},
-  {k:"運",r:"un / hako-",m:"Transport / Luck",l:"n4",w:[{j:"運動",r:"undou",e:"exercise"},{j:"運転",r:"unten",e:"driving"},{j:"幸運",r:"kouun",e:"good luck"},{j:"運命",r:"unmei",e:"destiny"}]},
-  {k:"転",r:"ten / koro-",m:"Roll / Turn",l:"n4",w:[{j:"自転車",r:"jitensha",e:"bicycle"},{j:"運転",r:"unten",e:"driving"},{j:"転勤",r:"tenkin",e:"job transfer"},{j:"回転",r:"kaiten",e:"rotation"}]},
-  {k:"動",r:"dou / ugo-",m:"Move",l:"n4",w:[{j:"動く",r:"ugoku",e:"to move"},{j:"運動",r:"undou",e:"exercise"},{j:"動物",r:"doubutsu",e:"animal"},{j:"感動",r:"kandou",e:"being moved emotionally"}]},
-  {k:"働",r:"dou / hatara-",m:"Work",l:"n4",w:[{j:"働く",r:"hataraku",e:"to work"},{j:"労働",r:"roudou",e:"labor"},{j:"働き者",r:"hatarakimono",e:"hard worker"},{j:"共働き",r:"tomobataraki",e:"dual income"}]},
-  {k:"始",r:"shi / haji-",m:"Begin / Start",l:"n4",w:[{j:"始まる",r:"hajimaru",e:"to begin"},{j:"開始",r:"kaishi",e:"start"},{j:"始業",r:"shigyou",e:"start of work"},{j:"始発",r:"shihatsu",e:"first train"}]},
-  {k:"終",r:"shuu / o-",m:"End / Finish",l:"n4",w:[{j:"終わる",r:"owaru",e:"to end"},{j:"最終",r:"saishuu",e:"last/final"},{j:"終点",r:"shuuten",e:"terminal"},{j:"終電",r:"shuuden",e:"last train"}]},
-  {k:"去",r:"kyo / sa-",m:"Leave / Past",l:"n4",w:[{j:"去年",r:"kyonen",e:"last year"},{j:"過去",r:"kako",e:"past"},{j:"去る",r:"saru",e:"to leave"},{j:"消去",r:"shougo",e:"erasure"}]},
-  {k:"発",r:"hatsu",m:"Depart / Emit",l:"n4",w:[{j:"出発",r:"shuppatsu",e:"departure"},{j:"発見",r:"hakken",e:"discovery"},{j:"発表",r:"happyou",e:"announcement"},{j:"発音",r:"hatsuon",e:"pronunciation"}]},
-  {k:"紙",r:"shi / kami",m:"Paper",l:"n4",w:[{j:"手紙",r:"tegami",e:"letter"},{j:"新聞紙",r:"shinbunshi",e:"newspaper"},{j:"紙幣",r:"shihei",e:"paper money"},{j:"折り紙",r:"origami",e:"origami"}]},
-  {k:"楽",r:"gaku / raku",m:"Music / Easy",l:"n4",w:[{j:"音楽",r:"ongaku",e:"music"},{j:"楽しい",r:"tanoshii",e:"fun"},{j:"気楽",r:"kiraku",e:"relaxed"},{j:"楽器",r:"gakki",e:"instrument"}]},
-  {k:"薬",r:"yaku / kusuri",m:"Medicine",l:"n4",w:[{j:"薬局",r:"yakkyoku",e:"pharmacy"},{j:"薬品",r:"yakuhin",e:"medicine/drug"},{j:"漢方薬",r:"kanpouyaku",e:"herbal medicine"},{j:"薬剤師",r:"yakuzaishi",e:"pharmacist"}]},
-  {k:"歌",r:"ka / uta",m:"Song / Sing",l:"n4",w:[{j:"歌う",r:"utau",e:"to sing"},{j:"歌手",r:"kashu",e:"singer"},{j:"歌詞",r:"kashi",e:"lyrics"},{j:"国歌",r:"kokka",e:"national anthem"}]},
-  {k:"映",r:"ei / ha-",m:"Reflect / Project",l:"n4",w:[{j:"映画",r:"eiga",e:"movie"},{j:"映す",r:"utsusu",e:"to project"},{j:"上映",r:"jouei",e:"screening"},{j:"映像",r:"eizou",e:"image/footage"}]},
-  {k:"画",r:"ga / kaku",m:"Picture / Drawing",l:"n4",w:[{j:"映画",r:"eiga",e:"movie"},{j:"絵画",r:"kaiga",e:"painting"},{j:"計画",r:"keikaku",e:"plan"},{j:"漫画",r:"manga",e:"manga/comics"}]},
-  {k:"写",r:"sha / utsu-",m:"Copy / Photograph",l:"n4",w:[{j:"写真",r:"shashin",e:"photograph"},{j:"写す",r:"utsusu",e:"to copy/take photo"},{j:"描写",r:"byousha",e:"description"},{j:"複写",r:"fukusha",e:"duplicate"}]},
-  {k:"真",r:"shin / ma",m:"True / Reality",l:"n4",w:[{j:"写真",r:"shashin",e:"photograph"},{j:"真剣",r:"shinken",e:"serious"},{j:"真実",r:"shinjitsu",e:"truth"},{j:"真っ直ぐ",r:"massugu",e:"straight"}]},
-  {k:"以",r:"i",m:"By means of",l:"n4",w:[{j:"以上",r:"ijou",e:"above/or more"},{j:"以下",r:"ika",e:"below/or less"},{j:"以外",r:"igai",e:"other than"},{j:"以内",r:"inai",e:"within"}]},
-  {k:"旅",r:"ryo / tabi",m:"Travel",l:"n4",w:[{j:"旅行",r:"ryokou",e:"travel/trip"},{j:"旅館",r:"ryokan",e:"Japanese inn"},{j:"旅人",r:"tabibito",e:"traveler"},{j:"一人旅",r:"hitoribito",e:"solo travel"}]},
-  {k:"館",r:"kan",m:"Hall / Building",l:"n4",w:[{j:"旅館",r:"ryokan",e:"Japanese inn"},{j:"図書館",r:"toshokan",e:"library"},{j:"博物館",r:"hakubutsukan",e:"museum"},{j:"大使館",r:"taishikan",e:"embassy"}]},
-  {k:"洋",r:"you",m:"Western / Ocean",l:"n4",w:[{j:"洋服",r:"youfuku",e:"Western clothes"},{j:"西洋",r:"seiyou",e:"the West"},{j:"洋食",r:"youshoku",e:"Western food"},{j:"洋室",r:"youshitsu",e:"Western-style room"}]},
-  {k:"服",r:"fuku",m:"Clothes",l:"n4",w:[{j:"洋服",r:"youfuku",e:"Western clothes"},{j:"制服",r:"seifuku",e:"uniform"},{j:"服装",r:"fukusou",e:"attire"},{j:"服用",r:"fukuyou",e:"taking medicine"}]},
-  {k:"室",r:"shitsu / muro",m:"Room / Chamber",l:"n4",w:[{j:"教室",r:"kyoushitsu",e:"classroom"},{j:"和室",r:"washitsu",e:"Japanese-style room"},{j:"研究室",r:"kenkyuushitsu",e:"research room"},{j:"室内",r:"shitsunai",e:"indoors"}]},
-  {k:"兄",r:"kei / ani",m:"Older brother",l:"n4",w:[{j:"お兄さん",r:"oniisan",e:"older brother"},{j:"兄弟",r:"kyoudai",e:"brothers"},{j:"実兄",r:"jikkei",e:"one's real brother"},{j:"長兄",r:"choukei",e:"eldest brother"}]},
-  {k:"弟",r:"tei / otouto",m:"Younger brother",l:"n4",w:[{j:"兄弟",r:"kyoudai",e:"brothers"},{j:"弟子",r:"deshi",e:"disciple"},{j:"義弟",r:"gitei",e:"brother-in-law"},{j:"師弟",r:"shitei",e:"master and disciple"}]},
-  {k:"姉",r:"shi / ane",m:"Older sister",l:"n4",w:[{j:"お姉さん",r:"oneesan",e:"older sister"},{j:"姉妹",r:"shimai",e:"sisters"},{j:"実姉",r:"jisshi",e:"one's real sister"},{j:"義姉",r:"gishi",e:"sister-in-law"}]},
-  {k:"妹",r:"mai / imouto",m:"Younger sister",l:"n4",w:[{j:"姉妹",r:"shimai",e:"sisters"},{j:"義妹",r:"gimai",e:"sister-in-law"},{j:"実妹",r:"jitsumai",e:"one's real sister"},{j:"妹分",r:"imoutobun",e:"like a younger sister"}]},
-  {k:"親",r:"shin / oya",m:"Parent",l:"n4",w:[{j:"親切",r:"shinsetsu",e:"kind"},{j:"両親",r:"ryoushin",e:"parents"},{j:"親友",r:"shin'yuu",e:"best friend"},{j:"親子",r:"oyako",e:"parent and child"}]},
-  {k:"族",r:"zoku",m:"Tribe / Family",l:"n4",w:[{j:"家族",r:"kazoku",e:"family"},{j:"民族",r:"minzoku",e:"ethnic group"},{j:"部族",r:"buzoku",e:"tribe"},{j:"遺族",r:"izoku",e:"bereaved family"}]},
-  {k:"者",r:"sha / mono",m:"Person",l:"n4",w:[{j:"記者",r:"kisha",e:"journalist"},{j:"医者",r:"isha",e:"doctor"},{j:"患者",r:"kanja",e:"patient"},{j:"若者",r:"wakamono",e:"young person"}]},
-  {k:"自",r:"ji / shi",m:"Self",l:"n4",w:[{j:"自分",r:"jibun",e:"oneself"},{j:"自動車",r:"jidousha",e:"automobile"},{j:"自然",r:"shizen",e:"nature"},{j:"自由",r:"jiyuu",e:"freedom"}]},
-  {k:"民",r:"min / tami",m:"People / Nation",l:"n4",w:[{j:"市民",r:"shimin",e:"citizen"},{j:"民族",r:"minzoku",e:"ethnic group"},{j:"国民",r:"kokumin",e:"national citizen"},{j:"難民",r:"nanmin",e:"refugee"}]},
-  {k:"主",r:"shu / nushi",m:"Master / Main",l:"n4",w:[{j:"主人",r:"shujin",e:"master/husband"},{j:"主に",r:"omoni",e:"mainly"},{j:"主語",r:"shugo",e:"subject"},{j:"民主",r:"minshu",e:"democratic"}]},
-  {k:"答",r:"tou / kota-",m:"Answer",l:"n4",w:[{j:"答える",r:"kotaeru",e:"to answer"},{j:"回答",r:"kaitou",e:"response"},{j:"解答",r:"kaitou",e:"solution"},{j:"答案",r:"touan",e:"answer sheet"}]},
-  {k:"特",r:"toku",m:"Special",l:"n4",w:[{j:"特別",r:"tokubetsu",e:"special"},{j:"特に",r:"toku ni",e:"especially"},{j:"特急",r:"tokkyuu",e:"super express"},{j:"特徴",r:"tokuchou",e:"characteristic"}]},
-  {k:"別",r:"betsu / waka-",m:"Separate / Different",l:"n4",w:[{j:"別に",r:"betsu ni",e:"separately"},{j:"特別",r:"tokubetsu",e:"special"},{j:"区別",r:"kubetsu",e:"distinction"},{j:"別れる",r:"wakareru",e:"to separate"}]},
-  {k:"病",r:"byou / ya-",m:"Sick / Disease",l:"n4",w:[{j:"病院",r:"byouin",e:"hospital"},{j:"病気",r:"byouki",e:"illness"},{j:"病人",r:"byounin",e:"sick person"},{j:"病室",r:"byoushitsu",e:"hospital room"}]},
-  {k:"院",r:"in",m:"Institution / Clinic",l:"n4",w:[{j:"病院",r:"byouin",e:"hospital"},{j:"大学院",r:"daigakuin",e:"graduate school"},{j:"入院",r:"nyuuin",e:"hospitalization"},{j:"退院",r:"taiin",e:"discharge from hospital"}]},
-  {k:"医",r:"i",m:"Medicine / Doctor",l:"n4",w:[{j:"医者",r:"isha",e:"doctor"},{j:"医学",r:"igaku",e:"medicine (study)"},{j:"医療",r:"iryou",e:"medical care"},{j:"歯医者",r:"haisha",e:"dentist"}]},
-  {k:"死",r:"shi / shi-",m:"Death / Die",l:"n4",w:[{j:"死ぬ",r:"shinu",e:"to die"},{j:"死亡",r:"shibou",e:"death"},{j:"生死",r:"seishi",e:"life and death"},{j:"死体",r:"shitai",e:"corpse"}]},
-  {k:"注",r:"chuu / so-",m:"Pour / Note",l:"n4",w:[{j:"注意",r:"chuui",e:"attention/caution"},{j:"注文",r:"chuumon",e:"order"},{j:"注目",r:"chuumoku",e:"attention"},{j:"注射",r:"chuusha",e:"injection"}]},
-  {k:"意",r:"i",m:"Meaning / Mind",l:"n4",w:[{j:"意見",r:"iken",e:"opinion"},{j:"意味",r:"imi",e:"meaning"},{j:"注意",r:"chuui",e:"caution"},{j:"意識",r:"ishiki",e:"consciousness"}]},
-  {k:"説",r:"setsu / to-",m:"Explain / Theory",l:"n4",w:[{j:"説明",r:"setsumei",e:"explanation"},{j:"小説",r:"shousetsu",e:"novel"},{j:"解説",r:"kaisetsu",e:"commentary"},{j:"演説",r:"enzetsu",e:"speech"}]},
-  {k:"首",r:"shu / kubi",m:"Neck / Head",l:"n4",w:[{j:"首相",r:"shushou",e:"prime minister"},{j:"首都",r:"shuto",e:"capital city"},{j:"手首",r:"tekubi",e:"wrist"},{j:"足首",r:"ashikubi",e:"ankle"}]},
-  {k:"頭",r:"tou / atama",m:"Head",l:"n4",w:[{j:"頭が良い",r:"atama ga yoi",e:"smart"},{j:"頭痛",r:"zutsuu",e:"headache"},{j:"先頭",r:"sentou",e:"the front/lead"},{j:"頭脳",r:"zunou",e:"brain/intellect"}]},
-  {k:"顔",r:"gan / kao",m:"Face",l:"n4",w:[{j:"顔色",r:"kaoiro",e:"complexion"},{j:"笑顔",r:"egao",e:"smiling face"},{j:"顔見知り",r:"kaomijiri",e:"acquaintance"},{j:"洗顔",r:"sengan",e:"face washing"}]},
-  {k:"進",r:"shin / susu-",m:"Advance",l:"n4",w:[{j:"進む",r:"susumu",e:"to advance"},{j:"進歩",r:"shinpo",e:"progress"},{j:"前進",r:"zenshin",e:"forward progress"},{j:"進学",r:"shingaku",e:"advancing to next school"}]},
-  {k:"集",r:"shuu / atsu-",m:"Gather / Collect",l:"n4",w:[{j:"集まる",r:"atsumaru",e:"to gather"},{j:"集中",r:"shuuchuu",e:"concentration"},{j:"収集",r:"shuushuu",e:"collection"},{j:"募集",r:"boshuu",e:"recruitment"}]},
-  {k:"洗",r:"sen / ara-",m:"Wash",l:"n4",w:[{j:"洗う",r:"arau",e:"to wash"},{j:"洗濯",r:"sentaku",e:"laundry"},{j:"洗面所",r:"senmenjo",e:"washroom"},{j:"洗剤",r:"senzai",e:"detergent"}]},
-  {k:"光",r:"kou / hikari",m:"Light",l:"n4",w:[{j:"光る",r:"hikaru",e:"to shine"},{j:"日光",r:"nikkou",e:"sunlight"},{j:"観光",r:"kankou",e:"sightseeing"},{j:"光景",r:"kouкei",e:"scene/sight"}]},
-  {k:"太",r:"tai / futo-",m:"Fat / Thick",l:"n4",w:[{j:"太い",r:"futoi",e:"thick/fat"},{j:"太陽",r:"taiyou",e:"sun"},{j:"太平洋",r:"taiheiyou",e:"Pacific Ocean"},{j:"太鼓",r:"taiko",e:"drum"}]},
-  {k:"建",r:"ken / ta-",m:"Build / Construct",l:"n4",w:[{j:"建てる",r:"tateru",e:"to build"},{j:"建物",r:"tatemono",e:"building"},{j:"建設",r:"kensetsu",e:"construction"},{j:"建築",r:"kenchiku",e:"architecture"}]},
-  {k:"起",r:"ki / o-",m:"Wake / Rise",l:"n4",w:[{j:"起きる",r:"okiru",e:"to wake up"},{j:"起こす",r:"okosu",e:"to cause/wake"},{j:"起源",r:"kigen",e:"origin"},{j:"早起き",r:"hayaoki",e:"early rising"}]},
-  {k:"鳥",r:"chou / tori",m:"Bird",l:"n4",w:[{j:"小鳥",r:"kotori",e:"small bird"},{j:"鳥居",r:"torii",e:"shrine gate"},{j:"渡り鳥",r:"wataridori",e:"migratory bird"},{j:"鳥肌",r:"torihada",e:"goosebumps"}]},
-  {k:"飯",r:"han / meshi",m:"Rice / Meal",l:"n4",w:[{j:"ご飯",r:"gohan",e:"rice/meal"},{j:"朝飯",r:"asameshi",e:"breakfast"},{j:"夕飯",r:"yuuhan",e:"dinner"},{j:"炊飯器",r:"suihanki",e:"rice cooker"}]},
-  {k:"野",r:"ya / no",m:"Field / Wild",l:"n4",w:[{j:"野菜",r:"yasai",e:"vegetable"},{j:"野球",r:"yakyuu",e:"baseball"},{j:"野原",r:"nohara",e:"field/plain"},{j:"分野",r:"bunya",e:"field/domain"}]},
-  {k:"菜",r:"sai / na",m:"Vegetable",l:"n4",w:[{j:"野菜",r:"yasai",e:"vegetable"},{j:"菜の花",r:"nanohana",e:"rapeseed flower"},{j:"白菜",r:"hakusai",e:"Chinese cabbage"},{j:"山菜",r:"sansai",e:"wild vegetable"}]},
-  {k:"林",r:"rin / hayashi",m:"Forest / Grove",l:"n4",w:[{j:"林業",r:"ringuyo",e:"forestry"},{j:"山林",r:"sanrin",e:"mountain forest"},{j:"竹林",r:"chikurin",e:"bamboo grove"},{j:"森林",r:"shinrin",e:"forest"}]},
-  {k:"森",r:"shin / mori",m:"Forest",l:"n4",w:[{j:"森林",r:"shinrin",e:"forest"},{j:"森の中",r:"mori no naka",e:"inside the forest"},{j:"原生林",r:"genseirin",e:"primeval forest"},{j:"緑の森",r:"midori no mori",e:"green forest"}]},
-  {k:"池",r:"chi / ike",m:"Pond",l:"n4",w:[{j:"池",r:"ike",e:"pond"},{j:"電池",r:"denchi",e:"battery"},{j:"溜め池",r:"tameike",e:"reservoir"},{j:"池畔",r:"chihan",e:"lakeside"}]},
-  {k:"県",r:"ken",m:"Prefecture",l:"n4",w:[{j:"都道府県",r:"todouhuken",e:"prefecture"},{j:"県庁",r:"kenchou",e:"prefectural office"},{j:"県民",r:"kenmin",e:"prefectural resident"},{j:"出身県",r:"shusshinken",e:"home prefecture"}]},
-  {k:"市",r:"shi / ichi",m:"City / Market",l:"n4",w:[{j:"市場",r:"shijou",e:"market"},{j:"市民",r:"shimin",e:"citizen"},{j:"都市",r:"toshi",e:"urban city"},{j:"市役所",r:"shiyakusho",e:"city hall"}]},
-  {k:"町",r:"chou / machi",m:"Town",l:"n4",w:[{j:"町中",r:"machinaka",e:"downtown"},{j:"下町",r:"shitamachi",e:"old part of town"},{j:"町役場",r:"machiyakuba",e:"town hall"},{j:"商店街",r:"shoutengai",e:"shopping street"}]},
-  {k:"村",r:"son / mura",m:"Village",l:"n4",w:[{j:"村人",r:"murabito",e:"villager"},{j:"農村",r:"nouson",e:"farming village"},{j:"村長",r:"sonchoo",e:"village head"},{j:"村落",r:"sonraku",e:"hamlet"}]},
-  {k:"区",r:"ku",m:"Ward / District",l:"n4",w:[{j:"地区",r:"chiku",e:"district"},{j:"区役所",r:"kuyakusho",e:"ward office"},{j:"区別",r:"kubetsu",e:"distinction"},{j:"区間",r:"kukan",e:"section"}]},
-  {k:"京",r:"kyou / kei",m:"Capital",l:"n4",w:[{j:"東京",r:"toukyou",e:"Tokyo"},{j:"京都",r:"kyouto",e:"Kyoto"},{j:"京阪",r:"keihan",e:"Kyoto-Osaka area"},{j:"上京",r:"joukyou",e:"going to Tokyo"}]},
-  {k:"都",r:"to / miyako",m:"Capital City",l:"n4",w:[{j:"東京都",r:"toukyouto",e:"Tokyo Metropolis"},{j:"京都",r:"kyouto",e:"Kyoto"},{j:"首都",r:"shuto",e:"capital city"},{j:"都市",r:"toshi",e:"city"}]},
-  {k:"工",r:"kou / ku",m:"Work / Craft",l:"n4",w:[{j:"工場",r:"koujou",e:"factory"},{j:"工事",r:"kouji",e:"construction"},{j:"工業",r:"kougyou",e:"industry"},{j:"工夫",r:"kufu",e:"ingenuity/devise"}]},
-  {k:"場",r:"jou / ba",m:"Place / Scene",l:"n4",w:[{j:"工場",r:"koujou",e:"factory"},{j:"場所",r:"basho",e:"place"},{j:"広場",r:"hiroba",e:"plaza"},{j:"市場",r:"ichiba",e:"market"}]},
-  {k:"台",r:"dai / tai",m:"Stand / Level",l:"n4",w:[{j:"台所",r:"daidokoro",e:"kitchen"},{j:"台風",r:"taifuu",e:"typhoon"},{j:"舞台",r:"butai",e:"stage"},{j:"台数",r:"daisuu",e:"number of machines"}]},
-  {k:"員",r:"in",m:"Member / Staff",l:"n4",w:[{j:"社員",r:"shain",e:"company employee"},{j:"店員",r:"ten'in",e:"store clerk"},{j:"会員",r:"kaiin",e:"member"},{j:"全員",r:"zen'in",e:"all members"}]},
-  {k:"業",r:"gyou / gou",m:"Business / Work",l:"n4",w:[{j:"産業",r:"sangyou",e:"industry"},{j:"卒業",r:"sotsugyou",e:"graduation"},{j:"職業",r:"shokugyou",e:"occupation"},{j:"作業",r:"sagyou",e:"work/task"}]},
-  {k:"度",r:"do / tabi",m:"Degree / Time",l:"n4",w:[{j:"温度",r:"ondo",e:"temperature"},{j:"態度",r:"taido",e:"attitude"},{j:"今度",r:"kondo",e:"next time"},{j:"制度",r:"seido",e:"system/institution"}]},
-  {k:"有",r:"yuu / a-",m:"Exist / Have",l:"n4",w:[{j:"有名",r:"yuumei",e:"famous"},{j:"有利",r:"yuuri",e:"advantageous"},{j:"所有",r:"shoyuu",e:"possession"},{j:"有効",r:"yuukou",e:"valid/effective"}]},
-  {k:"堂",r:"dou",m:"Hall / Temple",l:"n4",w:[{j:"食堂",r:"shokudou",e:"cafeteria"},{j:"礼堂",r:"reidou",e:"chapel"},{j:"講堂",r:"koudou",e:"auditorium"},{j:"仏堂",r:"butsudou",e:"Buddhist hall"}]},
-];
+    <script>
+      const KANJI = [
+        // ===== N5 =====
+        {
+          k: "一",
+          r: "ichi / hito-",
+          m: "One",
+          l: "n5",
+          w: [
+            { j: "一人", r: "hitori", e: "one person" },
+            { j: "一日", r: "tsuitachi", e: "1st of month" },
+            { j: "一番", r: "ichiban", e: "number one" },
+            { j: "一緒", r: "issho", e: "together" },
+          ],
+        },
+        {
+          k: "二",
+          r: "ni / futa-",
+          m: "Two",
+          l: "n5",
+          w: [
+            { j: "二人", r: "futari", e: "two people" },
+            { j: "二月", r: "nigatsu", e: "February" },
+            { j: "二階", r: "nikai", e: "second floor" },
+            { j: "二十", r: "nijuu", e: "twenty" },
+          ],
+        },
+        {
+          k: "三",
+          r: "san / mit-",
+          m: "Three",
+          l: "n5",
+          w: [
+            { j: "三月", r: "sangatsu", e: "March" },
+            { j: "三人", r: "sannin", e: "three people" },
+            { j: "三角", r: "sankaku", e: "triangle" },
+            { j: "三日", r: "mikka", e: "3rd / 3 days" },
+          ],
+        },
+        {
+          k: "四",
+          r: "shi / yon",
+          m: "Four",
+          l: "n5",
+          w: [
+            { j: "四月", r: "shigatsu", e: "April" },
+            { j: "四人", r: "yonin", e: "four people" },
+            { j: "四角", r: "shikaku", e: "square" },
+            { j: "四日", r: "yokka", e: "4th / 4 days" },
+          ],
+        },
+        {
+          k: "五",
+          r: "go / itsu-",
+          m: "Five",
+          l: "n5",
+          w: [
+            { j: "五月", r: "gogatsu", e: "May" },
+            { j: "五人", r: "gonin", e: "five people" },
+            { j: "五日", r: "itsuka", e: "5th / 5 days" },
+            { j: "五十", r: "gojuu", e: "fifty" },
+          ],
+        },
+        {
+          k: "六",
+          r: "roku / mut-",
+          m: "Six",
+          l: "n5",
+          w: [
+            { j: "六月", r: "rokugatsu", e: "June" },
+            { j: "六人", r: "rokunin", e: "six people" },
+            { j: "六日", r: "muika", e: "6th / 6 days" },
+            { j: "六十", r: "rokujuu", e: "sixty" },
+          ],
+        },
+        {
+          k: "七",
+          r: "shichi / nana",
+          m: "Seven",
+          l: "n5",
+          w: [
+            { j: "七月", r: "shichigatsu", e: "July" },
+            { j: "七人", r: "shichinin", e: "seven people" },
+            { j: "七日", r: "nanoka", e: "7th / 7 days" },
+            { j: "七夕", r: "tanabata", e: "Star Festival" },
+          ],
+        },
+        {
+          k: "八",
+          r: "hachi / ya-",
+          m: "Eight",
+          l: "n5",
+          w: [
+            { j: "八月", r: "hachigatsu", e: "August" },
+            { j: "八人", r: "hachinin", e: "eight people" },
+            { j: "八日", r: "youka", e: "8th / 8 days" },
+            { j: "八百屋", r: "yaoya", e: "greengrocer" },
+          ],
+        },
+        {
+          k: "九",
+          r: "kyuu / ku",
+          m: "Nine",
+          l: "n5",
+          w: [
+            { j: "九月", r: "kugatsu", e: "September" },
+            { j: "九人", r: "kyuunin", e: "nine people" },
+            { j: "九日", r: "kokonoka", e: "9th / 9 days" },
+            { j: "九十", r: "kyuujuu", e: "ninety" },
+          ],
+        },
+        {
+          k: "十",
+          r: "juu / too",
+          m: "Ten",
+          l: "n5",
+          w: [
+            { j: "十月", r: "juugatsu", e: "October" },
+            { j: "十分", r: "juubun", e: "enough / 10 min" },
+            { j: "十日", r: "tooka", e: "10th / 10 days" },
+            { j: "十字", r: "juuji", e: "cross shape" },
+          ],
+        },
+        {
+          k: "百",
+          r: "hyaku",
+          m: "Hundred",
+          l: "n5",
+          w: [
+            { j: "百円", r: "hyakuen", e: "100 yen" },
+            { j: "百点", r: "hyakuten", e: "100 points" },
+            { j: "三百", r: "sanbyaku", e: "300" },
+            { j: "百科", r: "hyouka", e: "encyclopedia" },
+          ],
+        },
+        {
+          k: "千",
+          r: "sen / chi",
+          m: "Thousand",
+          l: "n5",
+          w: [
+            { j: "千円", r: "senen", e: "1000 yen" },
+            { j: "千葉", r: "chiba", e: "Chiba (place)" },
+            { j: "三千", r: "sanzen", e: "3000" },
+            { j: "千鳥", r: "chidori", e: "plover bird" },
+          ],
+        },
+        {
+          k: "万",
+          r: "man / ban",
+          m: "Ten thousand",
+          l: "n5",
+          w: [
+            { j: "一万", r: "ichiman", e: "10,000" },
+            { j: "万年筆", r: "mannenhitsu", e: "fountain pen" },
+            { j: "万全", r: "banzen", e: "perfect" },
+            { j: "万国", r: "bankoku", e: "all nations" },
+          ],
+        },
+        {
+          k: "大",
+          r: "dai / oo-",
+          m: "Big / Large",
+          l: "n5",
+          w: [
+            { j: "大学", r: "daigaku", e: "university" },
+            { j: "大人", r: "otona", e: "adult" },
+            { j: "大切", r: "taisetsu", e: "important" },
+            { j: "大好き", r: "daisuki", e: "love very much" },
+          ],
+        },
+        {
+          k: "中",
+          r: "chuu / naka",
+          m: "Middle / Inside",
+          l: "n5",
+          w: [
+            { j: "中学校", r: "chuugakkou", e: "middle school" },
+            { j: "中国", r: "chuugoku", e: "China" },
+            { j: "中心", r: "chuushin", e: "center" },
+            { j: "中に", r: "naka ni", e: "inside" },
+          ],
+        },
+        {
+          k: "小",
+          r: "shou / ko-",
+          m: "Small",
+          l: "n5",
+          w: [
+            { j: "小学校", r: "shougakkou", e: "elementary school" },
+            { j: "小さい", r: "chiisai", e: "small" },
+            { j: "小説", r: "shousetsu", e: "novel" },
+            { j: "小鳥", r: "kotori", e: "small bird" },
+          ],
+        },
+        {
+          k: "上",
+          r: "jou / ue",
+          m: "Up / Above",
+          l: "n5",
+          w: [
+            { j: "上手", r: "jouzu", e: "skillful" },
+            { j: "上着", r: "uwagi", e: "jacket" },
+            { j: "上がる", r: "agaru", e: "to go up" },
+            { j: "上司", r: "joushi", e: "superior/boss" },
+          ],
+        },
+        {
+          k: "下",
+          r: "ka / shita",
+          m: "Down / Below",
+          l: "n5",
+          w: [
+            { j: "下手", r: "heta", e: "unskillful" },
+            { j: "下着", r: "shitagi", e: "underwear" },
+            { j: "地下", r: "chika", e: "underground" },
+            { j: "下がる", r: "sagaru", e: "to go down" },
+          ],
+        },
+        {
+          k: "左",
+          r: "sa / hidari",
+          m: "Left",
+          l: "n5",
+          w: [
+            { j: "左手", r: "hidarite", e: "left hand" },
+            { j: "左側", r: "hidarigawa", e: "left side" },
+            { j: "左折", r: "sasetsu", e: "left turn" },
+            { j: "左右", r: "sayuu", e: "left and right" },
+          ],
+        },
+        {
+          k: "右",
+          r: "u / migi",
+          m: "Right",
+          l: "n5",
+          w: [
+            { j: "右手", r: "migite", e: "right hand" },
+            { j: "右側", r: "migigawa", e: "right side" },
+            { j: "右折", r: "usetsu", e: "right turn" },
+            { j: "左右", r: "sayuu", e: "left and right" },
+          ],
+        },
+        {
+          k: "人",
+          r: "jin / hito",
+          m: "Person",
+          l: "n5",
+          w: [
+            { j: "人々", r: "hitobito", e: "people" },
+            { j: "外国人", r: "gaikokujin", e: "foreigner" },
+            { j: "人気", r: "ninki", e: "popular" },
+            { j: "一人", r: "hitori", e: "alone" },
+          ],
+        },
+        {
+          k: "入",
+          r: "nyuu / i-",
+          m: "Enter",
+          l: "n5",
+          w: [
+            { j: "入口", r: "iriguchi", e: "entrance" },
+            { j: "入学", r: "nyuugaku", e: "school entry" },
+            { j: "入る", r: "hairu", e: "to enter" },
+            { j: "入院", r: "nyuuin", e: "hospitalization" },
+          ],
+        },
+        {
+          k: "出",
+          r: "shutsu / de-",
+          m: "Exit / Leave",
+          l: "n5",
+          w: [
+            { j: "出口", r: "deguchi", e: "exit" },
+            { j: "出発", r: "shuppatsu", e: "departure" },
+            { j: "出る", r: "deru", e: "to leave" },
+            { j: "出張", r: "shutchou", e: "business trip" },
+          ],
+        },
+        {
+          k: "来",
+          r: "rai / ku-",
+          m: "Come",
+          l: "n5",
+          w: [
+            { j: "来年", r: "rainen", e: "next year" },
+            { j: "来月", r: "raigetsu", e: "next month" },
+            { j: "来る", r: "kuru", e: "to come" },
+            { j: "出来る", r: "dekiru", e: "can do" },
+          ],
+        },
+        {
+          k: "行",
+          r: "kou / i-",
+          m: "Go",
+          l: "n5",
+          w: [
+            { j: "行く", r: "iku", e: "to go" },
+            { j: "旅行", r: "ryokou", e: "travel" },
+            { j: "行動", r: "koudou", e: "action" },
+            { j: "銀行", r: "ginkou", e: "bank" },
+          ],
+        },
+        {
+          k: "男",
+          r: "dan / otoko",
+          m: "Man / Male",
+          l: "n5",
+          w: [
+            { j: "男の人", r: "otoko no hito", e: "man" },
+            { j: "男性", r: "dansei", e: "male" },
+            { j: "男子", r: "danshi", e: "boy" },
+            { j: "長男", r: "chounan", e: "eldest son" },
+          ],
+        },
+        {
+          k: "女",
+          r: "jo / onna",
+          m: "Woman / Female",
+          l: "n5",
+          w: [
+            { j: "女の人", r: "onna no hito", e: "woman" },
+            { j: "女性", r: "josei", e: "female" },
+            { j: "女子", r: "joshi", e: "girl" },
+            { j: "彼女", r: "kanojo", e: "girlfriend / she" },
+          ],
+        },
+        {
+          k: "子",
+          r: "shi / ko",
+          m: "Child",
+          l: "n5",
+          w: [
+            { j: "子供", r: "kodomo", e: "child" },
+            { j: "女子", r: "joshi", e: "girl" },
+            { j: "様子", r: "yousu", e: "situation" },
+            { j: "親子", r: "oyako", e: "parent and child" },
+          ],
+        },
+        {
+          k: "外",
+          r: "gai / soto",
+          m: "Outside",
+          l: "n5",
+          w: [
+            { j: "外国", r: "gaikoku", e: "foreign country" },
+            { j: "外出", r: "gaishutsu", e: "going out" },
+            { j: "外側", r: "sotogawa", e: "outside" },
+            { j: "以外", r: "igai", e: "other than" },
+          ],
+        },
+        {
+          k: "何",
+          r: "ka / nani",
+          m: "What",
+          l: "n5",
+          w: [
+            { j: "何か", r: "nanika", e: "something" },
+            { j: "何人", r: "nannin", e: "how many people" },
+            { j: "何時", r: "nanji", e: "what time" },
+            { j: "何でも", r: "nandemo", e: "anything" },
+          ],
+        },
+        {
+          k: "先",
+          r: "sen / saki",
+          m: "Before / Ahead",
+          l: "n5",
+          w: [
+            { j: "先生", r: "sensei", e: "teacher" },
+            { j: "先週", r: "senshuu", e: "last week" },
+            { j: "先月", r: "sengetsu", e: "last month" },
+            { j: "先ほど", r: "sakihodo", e: "a while ago" },
+          ],
+        },
+        {
+          k: "今",
+          r: "kon / ima",
+          m: "Now",
+          l: "n5",
+          w: [
+            { j: "今日", r: "kyou", e: "today" },
+            { j: "今週", r: "konshuu", e: "this week" },
+            { j: "今月", r: "kongetsu", e: "this month" },
+            { j: "今年", r: "kotoshi", e: "this year" },
+          ],
+        },
+        {
+          k: "休",
+          r: "kyuu / yasu-",
+          m: "Rest",
+          l: "n5",
+          w: [
+            { j: "休む", r: "yasumu", e: "to rest" },
+            { j: "休日", r: "kyuujitsu", e: "holiday" },
+            { j: "夏休み", r: "natsuyasumi", e: "summer break" },
+            { j: "休憩", r: "kyuukei", e: "break/rest" },
+          ],
+        },
+        {
+          k: "山",
+          r: "san / yama",
+          m: "Mountain",
+          l: "n5",
+          w: [
+            { j: "山登り", r: "yamanobori", e: "mountain climbing" },
+            { j: "富士山", r: "fujisan", e: "Mt. Fuji" },
+            { j: "山道", r: "yamamichi", e: "mountain path" },
+            { j: "火山", r: "kazan", e: "volcano" },
+          ],
+        },
+        {
+          k: "川",
+          r: "sen / kawa",
+          m: "River",
+          l: "n5",
+          w: [
+            { j: "川岸", r: "kawagishi", e: "riverbank" },
+            { j: "小川", r: "ogawa", e: "stream" },
+            { j: "川上", r: "kawakami", e: "upstream" },
+            { j: "河川", r: "kasen", e: "rivers" },
+          ],
+        },
+        {
+          k: "高",
+          r: "kou / taka-",
+          m: "High / Tall",
+          l: "n5",
+          w: [
+            { j: "高校", r: "koukou", e: "high school" },
+            { j: "高い", r: "takai", e: "tall / expensive" },
+            { j: "高速", r: "kousoku", e: "highway / fast" },
+            { j: "最高", r: "saikou", e: "best / maximum" },
+          ],
+        },
+        {
+          k: "日",
+          r: "nichi / hi",
+          m: "Day / Sun",
+          l: "n5",
+          w: [
+            { j: "日本", r: "nihon", e: "Japan" },
+            { j: "日曜日", r: "nichiyoubi", e: "Sunday" },
+            { j: "今日", r: "kyou", e: "today" },
+            { j: "毎日", r: "mainichi", e: "every day" },
+          ],
+        },
+        {
+          k: "月",
+          r: "getsu / tsuki",
+          m: "Month / Moon",
+          l: "n5",
+          w: [
+            { j: "月曜日", r: "getsuyoubi", e: "Monday" },
+            { j: "来月", r: "raigetsu", e: "next month" },
+            { j: "月光", r: "gekkou", e: "moonlight" },
+            { j: "三日月", r: "mikazuki", e: "crescent moon" },
+          ],
+        },
+        {
+          k: "火",
+          r: "ka / hi",
+          m: "Fire",
+          l: "n5",
+          w: [
+            { j: "火曜日", r: "kayoubi", e: "Tuesday" },
+            { j: "火事", r: "kaji", e: "fire accident" },
+            { j: "花火", r: "hanabi", e: "fireworks" },
+            { j: "火山", r: "kazan", e: "volcano" },
+          ],
+        },
+        {
+          k: "水",
+          r: "sui / mizu",
+          m: "Water",
+          l: "n5",
+          w: [
+            { j: "水曜日", r: "suiyoubi", e: "Wednesday" },
+            { j: "水道", r: "suidou", e: "waterworks" },
+            { j: "お水", r: "omizu", e: "water (polite)" },
+            { j: "水泳", r: "suiei", e: "swimming" },
+          ],
+        },
+        {
+          k: "木",
+          r: "moku / ki",
+          m: "Tree / Wood",
+          l: "n5",
+          w: [
+            { j: "木曜日", r: "mokuyoubi", e: "Thursday" },
+            { j: "木村", r: "kimura", e: "Kimura (surname)" },
+            { j: "木登り", r: "kinobori", e: "tree climbing" },
+            { j: "木材", r: "mokuzai", e: "lumber" },
+          ],
+        },
+        {
+          k: "金",
+          r: "kin / kane",
+          m: "Gold / Money",
+          l: "n5",
+          w: [
+            { j: "金曜日", r: "kin'youbi", e: "Friday" },
+            { j: "お金", r: "okane", e: "money" },
+            { j: "金色", r: "kin'iro", e: "golden color" },
+            { j: "金属", r: "kinzoku", e: "metal" },
+          ],
+        },
+        {
+          k: "土",
+          r: "do / tsuchi",
+          m: "Earth / Soil",
+          l: "n5",
+          w: [
+            { j: "土曜日", r: "doyoubi", e: "Saturday" },
+            { j: "土地", r: "tochi", e: "land" },
+            { j: "土台", r: "dodai", e: "foundation" },
+            { j: "国土", r: "kokudo", e: "national territory" },
+          ],
+        },
+        {
+          k: "本",
+          r: "hon / moto",
+          m: "Book / Origin",
+          l: "n5",
+          w: [
+            { j: "本当", r: "hontou", e: "truth / really" },
+            { j: "日本", r: "nihon", e: "Japan" },
+            { j: "本屋", r: "hon'ya", e: "bookstore" },
+            { j: "基本", r: "kihon", e: "basics" },
+          ],
+        },
+        {
+          k: "年",
+          r: "nen / toshi",
+          m: "Year",
+          l: "n5",
+          w: [
+            { j: "今年", r: "kotoshi", e: "this year" },
+            { j: "来年", r: "rainen", e: "next year" },
+            { j: "年齢", r: "nenrei", e: "age" },
+            { j: "毎年", r: "maitoshi", e: "every year" },
+          ],
+        },
+        {
+          k: "友",
+          r: "yuu / tomo",
+          m: "Friend",
+          l: "n5",
+          w: [
+            { j: "友達", r: "tomodachi", e: "friend" },
+            { j: "友人", r: "yuujin", e: "friend (formal)" },
+            { j: "親友", r: "shin'yuu", e: "best friend" },
+            { j: "友好", r: "yuukou", e: "friendship" },
+          ],
+        },
+        {
+          k: "時",
+          r: "ji / toki",
+          m: "Time",
+          l: "n5",
+          w: [
+            { j: "時間", r: "jikan", e: "time / duration" },
+            { j: "何時", r: "nanji", e: "what time" },
+            { j: "時々", r: "tokidoki", e: "sometimes" },
+            { j: "時代", r: "jidai", e: "era / age" },
+          ],
+        },
+        {
+          k: "天",
+          r: "ten / ama",
+          m: "Sky / Heaven",
+          l: "n5",
+          w: [
+            { j: "天気", r: "tenki", e: "weather" },
+            { j: "天国", r: "tengoku", e: "heaven" },
+            { j: "天才", r: "tensai", e: "genius" },
+            { j: "天井", r: "tenjou", e: "ceiling" },
+          ],
+        },
+        {
+          k: "雨",
+          r: "u / ame",
+          m: "Rain",
+          l: "n5",
+          w: [
+            { j: "雨天", r: "uten", e: "rainy weather" },
+            { j: "大雨", r: "oame", e: "heavy rain" },
+            { j: "梅雨", r: "tsuyu", e: "rainy season" },
+            { j: "雨傘", r: "amegasa", e: "umbrella" },
+          ],
+        },
+        {
+          k: "北",
+          r: "hoku / kita",
+          m: "North",
+          l: "n5",
+          w: [
+            { j: "北海道", r: "hokkaidou", e: "Hokkaido" },
+            { j: "北口", r: "kitaguchi", e: "north exit" },
+            { j: "北風", r: "kitakaze", e: "north wind" },
+            { j: "北極", r: "hokkyoku", e: "North Pole" },
+          ],
+        },
+        {
+          k: "南",
+          r: "nan / minami",
+          m: "South",
+          l: "n5",
+          w: [
+            { j: "南口", r: "minamiguchi", e: "south exit" },
+            { j: "南側", r: "minamigawa", e: "south side" },
+            { j: "南極", r: "nankyoku", e: "South Pole" },
+            { j: "南米", r: "nanbei", e: "South America" },
+          ],
+        },
+        {
+          k: "東",
+          r: "tou / higashi",
+          m: "East",
+          l: "n5",
+          w: [
+            { j: "東京", r: "toukyou", e: "Tokyo" },
+            { j: "東口", r: "higashiguchi", e: "east exit" },
+            { j: "東洋", r: "touyou", e: "the Orient" },
+            { j: "東南", r: "tounан", e: "southeast" },
+          ],
+        },
+        {
+          k: "西",
+          r: "sei / nishi",
+          m: "West",
+          l: "n5",
+          w: [
+            { j: "西口", r: "nishiguchi", e: "west exit" },
+            { j: "関西", r: "kansai", e: "Kansai region" },
+            { j: "西洋", r: "seiyou", e: "the West" },
+            { j: "西側", r: "nishigawa", e: "west side" },
+          ],
+        },
+        {
+          k: "前",
+          r: "zen / mae",
+          m: "Front / Before",
+          l: "n5",
+          w: [
+            { j: "前に", r: "mae ni", e: "in front / before" },
+            { j: "名前", r: "namae", e: "name" },
+            { j: "午前", r: "gozen", e: "morning / AM" },
+            { j: "前日", r: "zenjitsu", e: "previous day" },
+          ],
+        },
+        {
+          k: "後",
+          r: "go / ato",
+          m: "Behind / After",
+          l: "n5",
+          w: [
+            { j: "後で", r: "ato de", e: "later" },
+            { j: "午後", r: "gogo", e: "afternoon / PM" },
+            { j: "最後", r: "saigo", e: "last / final" },
+            { j: "後ろ", r: "ushiro", e: "behind" },
+          ],
+        },
+        {
+          k: "半",
+          r: "han",
+          m: "Half",
+          l: "n5",
+          w: [
+            { j: "半分", r: "hanbun", e: "half" },
+            { j: "一時半", r: "ichiji han", e: "one thirty" },
+            { j: "半島", r: "hantou", e: "peninsula" },
+            { j: "前半", r: "zenhan", e: "first half" },
+          ],
+        },
+        {
+          k: "食",
+          r: "shoku / ta-",
+          m: "Eat / Food",
+          l: "n5",
+          w: [
+            { j: "食べる", r: "taberu", e: "to eat" },
+            { j: "食事", r: "shokuji", e: "meal" },
+            { j: "食堂", r: "shokudou", e: "cafeteria" },
+            { j: "朝食", r: "choushoku", e: "breakfast" },
+          ],
+        },
+        {
+          k: "見",
+          r: "ken / mi-",
+          m: "See / Look",
+          l: "n5",
+          w: [
+            { j: "見る", r: "miru", e: "to see" },
+            { j: "見える", r: "mieru", e: "can be seen" },
+            { j: "見物", r: "kenbutsu", e: "sightseeing" },
+            { j: "意見", r: "iken", e: "opinion" },
+          ],
+        },
+        {
+          k: "車",
+          r: "sha / kuruma",
+          m: "Car / Wheel",
+          l: "n5",
+          w: [
+            { j: "電車", r: "densha", e: "electric train" },
+            { j: "自動車", r: "jidousha", e: "automobile" },
+            { j: "自転車", r: "jitensha", e: "bicycle" },
+            { j: "車道", r: "shadou", e: "roadway" },
+          ],
+        },
+        {
+          k: "長",
+          r: "chou / naga-",
+          m: "Long / Chief",
+          l: "n5",
+          w: [
+            { j: "長い", r: "nagai", e: "long" },
+            { j: "社長", r: "shachou", e: "company president" },
+            { j: "身長", r: "shinchou", e: "height" },
+            { j: "長所", r: "chousho", e: "strong point" },
+          ],
+        },
+        {
+          k: "国",
+          r: "koku / kuni",
+          m: "Country",
+          l: "n5",
+          w: [
+            { j: "外国", r: "gaikoku", e: "foreign country" },
+            { j: "国語", r: "kokugo", e: "national language" },
+            { j: "国内", r: "kokunai", e: "domestic" },
+            { j: "中国", r: "chuugoku", e: "China" },
+          ],
+        },
+        {
+          k: "白",
+          r: "haku / shiro",
+          m: "White",
+          l: "n5",
+          w: [
+            { j: "白い", r: "shiroi", e: "white" },
+            { j: "白紙", r: "hakushi", e: "blank paper" },
+            { j: "白黒", r: "shirokuro", e: "black and white" },
+            { j: "告白", r: "kokuhaku", e: "confession" },
+          ],
+        },
+        {
+          k: "名",
+          r: "mei / na",
+          m: "Name / Famous",
+          l: "n5",
+          w: [
+            { j: "名前", r: "namae", e: "name" },
+            { j: "有名", r: "yuumei", e: "famous" },
+            { j: "名刺", r: "meishi", e: "business card" },
+            { j: "名所", r: "meisho", e: "famous place" },
+          ],
+        },
+        {
+          k: "学",
+          r: "gaku / mana-",
+          m: "Study / Learn",
+          l: "n5",
+          w: [
+            { j: "学校", r: "gakkou", e: "school" },
+            { j: "大学", r: "daigaku", e: "university" },
+            { j: "学生", r: "gakusei", e: "student" },
+            { j: "学ぶ", r: "manabu", e: "to learn" },
+          ],
+        },
+        {
+          k: "生",
+          r: "sei / i-",
+          m: "Life / Birth",
+          l: "n5",
+          w: [
+            { j: "学生", r: "gakusei", e: "student" },
+            { j: "先生", r: "sensei", e: "teacher" },
+            { j: "生まれる", r: "umareru", e: "to be born" },
+            { j: "生活", r: "seikatsu", e: "daily life" },
+          ],
+        },
+        {
+          k: "気",
+          r: "ki / ke",
+          m: "Spirit / Energy",
+          l: "n5",
+          w: [
+            { j: "天気", r: "tenki", e: "weather" },
+            { j: "元気", r: "genki", e: "energetic" },
+            { j: "気持ち", r: "kimochi", e: "feeling" },
+            { j: "人気", r: "ninki", e: "popularity" },
+          ],
+        },
+        {
+          k: "校",
+          r: "kou",
+          m: "School",
+          l: "n5",
+          w: [
+            { j: "学校", r: "gakkou", e: "school" },
+            { j: "高校", r: "koukou", e: "high school" },
+            { j: "校長", r: "kouchou", e: "principal" },
+            { j: "登校", r: "toukou", e: "attending school" },
+          ],
+        },
+        {
+          k: "父",
+          r: "fu / chichi",
+          m: "Father",
+          l: "n5",
+          w: [
+            { j: "父親", r: "chichioya", e: "father" },
+            { j: "お父さん", r: "otousan", e: "dad" },
+            { j: "父母", r: "fubo", e: "father and mother" },
+            { j: "祖父", r: "sofu", e: "grandfather" },
+          ],
+        },
+        {
+          k: "母",
+          r: "bo / haha",
+          m: "Mother",
+          l: "n5",
+          w: [
+            { j: "母親", r: "hahaoya", e: "mother" },
+            { j: "お母さん", r: "okaasan", e: "mom" },
+            { j: "父母", r: "fubo", e: "father and mother" },
+            { j: "祖母", r: "sobo", e: "grandmother" },
+          ],
+        },
+        {
+          k: "分",
+          r: "fun / bun",
+          m: "Minute / Divide",
+          l: "n5",
+          w: [
+            { j: "十分", r: "juubun", e: "enough" },
+            { j: "自分", r: "jibun", e: "oneself" },
+            { j: "三分", r: "sanpun", e: "3 minutes" },
+            { j: "半分", r: "hanbun", e: "half" },
+          ],
+        },
+        {
+          k: "少",
+          r: "shou / suko-",
+          m: "Few / Little",
+          l: "n5",
+          w: [
+            { j: "少し", r: "sukoshi", e: "a little" },
+            { j: "少年", r: "shounen", e: "boy" },
+            { j: "少女", r: "shoujo", e: "girl" },
+            { j: "少ない", r: "sukunai", e: "few" },
+          ],
+        },
+        {
+          k: "多",
+          r: "ta / oo-",
+          m: "Many / Much",
+          l: "n5",
+          w: [
+            { j: "多い", r: "ooi", e: "many" },
+            { j: "多分", r: "tabun", e: "probably" },
+            { j: "多数", r: "tasuu", e: "majority" },
+            { j: "多様", r: "tayou", e: "diverse" },
+          ],
+        },
+        {
+          k: "目",
+          r: "moku / me",
+          m: "Eye",
+          l: "n5",
+          w: [
+            { j: "目玉", r: "medama", e: "eyeball" },
+            { j: "目的", r: "mokuteki", e: "purpose" },
+            { j: "注目", r: "chuumoku", e: "attention" },
+            { j: "目標", r: "mokuhyou", e: "goal" },
+          ],
+        },
+        {
+          k: "口",
+          r: "kou / kuchi",
+          m: "Mouth",
+          l: "n5",
+          w: [
+            { j: "出口", r: "deguchi", e: "exit" },
+            { j: "入口", r: "iriguchi", e: "entrance" },
+            { j: "口座", r: "kouza", e: "bank account" },
+            { j: "窓口", r: "madoguchi", e: "window / counter" },
+          ],
+        },
+        {
+          k: "耳",
+          r: "ji / mimi",
+          m: "Ear",
+          l: "n5",
+          w: [
+            { j: "耳元", r: "mimamoto", e: "near one's ear" },
+            { j: "耳鳴り", r: "miminari", e: "ringing in ears" },
+            { j: "耳打ち", r: "mimiuchi", e: "whisper" },
+            { j: "中耳炎", r: "chuujien", e: "otitis media" },
+          ],
+        },
+        {
+          k: "手",
+          r: "shu / te",
+          m: "Hand",
+          l: "n5",
+          w: [
+            { j: "手紙", r: "tegami", e: "letter" },
+            { j: "上手", r: "jouzu", e: "skillful" },
+            { j: "選手", r: "senshu", e: "athlete" },
+            { j: "握手", r: "akushu", e: "handshake" },
+          ],
+        },
+        {
+          k: "足",
+          r: "soku / ashi",
+          m: "Foot / Leg",
+          l: "n5",
+          w: [
+            { j: "足りる", r: "tariru", e: "to be enough" },
+            { j: "手足", r: "teashi", e: "limbs" },
+            { j: "足元", r: "ashimoto", e: "at one's feet" },
+            { j: "裸足", r: "hadashi", e: "barefoot" },
+          ],
+        },
+        {
+          k: "安",
+          r: "an / yasu-",
+          m: "Cheap / Safe",
+          l: "n5",
+          w: [
+            { j: "安全", r: "anzen", e: "safety" },
+            { j: "安心", r: "anshin", e: "relief" },
+            { j: "安い", r: "yasui", e: "cheap" },
+            { j: "不安", r: "fuan", e: "anxiety" },
+          ],
+        },
+        {
+          k: "飲",
+          r: "in / no-",
+          m: "Drink",
+          l: "n5",
+          w: [
+            { j: "飲む", r: "nomu", e: "to drink" },
+            { j: "飲み物", r: "nomimono", e: "beverage" },
+            { j: "飲食", r: "inshoku", e: "eating and drinking" },
+            { j: "飲み会", r: "nomikai", e: "drinking party" },
+          ],
+        },
+        {
+          k: "買",
+          r: "bai / ka-",
+          m: "Buy",
+          l: "n5",
+          w: [
+            { j: "買う", r: "kau", e: "to buy" },
+            { j: "買い物", r: "kaimono", e: "shopping" },
+            { j: "売買", r: "baibai", e: "buying and selling" },
+            { j: "買い手", r: "kaite", e: "buyer" },
+          ],
+        },
+        {
+          k: "言",
+          r: "gen / i-",
+          m: "Say / Word",
+          l: "n5",
+          w: [
+            { j: "言う", r: "iu", e: "to say" },
+            { j: "言葉", r: "kotoba", e: "word / language" },
+            { j: "言語", r: "gengo", e: "language" },
+            { j: "発言", r: "hatsugen", e: "statement" },
+          ],
+        },
+        {
+          k: "会",
+          r: "kai / a-",
+          m: "Meet / Society",
+          l: "n5",
+          w: [
+            { j: "会社", r: "kaisha", e: "company" },
+            { j: "会議", r: "kaigi", e: "meeting" },
+            { j: "会う", r: "au", e: "to meet" },
+            { j: "社会", r: "shakai", e: "society" },
+          ],
+        },
+        {
+          k: "社",
+          r: "sha",
+          m: "Company / Society",
+          l: "n5",
+          w: [
+            { j: "会社", r: "kaisha", e: "company" },
+            { j: "社長", r: "shachou", e: "president" },
+            { j: "社会", r: "shakai", e: "society" },
+            { j: "神社", r: "jinja", e: "shrine" },
+          ],
+        },
+        {
+          k: "道",
+          r: "dou / michi",
+          m: "Road / Way",
+          l: "n5",
+          w: [
+            { j: "道路", r: "douro", e: "road" },
+            { j: "北海道", r: "hokkaidou", e: "Hokkaido" },
+            { j: "道具", r: "dougu", e: "tool" },
+            { j: "柔道", r: "juudou", e: "judo" },
+          ],
+        },
+        {
+          k: "新",
+          r: "shin / atara-",
+          m: "New",
+          l: "n5",
+          w: [
+            { j: "新しい", r: "atarashii", e: "new" },
+            { j: "新聞", r: "shinbun", e: "newspaper" },
+            { j: "新幹線", r: "shinkansen", e: "bullet train" },
+            { j: "新年", r: "shinnen", e: "new year" },
+          ],
+        },
+        {
+          k: "店",
+          r: "ten / mise",
+          m: "Shop / Store",
+          l: "n5",
+          w: [
+            { j: "お店", r: "omise", e: "shop" },
+            { j: "書店", r: "shoten", e: "bookstore" },
+            { j: "喫茶店", r: "kissaten", e: "café" },
+            { j: "店員", r: "ten'in", e: "store clerk" },
+          ],
+        },
+        {
+          k: "魚",
+          r: "gyo / sakana",
+          m: "Fish",
+          l: "n5",
+          w: [
+            { j: "魚屋", r: "sakanaya", e: "fish shop" },
+            { j: "金魚", r: "kingyo", e: "goldfish" },
+            { j: "魚介", r: "gyokai", e: "seafood" },
+            { j: "魚類", r: "gyorui", e: "fish species" },
+          ],
+        },
+        {
+          k: "古",
+          r: "ko / furu-",
+          m: "Old",
+          l: "n5",
+          w: [
+            { j: "古い", r: "furui", e: "old" },
+            { j: "古代", r: "kodai", e: "ancient times" },
+            { j: "古典", r: "koten", e: "classics" },
+            { j: "中古", r: "chuuko", e: "used / secondhand" },
+          ],
+        },
+        {
+          k: "円",
+          r: "en / maru",
+          m: "Yen / Circle",
+          l: "n5",
+          w: [
+            { j: "円高", r: "endaka", e: "strong yen" },
+            { j: "円形", r: "enkei", e: "circular" },
+            { j: "百円", r: "hyakuen", e: "100 yen" },
+            { j: "半円", r: "han'en", e: "semicircle" },
+          ],
+        },
+        {
+          k: "立",
+          r: "ritsu / ta-",
+          m: "Stand",
+          l: "n5",
+          w: [
+            { j: "立つ", r: "tatsu", e: "to stand" },
+            { j: "立場", r: "tachiba", e: "position/standpoint" },
+            { j: "国立", r: "kokuritsu", e: "national" },
+            { j: "独立", r: "dokuritsu", e: "independence" },
+          ],
+        },
+        {
+          k: "週",
+          r: "shuu",
+          m: "Week",
+          l: "n5",
+          w: [
+            { j: "今週", r: "konshuu", e: "this week" },
+            { j: "来週", r: "raishuu", e: "next week" },
+            { j: "先週", r: "senshuu", e: "last week" },
+            { j: "週末", r: "shuumatsu", e: "weekend" },
+          ],
+        },
+        {
+          k: "毎",
+          r: "mai",
+          m: "Every",
+          l: "n5",
+          w: [
+            { j: "毎日", r: "mainichi", e: "every day" },
+            { j: "毎朝", r: "maiasa", e: "every morning" },
+            { j: "毎週", r: "maishuu", e: "every week" },
+            { j: "毎月", r: "maitsuki", e: "every month" },
+          ],
+        },
+        {
+          k: "午",
+          r: "go",
+          m: "Noon",
+          l: "n5",
+          w: [
+            { j: "午前", r: "gozen", e: "AM / morning" },
+            { j: "午後", r: "gogo", e: "PM / afternoon" },
+            { j: "正午", r: "shougo", e: "noon" },
+            { j: "午前中", r: "gozenchuu", e: "during the morning" },
+          ],
+        },
+        {
+          k: "花",
+          r: "ka / hana",
+          m: "Flower",
+          l: "n5",
+          w: [
+            { j: "花火", r: "hanabi", e: "fireworks" },
+            { j: "花見", r: "hanami", e: "flower viewing" },
+            { j: "桜花", r: "ouka", e: "cherry blossom" },
+            { j: "花壇", r: "kadan", e: "flowerbed" },
+          ],
+        },
+        {
+          k: "空",
+          r: "kuu / sora",
+          m: "Sky / Empty",
+          l: "n5",
+          w: [
+            { j: "空港", r: "kuukou", e: "airport" },
+            { j: "空気", r: "kuuki", e: "air" },
+            { j: "青空", r: "aozora", e: "blue sky" },
+            { j: "空白", r: "kuuhaku", e: "blank space" },
+          ],
+        },
+        {
+          k: "話",
+          r: "wa / hana-",
+          m: "Talk / Story",
+          l: "n5",
+          w: [
+            { j: "話す", r: "hanasu", e: "to speak" },
+            { j: "電話", r: "denwa", e: "telephone" },
+            { j: "会話", r: "kaiwa", e: "conversation" },
+            { j: "童話", r: "douwa", e: "fairy tale" },
+          ],
+        },
+        {
+          k: "読",
+          r: "doku / yo-",
+          m: "Read",
+          l: "n5",
+          w: [
+            { j: "読む", r: "yomu", e: "to read" },
+            { j: "読書", r: "dokusho", e: "reading books" },
+            { j: "音読", r: "ondoku", e: "reading aloud" },
+            { j: "読者", r: "dokusha", e: "reader" },
+          ],
+        },
+        {
+          k: "語",
+          r: "go / kata-",
+          m: "Language / Word",
+          l: "n5",
+          w: [
+            { j: "日本語", r: "nihongo", e: "Japanese" },
+            { j: "英語", r: "eigo", e: "English" },
+            { j: "語学", r: "gogaku", e: "language study" },
+            { j: "物語", r: "monogatari", e: "story/tale" },
+          ],
+        },
+        {
+          k: "書",
+          r: "sho / ka-",
+          m: "Write",
+          l: "n5",
+          w: [
+            { j: "書く", r: "kaku", e: "to write" },
+            { j: "書類", r: "shorui", e: "documents" },
+            { j: "教科書", r: "kyoukasho", e: "textbook" },
+            { j: "図書館", r: "toshokan", e: "library" },
+          ],
+        },
+        {
+          k: "聞",
+          r: "bun / ki-",
+          m: "Listen / Hear",
+          l: "n5",
+          w: [
+            { j: "聞く", r: "kiku", e: "to listen/ask" },
+            { j: "新聞", r: "shinbun", e: "newspaper" },
+            { j: "聞こえる", r: "kikoeru", e: "can hear" },
+            { j: "見聞", r: "kenbun", e: "knowledge/experience" },
+          ],
+        },
+        {
+          k: "間",
+          r: "kan / ma",
+          m: "Between / Space",
+          l: "n5",
+          w: [
+            { j: "時間", r: "jikan", e: "time" },
+            { j: "人間", r: "ningen", e: "human being" },
+            { j: "間違い", r: "machigai", e: "mistake" },
+            { j: "仲間", r: "nakama", e: "companion" },
+          ],
+        },
+        {
+          k: "電",
+          r: "den",
+          m: "Electricity",
+          l: "n5",
+          w: [
+            { j: "電車", r: "densha", e: "electric train" },
+            { j: "電話", r: "denwa", e: "telephone" },
+            { j: "電気", r: "denki", e: "electricity" },
+            { j: "電子", r: "denshi", e: "electron" },
+          ],
+        },
+        {
+          k: "駅",
+          r: "eki",
+          m: "Station",
+          l: "n5",
+          w: [
+            { j: "駅前", r: "ekimae", e: "in front of station" },
+            { j: "駅員", r: "ekiin", e: "station staff" },
+            { j: "終点駅", r: "shuuten eki", e: "terminal station" },
+            { j: "乗換駅", r: "norikaee ki", e: "transfer station" },
+          ],
+        },
 
-let current = [...KANJI];
+        // ===== N4 =====
+        {
+          k: "止",
+          r: "shi / to-",
+          m: "Stop",
+          l: "n4",
+          w: [
+            { j: "止まる", r: "tomaru", e: "to stop" },
+            { j: "禁止", r: "kinshi", e: "prohibition" },
+            { j: "中止", r: "chuushi", e: "cancellation" },
+            { j: "止血", r: "shiketsu", e: "stop bleeding" },
+          ],
+        },
+        {
+          k: "売",
+          r: "bai / u-",
+          m: "Sell",
+          l: "n4",
+          w: [
+            { j: "売る", r: "uru", e: "to sell" },
+            { j: "売り場", r: "uriba", e: "sales counter" },
+            { j: "販売", r: "hanbai", e: "sales" },
+            { j: "売上", r: "uriage", e: "sales revenue" },
+          ],
+        },
+        {
+          k: "帰",
+          r: "ki / kae-",
+          m: "Return Home",
+          l: "n4",
+          w: [
+            { j: "帰る", r: "kaeru", e: "to return" },
+            { j: "帰国", r: "kikoku", e: "return to country" },
+            { j: "帰宅", r: "kitaku", e: "return home" },
+            { j: "帰り道", r: "kaerimichi", e: "way home" },
+          ],
+        },
+        {
+          k: "方",
+          r: "hou / kata",
+          m: "Direction / Way",
+          l: "n4",
+          w: [
+            { j: "方法", r: "houhou", e: "method" },
+            { j: "方向", r: "houkou", e: "direction" },
+            { j: "地方", r: "chihou", e: "region" },
+            { j: "仕方", r: "shikata", e: "way of doing" },
+          ],
+        },
+        {
+          k: "体",
+          r: "tai / karada",
+          m: "Body",
+          l: "n4",
+          w: [
+            { j: "体育", r: "taiiku", e: "physical education" },
+            { j: "体験", r: "taiken", e: "experience" },
+            { j: "身体", r: "shintai", e: "body" },
+            { j: "体力", r: "tairyoku", e: "physical strength" },
+          ],
+        },
+        {
+          k: "力",
+          r: "ryoku / chikara",
+          m: "Strength / Power",
+          l: "n4",
+          w: [
+            { j: "力強い", r: "chikarazuyoi", e: "powerful" },
+            { j: "体力", r: "tairyoku", e: "physical strength" },
+            { j: "努力", r: "doryoku", e: "effort" },
+            { j: "電力", r: "denryoku", e: "electric power" },
+          ],
+        },
+        {
+          k: "強",
+          r: "kyou / tsuyo-",
+          m: "Strong",
+          l: "n4",
+          w: [
+            { j: "強い", r: "tsuyoi", e: "strong" },
+            { j: "勉強", r: "benkyou", e: "study" },
+            { j: "強化", r: "kyouka", e: "strengthening" },
+            { j: "最強", r: "saikyou", e: "strongest" },
+          ],
+        },
+        {
+          k: "弱",
+          r: "jaku / yowa-",
+          m: "Weak",
+          l: "n4",
+          w: [
+            { j: "弱い", r: "yowai", e: "weak" },
+            { j: "弱点", r: "jakuten", e: "weak point" },
+            { j: "弱者", r: "jakusha", e: "the weak" },
+            { j: "強弱", r: "kyoujaku", e: "strength and weakness" },
+          ],
+        },
+        {
+          k: "色",
+          r: "shoku / iro",
+          m: "Color",
+          l: "n4",
+          w: [
+            { j: "色々", r: "iroiro", e: "various" },
+            { j: "景色", r: "keshiki", e: "scenery" },
+            { j: "白色", r: "hakushoku", e: "white color" },
+            { j: "原色", r: "genshoku", e: "primary color" },
+          ],
+        },
+        {
+          k: "海",
+          r: "kai / umi",
+          m: "Sea / Ocean",
+          l: "n4",
+          w: [
+            { j: "海外", r: "kaigai", e: "overseas" },
+            { j: "海岸", r: "kaigan", e: "coast" },
+            { j: "海水浴", r: "kaisuiyoku", e: "sea bathing" },
+            { j: "日本海", r: "nihonkai", e: "Sea of Japan" },
+          ],
+        },
+        {
+          k: "門",
+          r: "mon / kado",
+          m: "Gate",
+          l: "n4",
+          w: [
+            { j: "正門", r: "seimon", e: "main gate" },
+            { j: "専門", r: "senmon", e: "specialty" },
+            { j: "門限", r: "mongen", e: "curfew" },
+            { j: "入門", r: "nyuumon", e: "introduction" },
+          ],
+        },
+        {
+          k: "田",
+          r: "den / ta",
+          m: "Rice field",
+          l: "n4",
+          w: [
+            { j: "田舎", r: "inaka", e: "countryside" },
+            { j: "田んぼ", r: "tanbo", e: "rice paddy" },
+            { j: "水田", r: "suiden", e: "paddy field" },
+            { j: "田園", r: "den'en", e: "rural area" },
+          ],
+        },
+        {
+          k: "好",
+          r: "kou / su-",
+          m: "Like / Good",
+          l: "n4",
+          w: [
+            { j: "好き", r: "suki", e: "like" },
+            { j: "好む", r: "konomu", e: "to prefer" },
+            { j: "好意", r: "koui", e: "goodwill" },
+            { j: "好奇心", r: "koukishin", e: "curiosity" },
+          ],
+        },
+        {
+          k: "私",
+          r: "shi / watashi",
+          m: "I / Private",
+          l: "n4",
+          w: [
+            { j: "私立", r: "shiritsu", e: "private (school)" },
+            { j: "私生活", r: "shiseikatsu", e: "private life" },
+            { j: "私的", r: "shiteki", e: "private/personal" },
+            { j: "公私", r: "koushi", e: "public and private" },
+          ],
+        },
+        {
+          k: "家",
+          r: "ka / ie",
+          m: "House / Home",
+          l: "n4",
+          w: [
+            { j: "家族", r: "kazoku", e: "family" },
+            { j: "家庭", r: "katei", e: "home/household" },
+            { j: "家賃", r: "yachin", e: "rent" },
+            { j: "帰宅", r: "kitaku", e: "return home" },
+          ],
+        },
+        {
+          k: "元",
+          r: "gen / moto",
+          m: "Origin / Former",
+          l: "n4",
+          w: [
+            { j: "元気", r: "genki", e: "energetic" },
+            { j: "元日", r: "ganjitsu", e: "New Year's Day" },
+            { j: "元々", r: "motomoto", e: "originally" },
+            { j: "地元", r: "jimoto", e: "local" },
+          ],
+        },
+        {
+          k: "同",
+          r: "dou / ona-",
+          m: "Same",
+          l: "n4",
+          w: [
+            { j: "同じ", r: "onaji", e: "same" },
+            { j: "同時", r: "douji", e: "simultaneous" },
+            { j: "同僚", r: "douryou", e: "colleague" },
+            { j: "共同", r: "kyoudou", e: "cooperative" },
+          ],
+        },
+        {
+          k: "茶",
+          r: "cha",
+          m: "Tea",
+          l: "n4",
+          w: [
+            { j: "お茶", r: "ocha", e: "tea" },
+            { j: "喫茶店", r: "kissaten", e: "café" },
+            { j: "緑茶", r: "ryokucha", e: "green tea" },
+            { j: "茶色", r: "chairo", e: "brown color" },
+          ],
+        },
+        {
+          k: "開",
+          r: "kai / a-",
+          m: "Open",
+          l: "n4",
+          w: [
+            { j: "開く", r: "hiraku", e: "to open" },
+            { j: "開発", r: "kaihatsu", e: "development" },
+            { j: "公開", r: "koukai", e: "public release" },
+            { j: "開始", r: "kaishi", e: "start" },
+          ],
+        },
+        {
+          k: "低",
+          r: "tei / hiku-",
+          m: "Low",
+          l: "n4",
+          w: [
+            { j: "低い", r: "hikui", e: "low" },
+            { j: "低下", r: "teika", e: "decline" },
+            { j: "最低", r: "saitei", e: "minimum/worst" },
+            { j: "低気圧", r: "teikiatsu", e: "low pressure" },
+          ],
+        },
+        {
+          k: "心",
+          r: "shin / kokoro",
+          m: "Heart / Mind",
+          l: "n4",
+          w: [
+            { j: "心配", r: "shinpai", e: "worry" },
+            { j: "心理", r: "shinri", e: "psychology" },
+            { j: "安心", r: "anshin", e: "relief" },
+            { j: "中心", r: "chuushin", e: "center" },
+          ],
+        },
+        {
+          k: "思",
+          r: "shi / omo-",
+          m: "Think",
+          l: "n4",
+          w: [
+            { j: "思う", r: "omou", e: "to think" },
+            { j: "思い出", r: "omoide", e: "memory" },
+            { j: "思想", r: "shisou", e: "thought/ideology" },
+            { j: "不思議", r: "fushigi", e: "mysterious" },
+          ],
+        },
+        {
+          k: "牛",
+          r: "gyuu / ushi",
+          m: "Cow",
+          l: "n4",
+          w: [
+            { j: "牛肉", r: "gyuuniku", e: "beef" },
+            { j: "牛乳", r: "gyuunyuu", e: "milk" },
+            { j: "牛丼", r: "gyuudon", e: "beef bowl" },
+            { j: "水牛", r: "suigyuu", e: "water buffalo" },
+          ],
+        },
+        {
+          k: "教",
+          r: "kyou / oshi-",
+          m: "Teach",
+          l: "n4",
+          w: [
+            { j: "教える", r: "oshieru", e: "to teach" },
+            { j: "教育", r: "kyouiku", e: "education" },
+            { j: "教室", r: "kyoushitsu", e: "classroom" },
+            { j: "宗教", r: "shuukyou", e: "religion" },
+          ],
+        },
+        {
+          k: "朝",
+          r: "chou / asa",
+          m: "Morning",
+          l: "n4",
+          w: [
+            { j: "朝食", r: "choushoku", e: "breakfast" },
+            { j: "毎朝", r: "maiasa", e: "every morning" },
+            { j: "朝日", r: "asahi", e: "morning sun" },
+            { j: "今朝", r: "kesa", e: "this morning" },
+          ],
+        },
+        {
+          k: "昼",
+          r: "chuu / hiru",
+          m: "Noon / Daytime",
+          l: "n4",
+          w: [
+            { j: "昼食", r: "chuushoku", e: "lunch" },
+            { j: "昼間", r: "hiruma", e: "daytime" },
+            { j: "昼休み", r: "hiruyasumi", e: "lunch break" },
+            { j: "昼寝", r: "hirune", e: "nap" },
+          ],
+        },
+        {
+          k: "夕",
+          r: "yuu / yu",
+          m: "Evening",
+          l: "n4",
+          w: [
+            { j: "夕食", r: "yuushoku", e: "dinner" },
+            { j: "夕方", r: "yuugata", e: "evening" },
+            { j: "夕日", r: "yuuhi", e: "evening sun" },
+            { j: "夕暮れ", r: "yuugure", e: "twilight" },
+          ],
+        },
+        {
+          k: "夜",
+          r: "ya / yoru",
+          m: "Night",
+          l: "n4",
+          w: [
+            { j: "夜中", r: "yonaka", e: "midnight" },
+            { j: "今夜", r: "kon'ya", e: "tonight" },
+            { j: "夜行", r: "yakou", e: "night travel" },
+            { j: "深夜", r: "shin'ya", e: "late night" },
+          ],
+        },
+        {
+          k: "英",
+          r: "ei",
+          m: "England / Brilliant",
+          l: "n4",
+          w: [
+            { j: "英語", r: "eigo", e: "English" },
+            { j: "英国", r: "eikoku", e: "England" },
+            { j: "英雄", r: "eiyuu", e: "hero" },
+            { j: "英才", r: "eisai", e: "prodigy" },
+          ],
+        },
+        {
+          k: "文",
+          r: "bun / fumi",
+          m: "Writing / Sentence",
+          l: "n4",
+          w: [
+            { j: "文章", r: "bunshou", e: "sentence/text" },
+            { j: "文化", r: "bunka", e: "culture" },
+            { j: "作文", r: "sakubun", e: "composition" },
+            { j: "文法", r: "bunpou", e: "grammar" },
+          ],
+        },
+        {
+          k: "漢",
+          r: "kan",
+          m: "Chinese / Kanji",
+          l: "n4",
+          w: [
+            { j: "漢字", r: "kanji", e: "Chinese characters" },
+            { j: "漢方", r: "kanpou", e: "herbal medicine" },
+            { j: "漢文", r: "kanbun", e: "classical Chinese" },
+            { j: "漢語", r: "kango", e: "Sino-Japanese word" },
+          ],
+        },
+        {
+          k: "字",
+          r: "ji",
+          m: "Character / Letter",
+          l: "n4",
+          w: [
+            { j: "漢字", r: "kanji", e: "kanji" },
+            { j: "文字", r: "moji", e: "character" },
+            { j: "数字", r: "suuji", e: "number/digit" },
+            { j: "字幕", r: "jimaku", e: "subtitles" },
+          ],
+        },
+        {
+          k: "合",
+          r: "gou / a-",
+          m: "Combine / Fit",
+          l: "n4",
+          w: [
+            { j: "合う", r: "au", e: "to fit/match" },
+            { j: "合格", r: "goukaku", e: "pass (exam)" },
+            { j: "場合", r: "baai", e: "case/situation" },
+            { j: "組み合わせ", r: "kumiawase", e: "combination" },
+          ],
+        },
+        {
+          k: "音",
+          r: "on / oto",
+          m: "Sound",
+          l: "n4",
+          w: [
+            { j: "音楽", r: "ongaku", e: "music" },
+            { j: "発音", r: "hatsuon", e: "pronunciation" },
+            { j: "騒音", r: "souon", e: "noise" },
+            { j: "音声", r: "onsei", e: "voice/sound" },
+          ],
+        },
+        {
+          k: "早",
+          r: "sou / haya-",
+          m: "Early / Fast",
+          l: "n4",
+          w: [
+            { j: "早い", r: "hayai", e: "early/fast" },
+            { j: "早起き", r: "hayaoki", e: "early rising" },
+            { j: "早速", r: "sassoku", e: "immediately" },
+            { j: "最早", r: "mohaya", e: "no longer/already" },
+          ],
+        },
+        {
+          k: "仕",
+          r: "shi",
+          m: "Serve / Work",
+          l: "n4",
+          w: [
+            { j: "仕事", r: "shigoto", e: "work/job" },
+            { j: "仕方", r: "shikata", e: "way of doing" },
+            { j: "仕組み", r: "shikumi", e: "mechanism" },
+            { j: "給仕", r: "kyuuji", e: "waiter" },
+          ],
+        },
+        {
+          k: "事",
+          r: "ji / koto",
+          m: "Thing / Fact",
+          l: "n4",
+          w: [
+            { j: "仕事", r: "shigoto", e: "work" },
+            { j: "大事", r: "daiji", e: "important" },
+            { j: "事故", r: "jiko", e: "accident" },
+            { j: "事実", r: "jijitsu", e: "fact" },
+          ],
+        },
+        {
+          k: "正",
+          r: "sei / tada-",
+          m: "Correct / Right",
+          l: "n4",
+          w: [
+            { j: "正しい", r: "tadashii", e: "correct" },
+            { j: "正直", r: "shoujiki", e: "honest" },
+            { j: "正式", r: "seishiki", e: "formal/official" },
+            { j: "修正", r: "shuusei", e: "correction" },
+          ],
+        },
+        {
+          k: "歩",
+          r: "ho / aru-",
+          m: "Walk / Step",
+          l: "n4",
+          w: [
+            { j: "歩く", r: "aruku", e: "to walk" },
+            { j: "一歩", r: "ippo", e: "one step" },
+            { j: "散歩", r: "sanpo", e: "walk/stroll" },
+            { j: "進歩", r: "shinpo", e: "progress" },
+          ],
+        },
+        {
+          k: "走",
+          r: "sou / hashi-",
+          m: "Run",
+          l: "n4",
+          w: [
+            { j: "走る", r: "hashiru", e: "to run" },
+            { j: "競走", r: "kyousou", e: "race" },
+            { j: "逃走", r: "tousou", e: "escape/flight" },
+            { j: "走行", r: "soukou", e: "running/traveling" },
+          ],
+        },
+        {
+          k: "声",
+          r: "sei / koe",
+          m: "Voice",
+          l: "n4",
+          w: [
+            { j: "声楽", r: "seigaku", e: "vocal music" },
+            { j: "大声", r: "oogoe", e: "loud voice" },
+            { j: "声優", r: "seiyuu", e: "voice actor" },
+            { j: "音声", r: "onsei", e: "voice/sound" },
+          ],
+        },
+        {
+          k: "犬",
+          r: "ken / inu",
+          m: "Dog",
+          l: "n4",
+          w: [
+            { j: "子犬", r: "koinu", e: "puppy" },
+            { j: "番犬", r: "banken", e: "guard dog" },
+            { j: "野犬", r: "yaken", e: "stray dog" },
+            { j: "犬小屋", r: "inugoya", e: "doghouse" },
+          ],
+        },
+        {
+          k: "近",
+          r: "kin / chika-",
+          m: "Near",
+          l: "n4",
+          w: [
+            { j: "近い", r: "chikai", e: "near" },
+            { j: "最近", r: "saikin", e: "recently" },
+            { j: "近所", r: "kinjo", e: "neighborhood" },
+            { j: "近代", r: "kindai", e: "modern era" },
+          ],
+        },
+        {
+          k: "遠",
+          r: "en / too-",
+          m: "Far",
+          l: "n4",
+          w: [
+            { j: "遠い", r: "tooi", e: "far" },
+            { j: "遠足", r: "ensoku", e: "excursion" },
+            { j: "遠慮", r: "enryo", e: "hesitation/restraint" },
+            { j: "永遠", r: "eien", e: "eternity" },
+          ],
+        },
+        {
+          k: "短",
+          r: "tan / mijika-",
+          m: "Short",
+          l: "n4",
+          w: [
+            { j: "短い", r: "mijikai", e: "short" },
+            { j: "短所", r: "tansho", e: "weak point" },
+            { j: "短期", r: "tanki", e: "short term" },
+            { j: "短縮", r: "tanshuku", e: "shortening" },
+          ],
+        },
+        {
+          k: "広",
+          r: "kou / hiro-",
+          m: "Wide / Broad",
+          l: "n4",
+          w: [
+            { j: "広い", r: "hiroi", e: "wide" },
+            { j: "広場", r: "hiroba", e: "plaza/square" },
+            { j: "広告", r: "koukoku", e: "advertisement" },
+            { j: "拡広", r: "kakukou", e: "expansion" },
+          ],
+        },
+        {
+          k: "世",
+          r: "sei / yo",
+          m: "World / Generation",
+          l: "n4",
+          w: [
+            { j: "世界", r: "sekai", e: "world" },
+            { j: "世紀", r: "seiki", e: "century" },
+            { j: "世話", r: "sewa", e: "care/help" },
+            { j: "世代", r: "sedai", e: "generation" },
+          ],
+        },
+        {
+          k: "界",
+          r: "kai",
+          m: "World / Boundary",
+          l: "n4",
+          w: [
+            { j: "世界", r: "sekai", e: "world" },
+            { j: "限界", r: "genkai", e: "limit" },
+            { j: "業界", r: "gyoukai", e: "industry" },
+            { j: "境界", r: "kyoukai", e: "boundary" },
+          ],
+        },
+        {
+          k: "青",
+          r: "sei / ao-",
+          m: "Blue / Green",
+          l: "n4",
+          w: [
+            { j: "青い", r: "aoi", e: "blue/green" },
+            { j: "青空", r: "aozora", e: "blue sky" },
+            { j: "青春", r: "seishun", e: "youth" },
+            { j: "青年", r: "seinen", e: "young person" },
+          ],
+        },
+        {
+          k: "黒",
+          r: "koku / kuro",
+          m: "Black",
+          l: "n4",
+          w: [
+            { j: "黒い", r: "kuroi", e: "black" },
+            { j: "黒板", r: "kokuban", e: "blackboard" },
+            { j: "黒字", r: "kuroji", e: "profit/surplus" },
+            { j: "黒白", r: "shirokuro", e: "black and white" },
+          ],
+        },
+        {
+          k: "赤",
+          r: "seki / aka",
+          m: "Red",
+          l: "n4",
+          w: [
+            { j: "赤い", r: "akai", e: "red" },
+            { j: "赤ちゃん", r: "akachan", e: "baby" },
+            { j: "赤字", r: "akaji", e: "deficit/loss" },
+            { j: "真っ赤", r: "makka", e: "bright red" },
+          ],
+        },
+        {
+          k: "銀",
+          r: "gin",
+          m: "Silver",
+          l: "n4",
+          w: [
+            { j: "銀行", r: "ginkou", e: "bank" },
+            { j: "銀色", r: "gin'iro", e: "silver color" },
+            { j: "銀座", r: "ginza", e: "Ginza (place)" },
+            { j: "水銀", r: "suigin", e: "mercury" },
+          ],
+        },
+        {
+          k: "肉",
+          r: "niku",
+          m: "Meat / Flesh",
+          l: "n4",
+          w: [
+            { j: "牛肉", r: "gyuuniku", e: "beef" },
+            { j: "豚肉", r: "butaniku", e: "pork" },
+            { j: "肉体", r: "nikutai", e: "physical body" },
+            { j: "肉親", r: "nikushin", e: "blood relative" },
+          ],
+        },
+        {
+          k: "屋",
+          r: "oku / ya",
+          m: "Shop / Roof",
+          l: "n4",
+          w: [
+            { j: "部屋", r: "heya", e: "room" },
+            { j: "本屋", r: "hon'ya", e: "bookshop" },
+            { j: "八百屋", r: "yaoya", e: "greengrocer" },
+            { j: "屋根", r: "yane", e: "roof" },
+          ],
+        },
+        {
+          k: "味",
+          r: "mi / aji",
+          m: "Taste / Flavor",
+          l: "n4",
+          w: [
+            { j: "味方", r: "mikata", e: "ally" },
+            { j: "趣味", r: "shumi", e: "hobby" },
+            { j: "味わう", r: "ajiwau", e: "to taste/savor" },
+            { j: "調味料", r: "choumiryou", e: "seasoning" },
+          ],
+        },
+        {
+          k: "料",
+          r: "ryou",
+          m: "Fee / Material",
+          l: "n4",
+          w: [
+            { j: "料理", r: "ryouri", e: "cooking" },
+            { j: "材料", r: "zairyou", e: "material" },
+            { j: "無料", r: "muryou", e: "free of charge" },
+            { j: "料金", r: "ryoukin", e: "charge/fee" },
+          ],
+        },
+        {
+          k: "理",
+          r: "ri",
+          m: "Reason / Logic",
+          l: "n4",
+          w: [
+            { j: "料理", r: "ryouri", e: "cooking" },
+            { j: "理由", r: "riyuu", e: "reason" },
+            { j: "理解", r: "rikai", e: "understanding" },
+            { j: "地理", r: "chiri", e: "geography" },
+          ],
+        },
+        {
+          k: "作",
+          r: "saku / tsuku-",
+          m: "Make / Create",
+          l: "n4",
+          w: [
+            { j: "作る", r: "tsukuru", e: "to make" },
+            { j: "作品", r: "sakuhin", e: "work/piece" },
+            { j: "作文", r: "sakubun", e: "composition" },
+            { j: "製作", r: "seisaku", e: "production" },
+          ],
+        },
+        {
+          k: "使",
+          r: "shi / tsuka-",
+          m: "Use",
+          l: "n4",
+          w: [
+            { j: "使う", r: "tsukau", e: "to use" },
+            { j: "使用", r: "shiyou", e: "usage" },
+            { j: "使い方", r: "tsukaikata", e: "how to use" },
+            { j: "大使", r: "taishi", e: "ambassador" },
+          ],
+        },
+        {
+          k: "引",
+          r: "in / hi-",
+          m: "Pull / Attract",
+          l: "n4",
+          w: [
+            { j: "引く", r: "hiku", e: "to pull" },
+            { j: "引っ越し", r: "hikkoshi", e: "moving house" },
+            { j: "引退", r: "intai", e: "retirement" },
+            { j: "取引", r: "torihiki", e: "transaction" },
+          ],
+        },
+        {
+          k: "用",
+          r: "you / mo-",
+          m: "Use / Purpose",
+          l: "n4",
+          w: [
+            { j: "使用", r: "shiyou", e: "usage" },
+            { j: "用意", r: "youi", e: "preparation" },
+            { j: "用事", r: "youji", e: "errand" },
+            { j: "利用", r: "riyou", e: "utilization" },
+          ],
+        },
+        {
+          k: "品",
+          r: "hin / shina",
+          m: "Goods / Quality",
+          l: "n4",
+          w: [
+            { j: "商品", r: "shouhin", e: "product" },
+            { j: "品質", r: "hinshitsu", e: "quality" },
+            { j: "作品", r: "sakuhin", e: "artwork" },
+            { j: "食品", r: "shokuhin", e: "food item" },
+          ],
+        },
+        {
+          k: "春",
+          r: "shun / haru",
+          m: "Spring",
+          l: "n4",
+          w: [
+            { j: "春休み", r: "haruyasumi", e: "spring break" },
+            { j: "青春", r: "seishun", e: "youth" },
+            { j: "春分", r: "shunbun", e: "spring equinox" },
+            { j: "春先", r: "harusaki", e: "early spring" },
+          ],
+        },
+        {
+          k: "夏",
+          r: "ka / natsu",
+          m: "Summer",
+          l: "n4",
+          w: [
+            { j: "夏休み", r: "natsuyasumi", e: "summer break" },
+            { j: "夏至", r: "geshi", e: "summer solstice" },
+            { j: "真夏", r: "manatsu", e: "midsummer" },
+            { j: "夏祭り", r: "natsumatsuri", e: "summer festival" },
+          ],
+        },
+        {
+          k: "秋",
+          r: "shuu / aki",
+          m: "Autumn",
+          l: "n4",
+          w: [
+            { j: "秋分", r: "shuubun", e: "autumn equinox" },
+            { j: "秋田", r: "akita", e: "Akita (place)" },
+            { j: "晩秋", r: "banshuu", e: "late autumn" },
+            { j: "秋空", r: "akizora", e: "autumn sky" },
+          ],
+        },
+        {
+          k: "冬",
+          r: "tou / fuyu",
+          m: "Winter",
+          l: "n4",
+          w: [
+            { j: "冬休み", r: "fuyuyasumi", e: "winter break" },
+            { j: "冬至", r: "touji", e: "winter solstice" },
+            { j: "真冬", r: "mafuyu", e: "midwinter" },
+            { j: "冬服", r: "fuyufuku", e: "winter clothes" },
+          ],
+        },
+        {
+          k: "暑",
+          r: "sho / atsu-",
+          m: "Hot (weather)",
+          l: "n4",
+          w: [
+            { j: "暑い", r: "atsui", e: "hot (weather)" },
+            { j: "暑さ", r: "atsusa", e: "heat" },
+            { j: "猛暑", r: "mousho", e: "intense heat" },
+            { j: "暑中", r: "shocchuu", e: "midsummer" },
+          ],
+        },
+        {
+          k: "寒",
+          r: "kan / samu-",
+          m: "Cold",
+          l: "n4",
+          w: [
+            { j: "寒い", r: "samui", e: "cold" },
+            { j: "寒さ", r: "samusa", e: "coldness" },
+            { j: "厳寒", r: "genkan", e: "severe cold" },
+            { j: "寒気", r: "kanki", e: "cold weather" },
+          ],
+        },
+        {
+          k: "風",
+          r: "fuu / kaze",
+          m: "Wind",
+          l: "n4",
+          w: [
+            { j: "台風", r: "taifuu", e: "typhoon" },
+            { j: "風景", r: "fuukei", e: "scenery" },
+            { j: "北風", r: "kitakaze", e: "north wind" },
+            { j: "風邪", r: "kaze", e: "cold (illness)" },
+          ],
+        },
+        {
+          k: "悪",
+          r: "aku / waru-",
+          m: "Bad / Evil",
+          l: "n4",
+          w: [
+            { j: "悪い", r: "warui", e: "bad" },
+            { j: "最悪", r: "saiaku", e: "worst" },
+            { j: "悪化", r: "akka", e: "worsening" },
+            { j: "罪悪", r: "zaiaku", e: "crime/evil" },
+          ],
+        },
+        {
+          k: "考",
+          r: "kou / kanga-",
+          m: "Think / Consider",
+          l: "n4",
+          w: [
+            { j: "考える", r: "kangaeru", e: "to think" },
+            { j: "考え方", r: "kangaekata", e: "way of thinking" },
+            { j: "参考", r: "sankou", e: "reference" },
+            { j: "思考", r: "shikou", e: "thought" },
+          ],
+        },
+        {
+          k: "知",
+          r: "chi / shi-",
+          m: "Know",
+          l: "n4",
+          w: [
+            { j: "知る", r: "shiru", e: "to know" },
+            { j: "知識", r: "chishiki", e: "knowledge" },
+            { j: "知らせ", r: "shirase", e: "notice/news" },
+            { j: "知人", r: "chijin", e: "acquaintance" },
+          ],
+        },
+        {
+          k: "不",
+          r: "fu / bu",
+          m: "Not / Un-",
+          l: "n4",
+          w: [
+            { j: "不安", r: "fuan", e: "anxiety" },
+            { j: "不便", r: "fuben", e: "inconvenient" },
+            { j: "不満", r: "fuman", e: "dissatisfied" },
+            { j: "不可能", r: "fukanou", e: "impossible" },
+          ],
+        },
+        {
+          k: "便",
+          r: "ben / tayo-",
+          m: "Convenient",
+          l: "n4",
+          w: [
+            { j: "便利", r: "benri", e: "convenient" },
+            { j: "不便", r: "fuben", e: "inconvenient" },
+            { j: "郵便", r: "yuubin", e: "mail/post" },
+            { j: "便所", r: "benjo", e: "restroom" },
+          ],
+        },
+        {
+          k: "住",
+          r: "juu / su-",
+          m: "Live / Reside",
+          l: "n4",
+          w: [
+            { j: "住む", r: "sumu", e: "to live" },
+            { j: "住所", r: "juusho", e: "address" },
+            { j: "住民", r: "juumin", e: "resident" },
+            { j: "移住", r: "ijuu", e: "migration" },
+          ],
+        },
+        {
+          k: "所",
+          r: "sho / tokoro",
+          m: "Place",
+          l: "n4",
+          w: [
+            { j: "所", r: "tokoro", e: "place" },
+            { j: "住所", r: "juusho", e: "address" },
+            { j: "場所", r: "basho", e: "location" },
+            { j: "研究所", r: "kenkyuujo", e: "research institute" },
+          ],
+        },
+        {
+          k: "物",
+          r: "butsu / mono",
+          m: "Thing / Object",
+          l: "n4",
+          w: [
+            { j: "買い物", r: "kaimono", e: "shopping" },
+            { j: "動物", r: "doubutsu", e: "animal" },
+            { j: "食べ物", r: "tabemono", e: "food" },
+            { j: "荷物", r: "nimotsu", e: "luggage" },
+          ],
+        },
+        {
+          k: "軽",
+          r: "kei / karu-",
+          m: "Light (weight)",
+          l: "n4",
+          w: [
+            { j: "軽い", r: "karui", e: "light" },
+            { j: "軽食", r: "keishoku", e: "light meal" },
+            { j: "軽減", r: "keigen", e: "reduction" },
+            { j: "気軽", r: "kigaru", e: "casual/easy-going" },
+          ],
+        },
+        {
+          k: "重",
+          r: "juu / omo-",
+          m: "Heavy",
+          l: "n4",
+          w: [
+            { j: "重い", r: "omoi", e: "heavy" },
+            { j: "重要", r: "juuyou", e: "important" },
+            { j: "体重", r: "taijuu", e: "body weight" },
+            { j: "重力", r: "juryoku", e: "gravity" },
+          ],
+        },
+        {
+          k: "送",
+          r: "sou / oku-",
+          m: "Send",
+          l: "n4",
+          w: [
+            { j: "送る", r: "okuru", e: "to send" },
+            { j: "放送", r: "housou", e: "broadcast" },
+            { j: "送料", r: "souryou", e: "shipping fee" },
+            { j: "見送り", r: "miokuri", e: "send-off" },
+          ],
+        },
+        {
+          k: "明",
+          r: "mei / aki-",
+          m: "Bright / Clear",
+          l: "n4",
+          w: [
+            { j: "明るい", r: "akarui", e: "bright" },
+            { j: "説明", r: "setsumei", e: "explanation" },
+            { j: "明日", r: "ashita", e: "tomorrow" },
+            { j: "発明", r: "hatsumei", e: "invention" },
+          ],
+        },
+        {
+          k: "暗",
+          r: "an / kura-",
+          m: "Dark",
+          l: "n4",
+          w: [
+            { j: "暗い", r: "kurai", e: "dark" },
+            { j: "暗記", r: "anki", e: "memorization" },
+            { j: "暗号", r: "angou", e: "code/cipher" },
+            { j: "薄暗い", r: "usugurai", e: "dim/gloomy" },
+          ],
+        },
+        {
+          k: "待",
+          r: "tai / ma-",
+          m: "Wait",
+          l: "n4",
+          w: [
+            { j: "待つ", r: "matsu", e: "to wait" },
+            { j: "待合室", r: "machiaishitsu", e: "waiting room" },
+            { j: "期待", r: "kitai", e: "expectation" },
+            { j: "招待", r: "shoutai", e: "invitation" },
+          ],
+        },
+        {
+          k: "持",
+          r: "ji / mo-",
+          m: "Hold / Have",
+          l: "n4",
+          w: [
+            { j: "持つ", r: "motsu", e: "to hold" },
+            { j: "気持ち", r: "kimochi", e: "feeling" },
+            { j: "所持", r: "shoji", e: "possession" },
+            { j: "持参", r: "jisan", e: "bringing along" },
+          ],
+        },
+        {
+          k: "産",
+          r: "san / u-",
+          m: "Produce / Birth",
+          l: "n4",
+          w: [
+            { j: "産業", r: "sangyou", e: "industry" },
+            { j: "生産", r: "seisan", e: "production" },
+            { j: "産地", r: "sanchi", e: "place of origin" },
+            { j: "出産", r: "shussan", e: "childbirth" },
+          ],
+        },
+        {
+          k: "勉",
+          r: "ben",
+          m: "Diligent / Study",
+          l: "n4",
+          w: [
+            { j: "勉強", r: "benkyou", e: "study" },
+            { j: "勤勉", r: "kinben", e: "industrious" },
+            { j: "勉学", r: "bengaku", e: "academic study" },
+            { j: "勉励", r: "benrei", e: "diligence" },
+          ],
+        },
+        {
+          k: "曜",
+          r: "you",
+          m: "Day of week",
+          l: "n4",
+          w: [
+            { j: "月曜日", r: "getsuyoubi", e: "Monday" },
+            { j: "火曜日", r: "kayoubi", e: "Tuesday" },
+            { j: "曜日", r: "youbi", e: "day of the week" },
+            { j: "何曜日", r: "nanyoubi", e: "what day" },
+          ],
+        },
+        {
+          k: "通",
+          r: "tsuu / too-",
+          m: "Pass Through",
+          l: "n4",
+          w: [
+            { j: "通る", r: "tooru", e: "to pass through" },
+            { j: "交通", r: "koutsuu", e: "traffic/transport" },
+            { j: "通勤", r: "tsuukin", e: "commuting" },
+            { j: "普通", r: "futsuu", e: "ordinary" },
+          ],
+        },
+        {
+          k: "習",
+          r: "shuu / nara-",
+          m: "Learn / Practice",
+          l: "n4",
+          w: [
+            { j: "習う", r: "narau", e: "to learn" },
+            { j: "練習", r: "renshuu", e: "practice" },
+            { j: "予習", r: "yoshuu", e: "preview study" },
+            { j: "習慣", r: "shuukan", e: "habit/custom" },
+          ],
+        },
+        {
+          k: "研",
+          r: "ken",
+          m: "Research / Sharpen",
+          l: "n4",
+          w: [
+            { j: "研究", r: "kenkyuu", e: "research" },
+            { j: "研修", r: "kenshuu", e: "training" },
+            { j: "研究所", r: "kenkyuujo", e: "research institute" },
+            { j: "研磨", r: "kenma", e: "polishing" },
+          ],
+        },
+        {
+          k: "究",
+          r: "kyuu / kiwa-",
+          m: "Investigate",
+          l: "n4",
+          w: [
+            { j: "研究", r: "kenkyuu", e: "research" },
+            { j: "究明", r: "kyuumei", e: "investigation" },
+            { j: "追究", r: "tsuikyuu", e: "pursuit" },
+            { j: "究極", r: "kyuukyoku", e: "ultimate" },
+          ],
+        },
+        {
+          k: "試",
+          r: "shi / kokoro-",
+          m: "Try / Test",
+          l: "n4",
+          w: [
+            { j: "試験", r: "shiken", e: "exam" },
+            { j: "試合", r: "shiai", e: "match/game" },
+            { j: "試す", r: "tamesu", e: "to try" },
+            { j: "試食", r: "shishoku", e: "taste test" },
+          ],
+        },
+        {
+          k: "験",
+          r: "ken / gen",
+          m: "Experience / Test",
+          l: "n4",
+          w: [
+            { j: "試験", r: "shiken", e: "exam" },
+            { j: "経験", r: "keiken", e: "experience" },
+            { j: "体験", r: "taiken", e: "hands-on experience" },
+            { j: "実験", r: "jikken", e: "experiment" },
+          ],
+        },
+        {
+          k: "質",
+          r: "shitsu / shichi",
+          m: "Quality / Nature",
+          l: "n4",
+          w: [
+            { j: "品質", r: "hinshitsu", e: "quality" },
+            { j: "質問", r: "shitsumon", e: "question" },
+            { j: "性質", r: "seishitsu", e: "nature/character" },
+            { j: "素質", r: "soshitsu", e: "talent" },
+          ],
+        },
+        {
+          k: "問",
+          r: "mon / to-",
+          m: "Question / Problem",
+          l: "n4",
+          w: [
+            { j: "質問", r: "shitsumon", e: "question" },
+            { j: "問題", r: "mondai", e: "problem" },
+            { j: "問い合わせ", r: "toiawase", e: "inquiry" },
+            { j: "訪問", r: "houmon", e: "visit" },
+          ],
+        },
+        {
+          k: "題",
+          r: "dai",
+          m: "Topic / Title",
+          l: "n4",
+          w: [
+            { j: "問題", r: "mondai", e: "problem" },
+            { j: "題名", r: "daimei", e: "title" },
+            { j: "宿題", r: "shukudai", e: "homework" },
+            { j: "話題", r: "wadai", e: "topic" },
+          ],
+        },
+        {
+          k: "回",
+          r: "kai / mawa-",
+          m: "Turn / Times",
+          l: "n4",
+          w: [
+            { j: "回す", r: "mawasu", e: "to turn" },
+            { j: "今回", r: "konkai", e: "this time" },
+            { j: "回答", r: "kaitou", e: "answer" },
+            { j: "回数", r: "kaisuu", e: "number of times" },
+          ],
+        },
+        {
+          k: "計",
+          r: "kei / haka-",
+          m: "Measure / Plan",
+          l: "n4",
+          w: [
+            { j: "時計", r: "tokei", e: "clock/watch" },
+            { j: "計画", r: "keikaku", e: "plan" },
+            { j: "合計", r: "goukei", e: "total" },
+            { j: "計算", r: "keisan", e: "calculation" },
+          ],
+        },
+        {
+          k: "借",
+          r: "shaku / ka-",
+          m: "Borrow",
+          l: "n4",
+          w: [
+            { j: "借りる", r: "kariru", e: "to borrow" },
+            { j: "借金", r: "shakkin", e: "debt" },
+            { j: "賃借", r: "chinshaku", e: "lease" },
+            { j: "借家", r: "shakuya", e: "rented house" },
+          ],
+        },
+        {
+          k: "貸",
+          r: "tai / ka-",
+          m: "Lend",
+          l: "n4",
+          w: [
+            { j: "貸す", r: "kasu", e: "to lend" },
+            { j: "貸し出し", r: "kashidashi", e: "loan/lending" },
+            { j: "貸家", r: "kashiya", e: "house for rent" },
+            { j: "賃貸", r: "chintai", e: "rental" },
+          ],
+        },
+        {
+          k: "急",
+          r: "kyuu / iso-",
+          m: "Urgent / Rush",
+          l: "n4",
+          w: [
+            { j: "急ぐ", r: "isogu", e: "to hurry" },
+            { j: "急行", r: "kyuukou", e: "express" },
+            { j: "急に", r: "kyuu ni", e: "suddenly" },
+            { j: "緊急", r: "kinkyuu", e: "emergency" },
+          ],
+        },
+        {
+          k: "切",
+          r: "setsu / ki-",
+          m: "Cut",
+          l: "n4",
+          w: [
+            { j: "切る", r: "kiru", e: "to cut" },
+            { j: "大切", r: "taisetsu", e: "important" },
+            { j: "切符", r: "kippu", e: "ticket" },
+            { j: "締め切り", r: "shimekiri", e: "deadline" },
+          ],
+        },
+        {
+          k: "代",
+          r: "dai / ka-",
+          m: "Replace / Era",
+          l: "n4",
+          w: [
+            { j: "時代", r: "jidai", e: "era" },
+            { j: "代わり", r: "kawari", e: "substitute" },
+            { j: "代金", r: "daikin", e: "price/cost" },
+            { j: "現代", r: "gendai", e: "modern times" },
+          ],
+        },
+        {
+          k: "乗",
+          r: "jou / no-",
+          m: "Ride / Board",
+          l: "n4",
+          w: [
+            { j: "乗る", r: "noru", e: "to ride" },
+            { j: "乗客", r: "joukyaku", e: "passenger" },
+            { j: "乗り換え", r: "norikae", e: "transfer" },
+            { j: "乗車", r: "jousha", e: "boarding" },
+          ],
+        },
+        {
+          k: "着",
+          r: "chaku / ki-",
+          m: "Wear / Arrive",
+          l: "n4",
+          w: [
+            { j: "着る", r: "kiru", e: "to wear" },
+            { j: "着く", r: "tsuku", e: "to arrive" },
+            { j: "到着", r: "touchaku", e: "arrival" },
+            { j: "着替え", r: "kigae", e: "change of clothes" },
+          ],
+        },
+        {
+          k: "地",
+          r: "chi / ji",
+          m: "Ground / Earth",
+          l: "n4",
+          w: [
+            { j: "地図", r: "chizu", e: "map" },
+            { j: "地下", r: "chika", e: "underground" },
+            { j: "地球", r: "chikyuu", e: "Earth" },
+            { j: "土地", r: "tochi", e: "land" },
+          ],
+        },
+        {
+          k: "図",
+          r: "zu / to",
+          m: "Map / Diagram",
+          l: "n4",
+          w: [
+            { j: "地図", r: "chizu", e: "map" },
+            { j: "図書館", r: "toshokan", e: "library" },
+            { j: "図形", r: "zukei", e: "figure/shape" },
+            { j: "意図", r: "ito", e: "intention" },
+          ],
+        },
+        {
+          k: "運",
+          r: "un / hako-",
+          m: "Transport / Luck",
+          l: "n4",
+          w: [
+            { j: "運動", r: "undou", e: "exercise" },
+            { j: "運転", r: "unten", e: "driving" },
+            { j: "幸運", r: "kouun", e: "good luck" },
+            { j: "運命", r: "unmei", e: "destiny" },
+          ],
+        },
+        {
+          k: "転",
+          r: "ten / koro-",
+          m: "Roll / Turn",
+          l: "n4",
+          w: [
+            { j: "自転車", r: "jitensha", e: "bicycle" },
+            { j: "運転", r: "unten", e: "driving" },
+            { j: "転勤", r: "tenkin", e: "job transfer" },
+            { j: "回転", r: "kaiten", e: "rotation" },
+          ],
+        },
+        {
+          k: "動",
+          r: "dou / ugo-",
+          m: "Move",
+          l: "n4",
+          w: [
+            { j: "動く", r: "ugoku", e: "to move" },
+            { j: "運動", r: "undou", e: "exercise" },
+            { j: "動物", r: "doubutsu", e: "animal" },
+            { j: "感動", r: "kandou", e: "being moved emotionally" },
+          ],
+        },
+        {
+          k: "働",
+          r: "dou / hatara-",
+          m: "Work",
+          l: "n4",
+          w: [
+            { j: "働く", r: "hataraku", e: "to work" },
+            { j: "労働", r: "roudou", e: "labor" },
+            { j: "働き者", r: "hatarakimono", e: "hard worker" },
+            { j: "共働き", r: "tomobataraki", e: "dual income" },
+          ],
+        },
+        {
+          k: "始",
+          r: "shi / haji-",
+          m: "Begin / Start",
+          l: "n4",
+          w: [
+            { j: "始まる", r: "hajimaru", e: "to begin" },
+            { j: "開始", r: "kaishi", e: "start" },
+            { j: "始業", r: "shigyou", e: "start of work" },
+            { j: "始発", r: "shihatsu", e: "first train" },
+          ],
+        },
+        {
+          k: "終",
+          r: "shuu / o-",
+          m: "End / Finish",
+          l: "n4",
+          w: [
+            { j: "終わる", r: "owaru", e: "to end" },
+            { j: "最終", r: "saishuu", e: "last/final" },
+            { j: "終点", r: "shuuten", e: "terminal" },
+            { j: "終電", r: "shuuden", e: "last train" },
+          ],
+        },
+        {
+          k: "去",
+          r: "kyo / sa-",
+          m: "Leave / Past",
+          l: "n4",
+          w: [
+            { j: "去年", r: "kyonen", e: "last year" },
+            { j: "過去", r: "kako", e: "past" },
+            { j: "去る", r: "saru", e: "to leave" },
+            { j: "消去", r: "shougo", e: "erasure" },
+          ],
+        },
+        {
+          k: "発",
+          r: "hatsu",
+          m: "Depart / Emit",
+          l: "n4",
+          w: [
+            { j: "出発", r: "shuppatsu", e: "departure" },
+            { j: "発見", r: "hakken", e: "discovery" },
+            { j: "発表", r: "happyou", e: "announcement" },
+            { j: "発音", r: "hatsuon", e: "pronunciation" },
+          ],
+        },
+        {
+          k: "紙",
+          r: "shi / kami",
+          m: "Paper",
+          l: "n4",
+          w: [
+            { j: "手紙", r: "tegami", e: "letter" },
+            { j: "新聞紙", r: "shinbunshi", e: "newspaper" },
+            { j: "紙幣", r: "shihei", e: "paper money" },
+            { j: "折り紙", r: "origami", e: "origami" },
+          ],
+        },
+        {
+          k: "楽",
+          r: "gaku / raku",
+          m: "Music / Easy",
+          l: "n4",
+          w: [
+            { j: "音楽", r: "ongaku", e: "music" },
+            { j: "楽しい", r: "tanoshii", e: "fun" },
+            { j: "気楽", r: "kiraku", e: "relaxed" },
+            { j: "楽器", r: "gakki", e: "instrument" },
+          ],
+        },
+        {
+          k: "薬",
+          r: "yaku / kusuri",
+          m: "Medicine",
+          l: "n4",
+          w: [
+            { j: "薬局", r: "yakkyoku", e: "pharmacy" },
+            { j: "薬品", r: "yakuhin", e: "medicine/drug" },
+            { j: "漢方薬", r: "kanpouyaku", e: "herbal medicine" },
+            { j: "薬剤師", r: "yakuzaishi", e: "pharmacist" },
+          ],
+        },
+        {
+          k: "歌",
+          r: "ka / uta",
+          m: "Song / Sing",
+          l: "n4",
+          w: [
+            { j: "歌う", r: "utau", e: "to sing" },
+            { j: "歌手", r: "kashu", e: "singer" },
+            { j: "歌詞", r: "kashi", e: "lyrics" },
+            { j: "国歌", r: "kokka", e: "national anthem" },
+          ],
+        },
+        {
+          k: "映",
+          r: "ei / ha-",
+          m: "Reflect / Project",
+          l: "n4",
+          w: [
+            { j: "映画", r: "eiga", e: "movie" },
+            { j: "映す", r: "utsusu", e: "to project" },
+            { j: "上映", r: "jouei", e: "screening" },
+            { j: "映像", r: "eizou", e: "image/footage" },
+          ],
+        },
+        {
+          k: "画",
+          r: "ga / kaku",
+          m: "Picture / Drawing",
+          l: "n4",
+          w: [
+            { j: "映画", r: "eiga", e: "movie" },
+            { j: "絵画", r: "kaiga", e: "painting" },
+            { j: "計画", r: "keikaku", e: "plan" },
+            { j: "漫画", r: "manga", e: "manga/comics" },
+          ],
+        },
+        {
+          k: "写",
+          r: "sha / utsu-",
+          m: "Copy / Photograph",
+          l: "n4",
+          w: [
+            { j: "写真", r: "shashin", e: "photograph" },
+            { j: "写す", r: "utsusu", e: "to copy/take photo" },
+            { j: "描写", r: "byousha", e: "description" },
+            { j: "複写", r: "fukusha", e: "duplicate" },
+          ],
+        },
+        {
+          k: "真",
+          r: "shin / ma",
+          m: "True / Reality",
+          l: "n4",
+          w: [
+            { j: "写真", r: "shashin", e: "photograph" },
+            { j: "真剣", r: "shinken", e: "serious" },
+            { j: "真実", r: "shinjitsu", e: "truth" },
+            { j: "真っ直ぐ", r: "massugu", e: "straight" },
+          ],
+        },
+        {
+          k: "以",
+          r: "i",
+          m: "By means of",
+          l: "n4",
+          w: [
+            { j: "以上", r: "ijou", e: "above/or more" },
+            { j: "以下", r: "ika", e: "below/or less" },
+            { j: "以外", r: "igai", e: "other than" },
+            { j: "以内", r: "inai", e: "within" },
+          ],
+        },
+        {
+          k: "旅",
+          r: "ryo / tabi",
+          m: "Travel",
+          l: "n4",
+          w: [
+            { j: "旅行", r: "ryokou", e: "travel/trip" },
+            { j: "旅館", r: "ryokan", e: "Japanese inn" },
+            { j: "旅人", r: "tabibito", e: "traveler" },
+            { j: "一人旅", r: "hitoribito", e: "solo travel" },
+          ],
+        },
+        {
+          k: "館",
+          r: "kan",
+          m: "Hall / Building",
+          l: "n4",
+          w: [
+            { j: "旅館", r: "ryokan", e: "Japanese inn" },
+            { j: "図書館", r: "toshokan", e: "library" },
+            { j: "博物館", r: "hakubutsukan", e: "museum" },
+            { j: "大使館", r: "taishikan", e: "embassy" },
+          ],
+        },
+        {
+          k: "洋",
+          r: "you",
+          m: "Western / Ocean",
+          l: "n4",
+          w: [
+            { j: "洋服", r: "youfuku", e: "Western clothes" },
+            { j: "西洋", r: "seiyou", e: "the West" },
+            { j: "洋食", r: "youshoku", e: "Western food" },
+            { j: "洋室", r: "youshitsu", e: "Western-style room" },
+          ],
+        },
+        {
+          k: "服",
+          r: "fuku",
+          m: "Clothes",
+          l: "n4",
+          w: [
+            { j: "洋服", r: "youfuku", e: "Western clothes" },
+            { j: "制服", r: "seifuku", e: "uniform" },
+            { j: "服装", r: "fukusou", e: "attire" },
+            { j: "服用", r: "fukuyou", e: "taking medicine" },
+          ],
+        },
+        {
+          k: "室",
+          r: "shitsu / muro",
+          m: "Room / Chamber",
+          l: "n4",
+          w: [
+            { j: "教室", r: "kyoushitsu", e: "classroom" },
+            { j: "和室", r: "washitsu", e: "Japanese-style room" },
+            { j: "研究室", r: "kenkyuushitsu", e: "research room" },
+            { j: "室内", r: "shitsunai", e: "indoors" },
+          ],
+        },
+        {
+          k: "兄",
+          r: "kei / ani",
+          m: "Older brother",
+          l: "n4",
+          w: [
+            { j: "お兄さん", r: "oniisan", e: "older brother" },
+            { j: "兄弟", r: "kyoudai", e: "brothers" },
+            { j: "実兄", r: "jikkei", e: "one's real brother" },
+            { j: "長兄", r: "choukei", e: "eldest brother" },
+          ],
+        },
+        {
+          k: "弟",
+          r: "tei / otouto",
+          m: "Younger brother",
+          l: "n4",
+          w: [
+            { j: "兄弟", r: "kyoudai", e: "brothers" },
+            { j: "弟子", r: "deshi", e: "disciple" },
+            { j: "義弟", r: "gitei", e: "brother-in-law" },
+            { j: "師弟", r: "shitei", e: "master and disciple" },
+          ],
+        },
+        {
+          k: "姉",
+          r: "shi / ane",
+          m: "Older sister",
+          l: "n4",
+          w: [
+            { j: "お姉さん", r: "oneesan", e: "older sister" },
+            { j: "姉妹", r: "shimai", e: "sisters" },
+            { j: "実姉", r: "jisshi", e: "one's real sister" },
+            { j: "義姉", r: "gishi", e: "sister-in-law" },
+          ],
+        },
+        {
+          k: "妹",
+          r: "mai / imouto",
+          m: "Younger sister",
+          l: "n4",
+          w: [
+            { j: "姉妹", r: "shimai", e: "sisters" },
+            { j: "義妹", r: "gimai", e: "sister-in-law" },
+            { j: "実妹", r: "jitsumai", e: "one's real sister" },
+            { j: "妹分", r: "imoutobun", e: "like a younger sister" },
+          ],
+        },
+        {
+          k: "親",
+          r: "shin / oya",
+          m: "Parent",
+          l: "n4",
+          w: [
+            { j: "親切", r: "shinsetsu", e: "kind" },
+            { j: "両親", r: "ryoushin", e: "parents" },
+            { j: "親友", r: "shin'yuu", e: "best friend" },
+            { j: "親子", r: "oyako", e: "parent and child" },
+          ],
+        },
+        {
+          k: "族",
+          r: "zoku",
+          m: "Tribe / Family",
+          l: "n4",
+          w: [
+            { j: "家族", r: "kazoku", e: "family" },
+            { j: "民族", r: "minzoku", e: "ethnic group" },
+            { j: "部族", r: "buzoku", e: "tribe" },
+            { j: "遺族", r: "izoku", e: "bereaved family" },
+          ],
+        },
+        {
+          k: "者",
+          r: "sha / mono",
+          m: "Person",
+          l: "n4",
+          w: [
+            { j: "記者", r: "kisha", e: "journalist" },
+            { j: "医者", r: "isha", e: "doctor" },
+            { j: "患者", r: "kanja", e: "patient" },
+            { j: "若者", r: "wakamono", e: "young person" },
+          ],
+        },
+        {
+          k: "自",
+          r: "ji / shi",
+          m: "Self",
+          l: "n4",
+          w: [
+            { j: "自分", r: "jibun", e: "oneself" },
+            { j: "自動車", r: "jidousha", e: "automobile" },
+            { j: "自然", r: "shizen", e: "nature" },
+            { j: "自由", r: "jiyuu", e: "freedom" },
+          ],
+        },
+        {
+          k: "民",
+          r: "min / tami",
+          m: "People / Nation",
+          l: "n4",
+          w: [
+            { j: "市民", r: "shimin", e: "citizen" },
+            { j: "民族", r: "minzoku", e: "ethnic group" },
+            { j: "国民", r: "kokumin", e: "national citizen" },
+            { j: "難民", r: "nanmin", e: "refugee" },
+          ],
+        },
+        {
+          k: "主",
+          r: "shu / nushi",
+          m: "Master / Main",
+          l: "n4",
+          w: [
+            { j: "主人", r: "shujin", e: "master/husband" },
+            { j: "主に", r: "omoni", e: "mainly" },
+            { j: "主語", r: "shugo", e: "subject" },
+            { j: "民主", r: "minshu", e: "democratic" },
+          ],
+        },
+        {
+          k: "答",
+          r: "tou / kota-",
+          m: "Answer",
+          l: "n4",
+          w: [
+            { j: "答える", r: "kotaeru", e: "to answer" },
+            { j: "回答", r: "kaitou", e: "response" },
+            { j: "解答", r: "kaitou", e: "solution" },
+            { j: "答案", r: "touan", e: "answer sheet" },
+          ],
+        },
+        {
+          k: "特",
+          r: "toku",
+          m: "Special",
+          l: "n4",
+          w: [
+            { j: "特別", r: "tokubetsu", e: "special" },
+            { j: "特に", r: "toku ni", e: "especially" },
+            { j: "特急", r: "tokkyuu", e: "super express" },
+            { j: "特徴", r: "tokuchou", e: "characteristic" },
+          ],
+        },
+        {
+          k: "別",
+          r: "betsu / waka-",
+          m: "Separate / Different",
+          l: "n4",
+          w: [
+            { j: "別に", r: "betsu ni", e: "separately" },
+            { j: "特別", r: "tokubetsu", e: "special" },
+            { j: "区別", r: "kubetsu", e: "distinction" },
+            { j: "別れる", r: "wakareru", e: "to separate" },
+          ],
+        },
+        {
+          k: "病",
+          r: "byou / ya-",
+          m: "Sick / Disease",
+          l: "n4",
+          w: [
+            { j: "病院", r: "byouin", e: "hospital" },
+            { j: "病気", r: "byouki", e: "illness" },
+            { j: "病人", r: "byounin", e: "sick person" },
+            { j: "病室", r: "byoushitsu", e: "hospital room" },
+          ],
+        },
+        {
+          k: "院",
+          r: "in",
+          m: "Institution / Clinic",
+          l: "n4",
+          w: [
+            { j: "病院", r: "byouin", e: "hospital" },
+            { j: "大学院", r: "daigakuin", e: "graduate school" },
+            { j: "入院", r: "nyuuin", e: "hospitalization" },
+            { j: "退院", r: "taiin", e: "discharge from hospital" },
+          ],
+        },
+        {
+          k: "医",
+          r: "i",
+          m: "Medicine / Doctor",
+          l: "n4",
+          w: [
+            { j: "医者", r: "isha", e: "doctor" },
+            { j: "医学", r: "igaku", e: "medicine (study)" },
+            { j: "医療", r: "iryou", e: "medical care" },
+            { j: "歯医者", r: "haisha", e: "dentist" },
+          ],
+        },
+        {
+          k: "死",
+          r: "shi / shi-",
+          m: "Death / Die",
+          l: "n4",
+          w: [
+            { j: "死ぬ", r: "shinu", e: "to die" },
+            { j: "死亡", r: "shibou", e: "death" },
+            { j: "生死", r: "seishi", e: "life and death" },
+            { j: "死体", r: "shitai", e: "corpse" },
+          ],
+        },
+        {
+          k: "注",
+          r: "chuu / so-",
+          m: "Pour / Note",
+          l: "n4",
+          w: [
+            { j: "注意", r: "chuui", e: "attention/caution" },
+            { j: "注文", r: "chuumon", e: "order" },
+            { j: "注目", r: "chuumoku", e: "attention" },
+            { j: "注射", r: "chuusha", e: "injection" },
+          ],
+        },
+        {
+          k: "意",
+          r: "i",
+          m: "Meaning / Mind",
+          l: "n4",
+          w: [
+            { j: "意見", r: "iken", e: "opinion" },
+            { j: "意味", r: "imi", e: "meaning" },
+            { j: "注意", r: "chuui", e: "caution" },
+            { j: "意識", r: "ishiki", e: "consciousness" },
+          ],
+        },
+        {
+          k: "説",
+          r: "setsu / to-",
+          m: "Explain / Theory",
+          l: "n4",
+          w: [
+            { j: "説明", r: "setsumei", e: "explanation" },
+            { j: "小説", r: "shousetsu", e: "novel" },
+            { j: "解説", r: "kaisetsu", e: "commentary" },
+            { j: "演説", r: "enzetsu", e: "speech" },
+          ],
+        },
+        {
+          k: "首",
+          r: "shu / kubi",
+          m: "Neck / Head",
+          l: "n4",
+          w: [
+            { j: "首相", r: "shushou", e: "prime minister" },
+            { j: "首都", r: "shuto", e: "capital city" },
+            { j: "手首", r: "tekubi", e: "wrist" },
+            { j: "足首", r: "ashikubi", e: "ankle" },
+          ],
+        },
+        {
+          k: "頭",
+          r: "tou / atama",
+          m: "Head",
+          l: "n4",
+          w: [
+            { j: "頭が良い", r: "atama ga yoi", e: "smart" },
+            { j: "頭痛", r: "zutsuu", e: "headache" },
+            { j: "先頭", r: "sentou", e: "the front/lead" },
+            { j: "頭脳", r: "zunou", e: "brain/intellect" },
+          ],
+        },
+        {
+          k: "顔",
+          r: "gan / kao",
+          m: "Face",
+          l: "n4",
+          w: [
+            { j: "顔色", r: "kaoiro", e: "complexion" },
+            { j: "笑顔", r: "egao", e: "smiling face" },
+            { j: "顔見知り", r: "kaomijiri", e: "acquaintance" },
+            { j: "洗顔", r: "sengan", e: "face washing" },
+          ],
+        },
+        {
+          k: "進",
+          r: "shin / susu-",
+          m: "Advance",
+          l: "n4",
+          w: [
+            { j: "進む", r: "susumu", e: "to advance" },
+            { j: "進歩", r: "shinpo", e: "progress" },
+            { j: "前進", r: "zenshin", e: "forward progress" },
+            { j: "進学", r: "shingaku", e: "advancing to next school" },
+          ],
+        },
+        {
+          k: "集",
+          r: "shuu / atsu-",
+          m: "Gather / Collect",
+          l: "n4",
+          w: [
+            { j: "集まる", r: "atsumaru", e: "to gather" },
+            { j: "集中", r: "shuuchuu", e: "concentration" },
+            { j: "収集", r: "shuushuu", e: "collection" },
+            { j: "募集", r: "boshuu", e: "recruitment" },
+          ],
+        },
+        {
+          k: "洗",
+          r: "sen / ara-",
+          m: "Wash",
+          l: "n4",
+          w: [
+            { j: "洗う", r: "arau", e: "to wash" },
+            { j: "洗濯", r: "sentaku", e: "laundry" },
+            { j: "洗面所", r: "senmenjo", e: "washroom" },
+            { j: "洗剤", r: "senzai", e: "detergent" },
+          ],
+        },
+        {
+          k: "光",
+          r: "kou / hikari",
+          m: "Light",
+          l: "n4",
+          w: [
+            { j: "光る", r: "hikaru", e: "to shine" },
+            { j: "日光", r: "nikkou", e: "sunlight" },
+            { j: "観光", r: "kankou", e: "sightseeing" },
+            { j: "光景", r: "kouкei", e: "scene/sight" },
+          ],
+        },
+        {
+          k: "太",
+          r: "tai / futo-",
+          m: "Fat / Thick",
+          l: "n4",
+          w: [
+            { j: "太い", r: "futoi", e: "thick/fat" },
+            { j: "太陽", r: "taiyou", e: "sun" },
+            { j: "太平洋", r: "taiheiyou", e: "Pacific Ocean" },
+            { j: "太鼓", r: "taiko", e: "drum" },
+          ],
+        },
+        {
+          k: "建",
+          r: "ken / ta-",
+          m: "Build / Construct",
+          l: "n4",
+          w: [
+            { j: "建てる", r: "tateru", e: "to build" },
+            { j: "建物", r: "tatemono", e: "building" },
+            { j: "建設", r: "kensetsu", e: "construction" },
+            { j: "建築", r: "kenchiku", e: "architecture" },
+          ],
+        },
+        {
+          k: "起",
+          r: "ki / o-",
+          m: "Wake / Rise",
+          l: "n4",
+          w: [
+            { j: "起きる", r: "okiru", e: "to wake up" },
+            { j: "起こす", r: "okosu", e: "to cause/wake" },
+            { j: "起源", r: "kigen", e: "origin" },
+            { j: "早起き", r: "hayaoki", e: "early rising" },
+          ],
+        },
+        {
+          k: "鳥",
+          r: "chou / tori",
+          m: "Bird",
+          l: "n4",
+          w: [
+            { j: "小鳥", r: "kotori", e: "small bird" },
+            { j: "鳥居", r: "torii", e: "shrine gate" },
+            { j: "渡り鳥", r: "wataridori", e: "migratory bird" },
+            { j: "鳥肌", r: "torihada", e: "goosebumps" },
+          ],
+        },
+        {
+          k: "飯",
+          r: "han / meshi",
+          m: "Rice / Meal",
+          l: "n4",
+          w: [
+            { j: "ご飯", r: "gohan", e: "rice/meal" },
+            { j: "朝飯", r: "asameshi", e: "breakfast" },
+            { j: "夕飯", r: "yuuhan", e: "dinner" },
+            { j: "炊飯器", r: "suihanki", e: "rice cooker" },
+          ],
+        },
+        {
+          k: "野",
+          r: "ya / no",
+          m: "Field / Wild",
+          l: "n4",
+          w: [
+            { j: "野菜", r: "yasai", e: "vegetable" },
+            { j: "野球", r: "yakyuu", e: "baseball" },
+            { j: "野原", r: "nohara", e: "field/plain" },
+            { j: "分野", r: "bunya", e: "field/domain" },
+          ],
+        },
+        {
+          k: "菜",
+          r: "sai / na",
+          m: "Vegetable",
+          l: "n4",
+          w: [
+            { j: "野菜", r: "yasai", e: "vegetable" },
+            { j: "菜の花", r: "nanohana", e: "rapeseed flower" },
+            { j: "白菜", r: "hakusai", e: "Chinese cabbage" },
+            { j: "山菜", r: "sansai", e: "wild vegetable" },
+          ],
+        },
+        {
+          k: "林",
+          r: "rin / hayashi",
+          m: "Forest / Grove",
+          l: "n4",
+          w: [
+            { j: "林業", r: "ringuyo", e: "forestry" },
+            { j: "山林", r: "sanrin", e: "mountain forest" },
+            { j: "竹林", r: "chikurin", e: "bamboo grove" },
+            { j: "森林", r: "shinrin", e: "forest" },
+          ],
+        },
+        {
+          k: "森",
+          r: "shin / mori",
+          m: "Forest",
+          l: "n4",
+          w: [
+            { j: "森林", r: "shinrin", e: "forest" },
+            { j: "森の中", r: "mori no naka", e: "inside the forest" },
+            { j: "原生林", r: "genseirin", e: "primeval forest" },
+            { j: "緑の森", r: "midori no mori", e: "green forest" },
+          ],
+        },
+        {
+          k: "池",
+          r: "chi / ike",
+          m: "Pond",
+          l: "n4",
+          w: [
+            { j: "池", r: "ike", e: "pond" },
+            { j: "電池", r: "denchi", e: "battery" },
+            { j: "溜め池", r: "tameike", e: "reservoir" },
+            { j: "池畔", r: "chihan", e: "lakeside" },
+          ],
+        },
+        {
+          k: "県",
+          r: "ken",
+          m: "Prefecture",
+          l: "n4",
+          w: [
+            { j: "都道府県", r: "todouhuken", e: "prefecture" },
+            { j: "県庁", r: "kenchou", e: "prefectural office" },
+            { j: "県民", r: "kenmin", e: "prefectural resident" },
+            { j: "出身県", r: "shusshinken", e: "home prefecture" },
+          ],
+        },
+        {
+          k: "市",
+          r: "shi / ichi",
+          m: "City / Market",
+          l: "n4",
+          w: [
+            { j: "市場", r: "shijou", e: "market" },
+            { j: "市民", r: "shimin", e: "citizen" },
+            { j: "都市", r: "toshi", e: "urban city" },
+            { j: "市役所", r: "shiyakusho", e: "city hall" },
+          ],
+        },
+        {
+          k: "町",
+          r: "chou / machi",
+          m: "Town",
+          l: "n4",
+          w: [
+            { j: "町中", r: "machinaka", e: "downtown" },
+            { j: "下町", r: "shitamachi", e: "old part of town" },
+            { j: "町役場", r: "machiyakuba", e: "town hall" },
+            { j: "商店街", r: "shoutengai", e: "shopping street" },
+          ],
+        },
+        {
+          k: "村",
+          r: "son / mura",
+          m: "Village",
+          l: "n4",
+          w: [
+            { j: "村人", r: "murabito", e: "villager" },
+            { j: "農村", r: "nouson", e: "farming village" },
+            { j: "村長", r: "sonchoo", e: "village head" },
+            { j: "村落", r: "sonraku", e: "hamlet" },
+          ],
+        },
+        {
+          k: "区",
+          r: "ku",
+          m: "Ward / District",
+          l: "n4",
+          w: [
+            { j: "地区", r: "chiku", e: "district" },
+            { j: "区役所", r: "kuyakusho", e: "ward office" },
+            { j: "区別", r: "kubetsu", e: "distinction" },
+            { j: "区間", r: "kukan", e: "section" },
+          ],
+        },
+        {
+          k: "京",
+          r: "kyou / kei",
+          m: "Capital",
+          l: "n4",
+          w: [
+            { j: "東京", r: "toukyou", e: "Tokyo" },
+            { j: "京都", r: "kyouto", e: "Kyoto" },
+            { j: "京阪", r: "keihan", e: "Kyoto-Osaka area" },
+            { j: "上京", r: "joukyou", e: "going to Tokyo" },
+          ],
+        },
+        {
+          k: "都",
+          r: "to / miyako",
+          m: "Capital City",
+          l: "n4",
+          w: [
+            { j: "東京都", r: "toukyouto", e: "Tokyo Metropolis" },
+            { j: "京都", r: "kyouto", e: "Kyoto" },
+            { j: "首都", r: "shuto", e: "capital city" },
+            { j: "都市", r: "toshi", e: "city" },
+          ],
+        },
+        {
+          k: "工",
+          r: "kou / ku",
+          m: "Work / Craft",
+          l: "n4",
+          w: [
+            { j: "工場", r: "koujou", e: "factory" },
+            { j: "工事", r: "kouji", e: "construction" },
+            { j: "工業", r: "kougyou", e: "industry" },
+            { j: "工夫", r: "kufu", e: "ingenuity/devise" },
+          ],
+        },
+        {
+          k: "場",
+          r: "jou / ba",
+          m: "Place / Scene",
+          l: "n4",
+          w: [
+            { j: "工場", r: "koujou", e: "factory" },
+            { j: "場所", r: "basho", e: "place" },
+            { j: "広場", r: "hiroba", e: "plaza" },
+            { j: "市場", r: "ichiba", e: "market" },
+          ],
+        },
+        {
+          k: "台",
+          r: "dai / tai",
+          m: "Stand / Level",
+          l: "n4",
+          w: [
+            { j: "台所", r: "daidokoro", e: "kitchen" },
+            { j: "台風", r: "taifuu", e: "typhoon" },
+            { j: "舞台", r: "butai", e: "stage" },
+            { j: "台数", r: "daisuu", e: "number of machines" },
+          ],
+        },
+        {
+          k: "員",
+          r: "in",
+          m: "Member / Staff",
+          l: "n4",
+          w: [
+            { j: "社員", r: "shain", e: "company employee" },
+            { j: "店員", r: "ten'in", e: "store clerk" },
+            { j: "会員", r: "kaiin", e: "member" },
+            { j: "全員", r: "zen'in", e: "all members" },
+          ],
+        },
+        {
+          k: "業",
+          r: "gyou / gou",
+          m: "Business / Work",
+          l: "n4",
+          w: [
+            { j: "産業", r: "sangyou", e: "industry" },
+            { j: "卒業", r: "sotsugyou", e: "graduation" },
+            { j: "職業", r: "shokugyou", e: "occupation" },
+            { j: "作業", r: "sagyou", e: "work/task" },
+          ],
+        },
+        {
+          k: "度",
+          r: "do / tabi",
+          m: "Degree / Time",
+          l: "n4",
+          w: [
+            { j: "温度", r: "ondo", e: "temperature" },
+            { j: "態度", r: "taido", e: "attitude" },
+            { j: "今度", r: "kondo", e: "next time" },
+            { j: "制度", r: "seido", e: "system/institution" },
+          ],
+        },
+        {
+          k: "有",
+          r: "yuu / a-",
+          m: "Exist / Have",
+          l: "n4",
+          w: [
+            { j: "有名", r: "yuumei", e: "famous" },
+            { j: "有利", r: "yuuri", e: "advantageous" },
+            { j: "所有", r: "shoyuu", e: "possession" },
+            { j: "有効", r: "yuukou", e: "valid/effective" },
+          ],
+        },
+        {
+          k: "堂",
+          r: "dou",
+          m: "Hall / Temple",
+          l: "n4",
+          w: [
+            { j: "食堂", r: "shokudou", e: "cafeteria" },
+            { j: "礼堂", r: "reidou", e: "chapel" },
+            { j: "講堂", r: "koudou", e: "auditorium" },
+            { j: "仏堂", r: "butsudou", e: "Buddhist hall" },
+          ],
+        },
+      ];
 
-function renderCards(data) {
-  const grid = document.getElementById('grid');
-  document.getElementById('countBadge').textContent = data.length + ' shown';
-  if (data.length === 0) {
-    grid.innerHTML = '<div class="no-results">NO RESULTS FOUND</div>';
-    return;
-  }
-  grid.innerHTML = data.map(k => `
+      let current = [...KANJI];
+
+      function renderCards(data) {
+        const grid = document.getElementById("grid");
+        document.getElementById("countBadge").textContent =
+          data.length + " shown";
+        if (data.length === 0) {
+          grid.innerHTML = '<div class="no-results">NO RESULTS FOUND</div>';
+          return;
+        }
+        grid.innerHTML = data
+          .map(
+            (k) => `
     <div class="card ${k.l}">
       <div class="card-top">
         <div class="kanji-char">${k.k}</div>
@@ -620,61 +3905,120 @@ function renderCards(data) {
         <div class="meaning">${k.m}</div>
         <div class="words-label">Common Words</div>
         <div class="words">
-          ${k.w.map(w => `
+          ${k.w
+            .map(
+              (w) => `
             <div class="word-item">
               <span class="word-jp">${w.j}</span>
               <span class="word-rom">${w.r}</span>
               <span class="word-en">${w.e}</span>
             </div>
-          `).join('')}
+          `,
+            )
+            .join("")}
         </div>
       </div>
     </div>
-  `).join('');
-}
+  `,
+          )
+          .join("");
+      }
 
-function filter(level, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const q = document.getElementById('searchBox').value.toLowerCase();
-  current = level === 'all' ? KANJI : KANJI.filter(k => k.l === level);
-  const filtered = q ? current.filter(k =>
-    k.k.includes(q) || k.m.toLowerCase().includes(q) || k.r.toLowerCase().includes(q) ||
-    k.w.some(w => w.j.includes(q) || w.e.toLowerCase().includes(q))
-  ) : current;
-  renderCards(filtered);
-}
+      function filter(level, btn) {
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const q = document.getElementById("searchBox").value.toLowerCase();
+        current = level === "all" ? KANJI : KANJI.filter((k) => k.l === level);
+        const filtered = q
+          ? current.filter(
+              (k) =>
+                k.k.includes(q) ||
+                k.m.toLowerCase().includes(q) ||
+                k.r.toLowerCase().includes(q) ||
+                k.w.some(
+                  (w) => w.j.includes(q) || w.e.toLowerCase().includes(q),
+                ),
+            )
+          : current;
+        renderCards(filtered);
+      }
 
-function search() {
-  const q = document.getElementById('searchBox').value.toLowerCase();
-  const filtered = q ? current.filter(k =>
-    k.k.includes(q) || k.m.toLowerCase().includes(q) || k.r.toLowerCase().includes(q) ||
-    k.w.some(w => w.j.includes(q) || w.e.toLowerCase().includes(q))
-  ) : current;
-  renderCards(filtered);
-}
+      function search() {
+        const q = document.getElementById("searchBox").value.toLowerCase();
+        const filtered = q
+          ? current.filter(
+              (k) =>
+                k.k.includes(q) ||
+                k.m.toLowerCase().includes(q) ||
+                k.r.toLowerCase().includes(q) ||
+                k.w.some(
+                  (w) => w.j.includes(q) || w.e.toLowerCase().includes(q),
+                ),
+            )
+          : current;
+        renderCards(filtered);
+      }
 
-// Initial render
-renderCards(KANJI);
-</script>
-<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-<script>
-const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+      function toggleMenu(force) {
+        const ctrl = document.getElementById("controls");
+        const btn = document.getElementById("hamburger");
+        const open =
+          typeof force === "boolean" ? force : !ctrl.classList.contains("open");
+        ctrl.classList.toggle("open", open);
+        btn.classList.toggle("open", open);
+        btn.setAttribute("aria-expanded", String(open));
+      }
 
-(function raf(time) { lenis.raf(time); requestAnimationFrame(raf); })(0);
+      // Auto-close menu on tab tap (mobile)
+      document.querySelectorAll(".controls .tab-btn").forEach((b) => {
+        b.addEventListener("click", () => {
+          if (window.matchMedia("(max-width: 600px)").matches)
+            toggleMenu(false);
+        });
+      });
 
-const header = document.querySelector('header');
-let lastY = 0;
-lenis.on('scroll', ({ scroll }) => {
-  header.classList.toggle('hidden', scroll > lastY && scroll > 80);
-  lastY = scroll;
-});
+      // Initial render
+      renderCards(KANJI);
+    </script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script>
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/kanji/sw.js').catch(() => {});
-  });
-}
-</script>
-</body>
+      (function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      })(0);
+
+      const header = document.querySelector("header");
+      const setHeaderH = () => {
+        document.documentElement.style.setProperty(
+          "--header-h",
+          header.offsetHeight + "px",
+        );
+      };
+      setHeaderH();
+      window.addEventListener("resize", setHeaderH);
+      if (document.fonts && document.fonts.ready)
+        document.fonts.ready.then(setHeaderH);
+      let lastY = 0;
+      lenis.on("scroll", ({ scroll }) => {
+        const hide = scroll > lastY && scroll > 80;
+        header.classList.toggle("hidden", hide);
+        if (hide && document.getElementById("controls").classList.contains("open"))
+          toggleMenu(false);
+        lastY = scroll;
+      });
+
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/kanji/sw.js").catch(() => {});
+        });
+      }
+    </script>
+  </body>
 </html>

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>漢字 MASTER</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#0a0a0a; --white:#f5f0e8; --yellow:#ffe000; --red:#ff2d00;
+  --blue:#00b8c4; --green:#00c853; --pink:#ff6ec7; --purple:#9b30ff;
+  --border:3px solid var(--black); --shadow:4px 4px 0 var(--black);
+  --shadow-lg:6px 6px 0 var(--black); --nav-h:64px; --top-h:56px;
+  --safe:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--white);color:var(--black);font-family:'Space Mono',monospace;overflow-x:hidden;min-height:100vh}
+
+/* ── TOPBAR ── */
+.topbar{position:fixed;top:0;left:0;right:0;height:var(--top-h);background:var(--black);border-bottom:3px solid var(--yellow);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:200}
+.topbar-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--yellow);letter-spacing:0.08em}
+.topbar-title span{color:var(--red)}
+.topbar-badge{background:var(--yellow);color:var(--black);font-size:0.6rem;font-weight:700;padding:3px 8px;border:2px solid var(--yellow);letter-spacing:0.08em}
+
+/* ── CONTENT ── */
+.content{padding-top:var(--top-h);padding-bottom:calc(var(--nav-h) + var(--safe) + 8px);min-height:100vh}
+.tab-panel{display:none;padding:16px}
+.tab-panel.active{display:block}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + var(--safe));background:var(--black);border-top:3px solid var(--yellow);display:flex;padding-bottom:var(--safe);z-index:200}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;border:none;background:none;color:#666;transition:all 0.15s;padding:8px 0}
+.nav-item.active{color:var(--yellow)}
+.nav-icon{font-size:1.3rem;line-height:1}
+.nav-label{font-size:0.55rem;letter-spacing:0.06em;text-transform:uppercase;font-family:'Space Mono',monospace}
+
+/* ── BROWSE TAB ── */
+.filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filter-btn{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding:7px 16px;border:var(--border);background:var(--white);cursor:pointer;box-shadow:var(--shadow);transition:all 0.1s}
+.filter-btn:active{transform:translate(2px,2px);box-shadow:none}
+.filter-btn.active-all{background:var(--red);color:var(--white)}
+.filter-btn.active-n5{background:var(--yellow)}
+.filter-btn.active-n4{background:var(--blue);color:var(--white)}
+.search-box{flex:1;min-width:140px;font-family:'Space Mono',monospace;font-size:0.8rem;padding:8px 12px;border:var(--border);background:var(--white);box-shadow:var(--shadow);outline:none}
+.count-tag{font-size:0.65rem;font-weight:700;background:var(--pink);color:var(--black);padding:4px 8px;border:var(--border);white-space:nowrap}
+
+.kanji-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.k-card{border:var(--border);background:var(--white);box-shadow:var(--shadow-lg);position:relative;cursor:pointer;transition:all 0.12s;overflow:hidden}
+.k-card:active{transform:translate(3px,3px);box-shadow:none}
+.k-card.n5{--accent:var(--yellow)}
+.k-card.n4{--accent:var(--blue)}
+.k-card-top{background:var(--accent);padding:12px 12px 8px;border-bottom:var(--border);display:flex;align-items:flex-start;justify-content:space-between}
+.k-char{font-family:'Noto Sans JP',sans-serif;font-size:2.8rem;font-weight:900;line-height:1}
+.k-meta{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.level-tag{font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:0.05em;padding:2px 7px;border:2px solid var(--black);background:var(--black);color:var(--accent)}
+.k-rom{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;background:rgba(255,255,255,0.6);padding:2px 5px;border:1px solid var(--black);max-width:100px;text-align:center;word-break:break-word}
+.k-body{padding:10px 12px}
+.k-meaning{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.04em;border-left:3px solid var(--accent,var(--black));padding-left:6px;margin-bottom:6px}
+.k-words{display:flex;flex-direction:column;gap:4px}
+.k-word{display:flex;align-items:baseline;gap:5px;font-size:0.7rem;padding:4px 8px;border:2px solid var(--black);background:var(--white);cursor:pointer;transition:background 0.1s}
+.k-word:active{background:var(--yellow)}
+.k-word::before{content:"→";font-weight:700;color:var(--red);flex-shrink:0}
+.k-word-jp{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:0.85rem}
+.k-word-rom{color:#555;font-size:0.6rem;flex-shrink:0}
+.k-word-en{margin-left:auto;font-size:0.6rem;font-weight:700}
+.speak-btn{font-size:0.65rem;background:var(--black);color:var(--yellow);border:none;padding:3px 8px;cursor:pointer;font-family:'Space Mono',monospace;letter-spacing:0.05em;margin-top:6px;display:flex;align-items:center;gap:4px}
+
+/* ── STUDY (FLASHCARD) TAB ── */
+.study-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+.study-counter{text-align:center;font-size:0.75rem;color:#666;font-family:'Space Mono',monospace}
+.study-progress-wrap{width:100%;max-width:360px;height:5px;background:#ddd;border:2px solid var(--black)}
+.study-progress-fill{height:100%;background:var(--yellow);transition:width 0.3s}
+.flashcard{width:100%;max-width:360px;height:240px;perspective:1000px;cursor:pointer}
+.flashcard-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;border:var(--border);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:16px}
+.fc-front{background:var(--white)}
+.fc-back{background:var(--yellow);transform:rotateY(180deg)}
+.fc-kana-big{font-family:'Noto Sans JP',sans-serif;font-size:4.5rem;font-weight:900;line-height:1}
+.fc-level{font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:0.06em;background:var(--black);color:var(--yellow);padding:2px 10px}
+.fc-hint{font-size:0.7rem;color:#888}
+.fc-meaning{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em}
+.fc-romaji{font-size:0.9rem;font-weight:700;color:#333}
+.fc-example{font-family:'Noto Sans JP',sans-serif;font-size:0.85rem;color:#444;text-align:center}
+.fc-actions{display:flex;gap:10px;width:100%;max-width:360px}
+.fc-btn{flex:1;padding:12px;border:var(--border);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;cursor:pointer;box-shadow:var(--shadow);transition:all 0.1s}
+.fc-btn:active{transform:translate(2px,2px);box-shadow:none}
+.fc-btn-again{background:var(--red);color:var(--white)}
+.fc-btn-know{background:var(--green);color:var(--white)}
+.fc-speak{background:var(--black);color:var(--yellow);border:var(--border);padding:8px 20px;font-family:'Space Mono',monospace;font-size:0.75rem;cursor:pointer;box-shadow:var(--shadow);letter-spacing:0.05em}
+
+/* ── QUIZ TAB ── */
+.quiz-mode-row{display:flex;gap:8px;margin-bottom:16px}
+.quiz-mode-btn{flex:1;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:0.04em;padding:8px 4px;border:var(--border);background:var(--white);cursor:pointer;text-align:center;box-shadow:var(--shadow);transition:all 0.1s}
+.quiz-mode-btn:active{transform:translate(2px,2px);box-shadow:none}
+.quiz-mode-btn.active{background:var(--black);color:var(--yellow)}
+.quiz-q-box{border:var(--border);background:var(--black);box-shadow:var(--shadow-lg);padding:20px;text-align:center;margin-bottom:16px}
+.quiz-q-char{font-family:'Noto Sans JP',sans-serif;font-size:4rem;font-weight:900;color:var(--yellow);line-height:1;margin-bottom:6px}
+.quiz-q-prompt{font-size:0.7rem;color:#aaa;font-family:'Space Mono',monospace;letter-spacing:0.06em;text-transform:uppercase}
+.quiz-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.quiz-opt{padding:16px 8px;border:var(--border);background:var(--white);font-family:'Space Mono',monospace;font-size:0.85rem;cursor:pointer;text-align:center;box-shadow:var(--shadow);transition:all 0.1s;font-weight:700}
+.quiz-opt:active{transform:translate(2px,2px);box-shadow:none}
+.quiz-opt.correct{background:var(--green);color:var(--white);border-color:var(--green)}
+.quiz-opt.wrong{background:var(--red);color:var(--white);border-color:var(--red)}
+.quiz-opt.reveal{background:var(--green);color:var(--white);border-color:var(--green)}
+.quiz-result-bar{padding:10px 14px;border:var(--border);font-size:0.8rem;font-weight:700;margin-top:12px;display:none}
+.quiz-result-bar.correct{background:var(--green);color:var(--white)}
+.quiz-result-bar.wrong{background:var(--red);color:var(--white)}
+.quiz-score{text-align:center;font-size:0.75rem;color:#666;font-family:'Space Mono',monospace;margin-top:10px}
+
+/* ── PROGRESS TAB ── */
+.stat-row{display:flex;gap:10px;margin-bottom:16px}
+.stat-box{flex:1;border:var(--border);background:var(--white);box-shadow:var(--shadow);padding:12px 8px;text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1}
+.stat-num.y{color:var(--yellow);-webkit-text-stroke:1px var(--black)}
+.stat-num.g{color:var(--green)}
+.stat-num.r{color:var(--red)}
+.stat-label{font-size:0.55rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#666;margin-top:2px}
+.prog-section-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.06em;border-left:4px solid var(--black);padding-left:8px;margin-bottom:10px}
+.kgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:20px}
+.kgrid-cell{border:2px solid var(--black);background:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:1;gap:1px;cursor:pointer;transition:all 0.15s}
+.kgrid-cell .kc{font-family:'Noto Sans JP',sans-serif;font-size:1.1rem;font-weight:900}
+.kgrid-cell .kr{font-size:0.45rem;font-family:'Space Mono',monospace;color:#666}
+.kgrid-cell.mastered{background:var(--green);border-color:var(--green)}
+.kgrid-cell.mastered .kr{color:var(--white)}
+.kgrid-cell.struggling{background:var(--red);border-color:var(--red)}
+.kgrid-cell.struggling .kc,.kgrid-cell.struggling .kr{color:var(--white)}
+.kgrid-cell.n5c{border-color:#b8a000}
+.kgrid-cell.n4c{border-color:var(--blue)}
+.legend-row{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:0.65rem;font-family:'Space Mono',monospace}
+.legend-dot{width:12px;height:12px;border:2px solid var(--black)}
+.reset-btn{width:100%;border:var(--border);background:var(--white);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding:12px;cursor:pointer;box-shadow:var(--shadow);transition:all 0.1s;margin-top:8px}
+.reset-btn:active{transform:translate(2px,2px);box-shadow:none}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:none;align-items:flex-end}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-top:4px solid var(--black);width:100%;max-height:85vh;overflow-y:auto;padding:20px 16px;padding-bottom:calc(20px + var(--safe))}
+.modal-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:var(--border)}
+.modal-char{font-family:'Noto Sans JP',sans-serif;font-size:5rem;font-weight:900;line-height:1}
+.modal-meta{flex:1}
+.modal-level{display:inline-block;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;background:var(--black);color:var(--yellow);padding:2px 10px;letter-spacing:0.06em;margin-bottom:4px}
+.modal-meaning{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.04em}
+.modal-romaji{font-size:0.8rem;color:#555;font-weight:700}
+.modal-close{border:var(--border);background:var(--black);color:var(--yellow);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;padding:8px 16px;cursor:pointer;box-shadow:var(--shadow);flex-shrink:0;align-self:flex-start}
+.modal-section{margin-bottom:14px}
+.modal-section-title{font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:#666;margin-bottom:8px;border-left:3px solid var(--red);padding-left:6px}
+.modal-words{display:flex;flex-direction:column;gap:6px}
+.modal-word{display:flex;align-items:baseline;gap:8px;padding:8px 10px;border:var(--border);background:var(--white);cursor:pointer;transition:background 0.1s}
+.modal-word:active{background:var(--yellow)}
+.modal-word::before{content:"→";font-weight:700;color:var(--red);flex-shrink:0}
+.modal-word-jp{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:1rem}
+.modal-word-rom{color:#555;font-size:0.7rem;flex-shrink:0}
+.modal-word-en{margin-left:auto;font-size:0.7rem;font-weight:700}
+.modal-actions{display:flex;gap:10px;margin-top:16px}
+.modal-btn{flex:1;border:var(--border);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.05em;padding:12px;cursor:pointer;box-shadow:var(--shadow);transition:all 0.1s}
+.modal-btn:active{transform:translate(2px,2px);box-shadow:none}
+.modal-btn-speak{background:var(--black);color:var(--yellow)}
+
+/* ── HAMBURGER ── */
+.topbar-right{display:flex;align-items:center;gap:12px}
+.hamburger{display:none;flex-direction:column;justify-content:space-between;width:26px;height:20px;padding:0;background:transparent;border:none;cursor:pointer}
+.hamburger span{display:block;width:100%;height:3px;background:var(--yellow);transition:transform 0.25s ease,opacity 0.2s ease;transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(8.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8.5px) rotate(-45deg)}
+
+@media (max-width:600px){
+  body[data-tab="browse"] .hamburger{display:flex}
+  body[data-tab="browse"] .topbar-badge{display:none}
+  #panel-browse .filter-bar{max-height:0;overflow:hidden;margin-bottom:0;transition:max-height 0.3s ease,margin-bottom 0.3s ease}
+  #panel-browse .filter-bar.open{max-height:400px;margin-bottom:16px}
+  #panel-browse .filter-bar > *{flex:1 0 100%}
+}
+
+/* stripe bg */
+.stripe-bg{position:fixed;top:0;right:0;width:80px;height:100%;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(0,0,0,0.03) 8px,rgba(0,0,0,0.03) 16px);pointer-events:none;z-index:0}
+
+/* toast */
+.toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe) + 12px);left:50%;transform:translateX(-50%);background:var(--black);color:var(--yellow);border:2px solid var(--yellow);padding:8px 18px;font-family:'Space Mono',monospace;font-size:0.75rem;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:400;white-space:nowrap;letter-spacing:0.05em}
+.toast.show{opacity:1}
+
+.no-results{grid-column:1/-1;text-align:center;padding:60px 20px;font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#ccc}
+</style>
+</head>
+<body>
+<div class="stripe-bg"></div>
+
+<div class="topbar">
+  <div class="topbar-title">漢字 <span>MASTER</span></div>
+  <div class="topbar-right">
+    <div class="topbar-badge">286 KANJI</div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle filters" aria-expanded="false" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ── BROWSE ── -->
+  <div class="tab-panel active" id="panel-browse">
+    <div class="filter-bar">
+      <button class="filter-btn active-all" id="fb-all" onclick="filterCards('all',this)">ALL</button>
+      <button class="filter-btn" id="fb-n5" onclick="filterCards('n5',this)">N5</button>
+      <button class="filter-btn" id="fb-n4" onclick="filterCards('n4',this)">N4</button>
+      <input class="search-box" id="searchBox" placeholder="Search kanji, meaning..." oninput="searchCards()">
+      <div class="count-tag" id="countTag">286</div>
+    </div>
+    <div class="kanji-grid" id="kanjiGrid"></div>
+  </div>
+
+  <!-- ── STUDY ── -->
+  <div class="tab-panel" id="panel-study">
+    <div class="study-wrap">
+      <div class="study-counter" id="study-counter">Card 1 of 286</div>
+      <div class="study-progress-wrap"><div class="study-progress-fill" id="study-progress" style="width:0%"></div></div>
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner">
+          <div class="fc-front">
+            <div class="fc-level" id="fc-level">N5</div>
+            <div class="fc-kana-big" id="fc-char">一</div>
+            <div class="fc-hint">Tap to reveal</div>
+          </div>
+          <div class="fc-back">
+            <div class="fc-kana-big" id="fc-char-back">一</div>
+            <div class="fc-meaning" id="fc-meaning">ONE</div>
+            <div class="fc-romaji" id="fc-romaji">ichi / hito-</div>
+            <div class="fc-example" id="fc-example">一番 — number one</div>
+          </div>
+        </div>
+      </div>
+      <button class="fc-speak" onclick="speakCurrent()">🔊 LISTEN</button>
+      <div class="fc-actions">
+        <button class="fc-btn fc-btn-again" onclick="markCard(false)">✕ AGAIN</button>
+        <button class="fc-btn fc-btn-know" onclick="markCard(true)">✓ KNOW IT</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUIZ ── -->
+  <div class="tab-panel" id="panel-quiz">
+    <div class="quiz-mode-row">
+      <div class="quiz-mode-btn active" id="qm-kanji" onclick="setQuizMode('kanji')">漢字→EN</div>
+      <div class="quiz-mode-btn" id="qm-meaning" onclick="setQuizMode('meaning')">EN→漢字</div>
+      <div class="quiz-mode-btn" id="qm-word" onclick="setQuizMode('word')">WORD</div>
+    </div>
+    <div class="quiz-q-box">
+      <div class="quiz-q-char" id="quiz-q-display">一</div>
+      <div class="quiz-q-prompt" id="quiz-q-prompt">Pick the correct meaning</div>
+    </div>
+    <div class="quiz-opts" id="quiz-opts"></div>
+    <div class="quiz-result-bar" id="quiz-result"></div>
+    <div class="quiz-score" id="quiz-score">Score: 0 / 0</div>
+  </div>
+
+  <!-- ── PROGRESS ── -->
+  <div class="tab-panel" id="panel-progress">
+    <div class="stat-row">
+      <div class="stat-box"><div class="stat-num g" id="s-mastered">0</div><div class="stat-label">Mastered</div></div>
+      <div class="stat-box"><div class="stat-num r" id="s-struggling">0</div><div class="stat-label">Struggling</div></div>
+      <div class="stat-box"><div class="stat-num y" id="s-unseen">286</div><div class="stat-label">Unseen</div></div>
+    </div>
+    <div class="prog-section-title">N5 KANJI</div>
+    <div class="kgrid" id="prog-n5"></div>
+    <div class="prog-section-title">N4 KANJI</div>
+    <div class="kgrid" id="prog-n4"></div>
+    <div class="legend-row">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Mastered</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Struggling</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--white)"></div>Unseen</div>
+    </div>
+    <button class="reset-btn" onclick="resetProgress()">RESET PROGRESS</button>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-item active" id="nav-browse" onclick="switchTab('browse')"><span class="nav-icon">📚</span><span class="nav-label">Browse</span></button>
+  <button class="nav-item" id="nav-study" onclick="switchTab('study')"><span class="nav-icon">🃏</span><span class="nav-label">Study</span></button>
+  <button class="nav-item" id="nav-quiz" onclick="switchTab('quiz')"><span class="nav-icon">❓</span><span class="nav-label">Quiz</span></button>
+  <button class="nav-item" id="nav-progress" onclick="switchTab('progress')"><span class="nav-icon">📊</span><span class="nav-label">Progress</span></button>
+</nav>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-char" id="modal-char">一</div>
+      <div class="modal-meta">
+        <div class="modal-level" id="modal-level">N5</div>
+        <div class="modal-meaning" id="modal-meaning">ONE</div>
+        <div class="modal-romaji" id="modal-romaji">ichi / hito-</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">Common Words</div>
+      <div class="modal-words" id="modal-words"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-speak" onclick="speakModal()">🔊 LISTEN</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const KANJI = [
+  {k:"一",r:"ichi / hito-",m:"One",l:"n5",w:[{j:"一人",r:"hitori",e:"one person"},{j:"一日",r:"tsuitachi",e:"1st of month"},{j:"一番",r:"ichiban",e:"number one"},{j:"一緒",r:"issho",e:"together"}]},
+  {k:"二",r:"ni / futa-",m:"Two",l:"n5",w:[{j:"二人",r:"futari",e:"two people"},{j:"二月",r:"nigatsu",e:"February"},{j:"二階",r:"nikai",e:"second floor"},{j:"二十",r:"nijuu",e:"twenty"}]},
+  {k:"三",r:"san / mit-",m:"Three",l:"n5",w:[{j:"三月",r:"sangatsu",e:"March"},{j:"三人",r:"sannin",e:"three people"},{j:"三角",r:"sankaku",e:"triangle"},{j:"三日",r:"mikka",e:"3rd / 3 days"}]},
+  {k:"四",r:"shi / yon",m:"Four",l:"n5",w:[{j:"四月",r:"shigatsu",e:"April"},{j:"四人",r:"yonin",e:"four people"},{j:"四角",r:"shikaku",e:"square"},{j:"四日",r:"yokka",e:"4th / 4 days"}]},
+  {k:"五",r:"go / itsu-",m:"Five",l:"n5",w:[{j:"五月",r:"gogatsu",e:"May"},{j:"五人",r:"gonin",e:"five people"},{j:"五日",r:"itsuka",e:"5th / 5 days"},{j:"五十",r:"gojuu",e:"fifty"}]},
+  {k:"六",r:"roku / mut-",m:"Six",l:"n5",w:[{j:"六月",r:"rokugatsu",e:"June"},{j:"六人",r:"rokunin",e:"six people"},{j:"六日",r:"muika",e:"6th / 6 days"},{j:"六十",r:"rokujuu",e:"sixty"}]},
+  {k:"七",r:"shichi / nana",m:"Seven",l:"n5",w:[{j:"七月",r:"shichigatsu",e:"July"},{j:"七人",r:"shichinin",e:"seven people"},{j:"七日",r:"nanoka",e:"7th / 7 days"},{j:"七夕",r:"tanabata",e:"Star Festival"}]},
+  {k:"八",r:"hachi / ya-",m:"Eight",l:"n5",w:[{j:"八月",r:"hachigatsu",e:"August"},{j:"八人",r:"hachinin",e:"eight people"},{j:"八日",r:"youka",e:"8th / 8 days"},{j:"八百屋",r:"yaoya",e:"greengrocer"}]},
+  {k:"九",r:"kyuu / ku",m:"Nine",l:"n5",w:[{j:"九月",r:"kugatsu",e:"September"},{j:"九人",r:"kyuunin",e:"nine people"},{j:"九日",r:"kokonoka",e:"9th / 9 days"},{j:"九十",r:"kyuujuu",e:"ninety"}]},
+  {k:"十",r:"juu / too",m:"Ten",l:"n5",w:[{j:"十月",r:"juugatsu",e:"October"},{j:"十分",r:"juubun",e:"enough"},{j:"十日",r:"tooka",e:"10th"},{j:"十字",r:"juuji",e:"cross shape"}]},
+  {k:"百",r:"hyaku",m:"Hundred",l:"n5",w:[{j:"百円",r:"hyakuen",e:"100 yen"},{j:"百点",r:"hyakuten",e:"100 points"},{j:"三百",r:"sanbyaku",e:"300"},{j:"百科",r:"hyouka",e:"encyclopedia"}]},
+  {k:"千",r:"sen / chi",m:"Thousand",l:"n5",w:[{j:"千円",r:"senen",e:"1000 yen"},{j:"千葉",r:"chiba",e:"Chiba"},{j:"三千",r:"sanzen",e:"3000"},{j:"千鳥",r:"chidori",e:"plover bird"}]},
+  {k:"万",r:"man / ban",m:"Ten thousand",l:"n5",w:[{j:"一万",r:"ichiman",e:"10,000"},{j:"万年筆",r:"mannenhitsu",e:"fountain pen"},{j:"万全",r:"banzen",e:"perfect"},{j:"万国",r:"bankoku",e:"all nations"}]},
+  {k:"大",r:"dai / oo-",m:"Big / Large",l:"n5",w:[{j:"大学",r:"daigaku",e:"university"},{j:"大人",r:"otona",e:"adult"},{j:"大切",r:"taisetsu",e:"important"},{j:"大好き",r:"daisuki",e:"love very much"}]},
+  {k:"中",r:"chuu / naka",m:"Middle / Inside",l:"n5",w:[{j:"中学校",r:"chuugakkou",e:"middle school"},{j:"中国",r:"chuugoku",e:"China"},{j:"中心",r:"chuushin",e:"center"},{j:"中に",r:"naka ni",e:"inside"}]},
+  {k:"小",r:"shou / ko-",m:"Small",l:"n5",w:[{j:"小学校",r:"shougakkou",e:"elementary school"},{j:"小さい",r:"chiisai",e:"small"},{j:"小説",r:"shousetsu",e:"novel"},{j:"小鳥",r:"kotori",e:"small bird"}]},
+  {k:"上",r:"jou / ue",m:"Up / Above",l:"n5",w:[{j:"上手",r:"jouzu",e:"skillful"},{j:"上着",r:"uwagi",e:"jacket"},{j:"上がる",r:"agaru",e:"to go up"},{j:"上司",r:"joushi",e:"boss"}]},
+  {k:"下",r:"ka / shita",m:"Down / Below",l:"n5",w:[{j:"下手",r:"heta",e:"unskillful"},{j:"下着",r:"shitagi",e:"underwear"},{j:"地下",r:"chika",e:"underground"},{j:"下がる",r:"sagaru",e:"to go down"}]},
+  {k:"左",r:"sa / hidari",m:"Left",l:"n5",w:[{j:"左手",r:"hidarite",e:"left hand"},{j:"左側",r:"hidarigawa",e:"left side"},{j:"左折",r:"sasetsu",e:"left turn"},{j:"左右",r:"sayuu",e:"left and right"}]},
+  {k:"右",r:"u / migi",m:"Right",l:"n5",w:[{j:"右手",r:"migite",e:"right hand"},{j:"右側",r:"migigawa",e:"right side"},{j:"右折",r:"usetsu",e:"right turn"},{j:"左右",r:"sayuu",e:"left and right"}]},
+  {k:"人",r:"jin / hito",m:"Person",l:"n5",w:[{j:"人々",r:"hitobito",e:"people"},{j:"外国人",r:"gaikokujin",e:"foreigner"},{j:"人気",r:"ninki",e:"popular"},{j:"一人",r:"hitori",e:"alone"}]},
+  {k:"入",r:"nyuu / i-",m:"Enter",l:"n5",w:[{j:"入口",r:"iriguchi",e:"entrance"},{j:"入学",r:"nyuugaku",e:"school entry"},{j:"入る",r:"hairu",e:"to enter"},{j:"入院",r:"nyuuin",e:"hospitalization"}]},
+  {k:"出",r:"shutsu / de-",m:"Exit / Leave",l:"n5",w:[{j:"出口",r:"deguchi",e:"exit"},{j:"出発",r:"shuppatsu",e:"departure"},{j:"出る",r:"deru",e:"to leave"},{j:"出張",r:"shutchou",e:"business trip"}]},
+  {k:"来",r:"rai / ku-",m:"Come",l:"n5",w:[{j:"来年",r:"rainen",e:"next year"},{j:"来月",r:"raigetsu",e:"next month"},{j:"来る",r:"kuru",e:"to come"},{j:"出来る",r:"dekiru",e:"can do"}]},
+  {k:"行",r:"kou / i-",m:"Go",l:"n5",w:[{j:"行く",r:"iku",e:"to go"},{j:"旅行",r:"ryokou",e:"travel"},{j:"行動",r:"koudou",e:"action"},{j:"銀行",r:"ginkou",e:"bank"}]},
+  {k:"男",r:"dan / otoko",m:"Man / Male",l:"n5",w:[{j:"男の人",r:"otoko no hito",e:"man"},{j:"男性",r:"dansei",e:"male"},{j:"男子",r:"danshi",e:"boy"},{j:"長男",r:"chounan",e:"eldest son"}]},
+  {k:"女",r:"jo / onna",m:"Woman / Female",l:"n5",w:[{j:"女の人",r:"onna no hito",e:"woman"},{j:"女性",r:"josei",e:"female"},{j:"女子",r:"joshi",e:"girl"},{j:"彼女",r:"kanojo",e:"girlfriend / she"}]},
+  {k:"子",r:"shi / ko",m:"Child",l:"n5",w:[{j:"子供",r:"kodomo",e:"child"},{j:"女子",r:"joshi",e:"girl"},{j:"様子",r:"yousu",e:"situation"},{j:"親子",r:"oyako",e:"parent and child"}]},
+  {k:"外",r:"gai / soto",m:"Outside",l:"n5",w:[{j:"外国",r:"gaikoku",e:"foreign country"},{j:"外出",r:"gaishutsu",e:"going out"},{j:"外側",r:"sotogawa",e:"outside"},{j:"以外",r:"igai",e:"other than"}]},
+  {k:"何",r:"ka / nani",m:"What",l:"n5",w:[{j:"何か",r:"nanika",e:"something"},{j:"何人",r:"nannin",e:"how many people"},{j:"何時",r:"nanji",e:"what time"},{j:"何でも",r:"nandemo",e:"anything"}]},
+  {k:"先",r:"sen / saki",m:"Before / Ahead",l:"n5",w:[{j:"先生",r:"sensei",e:"teacher"},{j:"先週",r:"senshuu",e:"last week"},{j:"先月",r:"sengetsu",e:"last month"},{j:"先ほど",r:"sakihodo",e:"a while ago"}]},
+  {k:"今",r:"kon / ima",m:"Now",l:"n5",w:[{j:"今日",r:"kyou",e:"today"},{j:"今週",r:"konshuu",e:"this week"},{j:"今月",r:"kongetsu",e:"this month"},{j:"今年",r:"kotoshi",e:"this year"}]},
+  {k:"休",r:"kyuu / yasu-",m:"Rest",l:"n5",w:[{j:"休む",r:"yasumu",e:"to rest"},{j:"休日",r:"kyuujitsu",e:"holiday"},{j:"夏休み",r:"natsuyasumi",e:"summer break"},{j:"休憩",r:"kyuukei",e:"break"}]},
+  {k:"山",r:"san / yama",m:"Mountain",l:"n5",w:[{j:"山登り",r:"yamanobori",e:"mountain climbing"},{j:"富士山",r:"fujisan",e:"Mt. Fuji"},{j:"山道",r:"yamamichi",e:"mountain path"},{j:"火山",r:"kazan",e:"volcano"}]},
+  {k:"川",r:"sen / kawa",m:"River",l:"n5",w:[{j:"川岸",r:"kawagishi",e:"riverbank"},{j:"小川",r:"ogawa",e:"stream"},{j:"川上",r:"kawakami",e:"upstream"},{j:"河川",r:"kasen",e:"rivers"}]},
+  {k:"高",r:"kou / taka-",m:"High / Tall",l:"n5",w:[{j:"高校",r:"koukou",e:"high school"},{j:"高い",r:"takai",e:"tall / expensive"},{j:"高速",r:"kousoku",e:"highway"},{j:"最高",r:"saikou",e:"best"}]},
+  {k:"日",r:"nichi / hi",m:"Day / Sun",l:"n5",w:[{j:"日本",r:"nihon",e:"Japan"},{j:"日曜日",r:"nichiyoubi",e:"Sunday"},{j:"今日",r:"kyou",e:"today"},{j:"毎日",r:"mainichi",e:"every day"}]},
+  {k:"月",r:"getsu / tsuki",m:"Month / Moon",l:"n5",w:[{j:"月曜日",r:"getsuyoubi",e:"Monday"},{j:"来月",r:"raigetsu",e:"next month"},{j:"月光",r:"gekkou",e:"moonlight"},{j:"三日月",r:"mikazuki",e:"crescent moon"}]},
+  {k:"火",r:"ka / hi",m:"Fire",l:"n5",w:[{j:"火曜日",r:"kayoubi",e:"Tuesday"},{j:"火事",r:"kaji",e:"fire accident"},{j:"花火",r:"hanabi",e:"fireworks"},{j:"火山",r:"kazan",e:"volcano"}]},
+  {k:"水",r:"sui / mizu",m:"Water",l:"n5",w:[{j:"水曜日",r:"suiyoubi",e:"Wednesday"},{j:"水道",r:"suidou",e:"waterworks"},{j:"お水",r:"omizu",e:"water (polite)"},{j:"水泳",r:"suiei",e:"swimming"}]},
+  {k:"木",r:"moku / ki",m:"Tree / Wood",l:"n5",w:[{j:"木曜日",r:"mokuyoubi",e:"Thursday"},{j:"木村",r:"kimura",e:"Kimura (surname)"},{j:"木登り",r:"kinobori",e:"tree climbing"},{j:"木材",r:"mokuzai",e:"lumber"}]},
+  {k:"金",r:"kin / kane",m:"Gold / Money",l:"n5",w:[{j:"金曜日",r:"kin'youbi",e:"Friday"},{j:"お金",r:"okane",e:"money"},{j:"金色",r:"kin'iro",e:"golden color"},{j:"金属",r:"kinzoku",e:"metal"}]},
+  {k:"土",r:"do / tsuchi",m:"Earth / Soil",l:"n5",w:[{j:"土曜日",r:"doyoubi",e:"Saturday"},{j:"土地",r:"tochi",e:"land"},{j:"土台",r:"dodai",e:"foundation"},{j:"国土",r:"kokudo",e:"national territory"}]},
+  {k:"本",r:"hon / moto",m:"Book / Origin",l:"n5",w:[{j:"本当",r:"hontou",e:"truth / really"},{j:"日本",r:"nihon",e:"Japan"},{j:"本屋",r:"hon'ya",e:"bookstore"},{j:"基本",r:"kihon",e:"basics"}]},
+  {k:"年",r:"nen / toshi",m:"Year",l:"n5",w:[{j:"今年",r:"kotoshi",e:"this year"},{j:"来年",r:"rainen",e:"next year"},{j:"年齢",r:"nenrei",e:"age"},{j:"毎年",r:"maitoshi",e:"every year"}]},
+  {k:"友",r:"yuu / tomo",m:"Friend",l:"n5",w:[{j:"友達",r:"tomodachi",e:"friend"},{j:"友人",r:"yuujin",e:"friend (formal)"},{j:"親友",r:"shin'yuu",e:"best friend"},{j:"友好",r:"yuukou",e:"friendship"}]},
+  {k:"時",r:"ji / toki",m:"Time",l:"n5",w:[{j:"時間",r:"jikan",e:"time / duration"},{j:"何時",r:"nanji",e:"what time"},{j:"時々",r:"tokidoki",e:"sometimes"},{j:"時代",r:"jidai",e:"era / age"}]},
+  {k:"天",r:"ten / ama",m:"Sky / Heaven",l:"n5",w:[{j:"天気",r:"tenki",e:"weather"},{j:"天国",r:"tengoku",e:"heaven"},{j:"天才",r:"tensai",e:"genius"},{j:"天井",r:"tenjou",e:"ceiling"}]},
+  {k:"雨",r:"u / ame",m:"Rain",l:"n5",w:[{j:"雨天",r:"uten",e:"rainy weather"},{j:"大雨",r:"oame",e:"heavy rain"},{j:"梅雨",r:"tsuyu",e:"rainy season"},{j:"雨傘",r:"amegasa",e:"umbrella"}]},
+  {k:"北",r:"hoku / kita",m:"North",l:"n5",w:[{j:"北海道",r:"hokkaidou",e:"Hokkaido"},{j:"北口",r:"kitaguchi",e:"north exit"},{j:"北風",r:"kitakaze",e:"north wind"},{j:"北極",r:"hokkyoku",e:"North Pole"}]},
+  {k:"南",r:"nan / minami",m:"South",l:"n5",w:[{j:"南口",r:"minamiguchi",e:"south exit"},{j:"南国",r:"nangoku",e:"tropical country"},{j:"南極",r:"nankyoku",e:"South Pole"},{j:"東南",r:"tounan",e:"southeast"}]},
+  {k:"東",r:"tou / higashi",m:"East",l:"n5",w:[{j:"東京",r:"toukyou",e:"Tokyo"},{j:"東口",r:"higashiguchi",e:"east exit"},{j:"東海道",r:"toukaidou",e:"Tokaido"},{j:"東洋",r:"touyou",e:"the East"}]},
+  {k:"西",r:"sei / nishi",m:"West",l:"n5",w:[{j:"西口",r:"nishiguchi",e:"west exit"},{j:"西洋",r:"seiyou",e:"the West"},{j:"関西",r:"kansai",e:"Kansai region"},{j:"西側",r:"nishigawa",e:"west side"}]},
+  {k:"長",r:"chou / naga-",m:"Long / Chief",l:"n5",w:[{j:"社長",r:"shachou",e:"president"},{j:"長い",r:"nagai",e:"long"},{j:"校長",r:"kouchou",e:"principal"},{j:"身長",r:"shinchou",e:"height"}]},
+  {k:"気",r:"ki / ke",m:"Spirit / Energy",l:"n5",w:[{j:"天気",r:"tenki",e:"weather"},{j:"気持ち",r:"kimochi",e:"feeling"},{j:"電気",r:"denki",e:"electricity"},{j:"気分",r:"kibun",e:"mood"}]},
+  {k:"国",r:"koku / kuni",m:"Country",l:"n5",w:[{j:"外国",r:"gaikoku",e:"foreign country"},{j:"国際",r:"kokusai",e:"international"},{j:"日本国",r:"nihonkoku",e:"Japan (formal)"},{j:"国語",r:"kokugo",e:"national language"}]},
+  {k:"学",r:"gaku / mana-",m:"Study / Learn",l:"n5",w:[{j:"学校",r:"gakkou",e:"school"},{j:"大学",r:"daigaku",e:"university"},{j:"学生",r:"gakusei",e:"student"},{j:"学ぶ",r:"manabu",e:"to learn"}]},
+  {k:"校",r:"kou",m:"School",l:"n5",w:[{j:"学校",r:"gakkou",e:"school"},{j:"高校",r:"koukou",e:"high school"},{j:"校長",r:"kouchou",e:"principal"},{j:"校庭",r:"koutei",e:"schoolyard"}]},
+  {k:"生",r:"sei / i-",m:"Life / Birth",l:"n5",w:[{j:"学生",r:"gakusei",e:"student"},{j:"先生",r:"sensei",e:"teacher"},{j:"生まれる",r:"umareru",e:"to be born"},{j:"人生",r:"jinsei",e:"life"}]},
+  {k:"食",r:"shoku / ta-",m:"Eat / Food",l:"n5",w:[{j:"食べる",r:"taberu",e:"to eat"},{j:"食事",r:"shokuji",e:"meal"},{j:"食堂",r:"shokudou",e:"cafeteria"},{j:"食料",r:"shokuryou",e:"food"}]},
+  {k:"見",r:"ken / mi-",m:"See / Look",l:"n5",w:[{j:"見る",r:"miru",e:"to see"},{j:"見学",r:"kengaku",e:"field trip"},{j:"意見",r:"iken",e:"opinion"},{j:"発見",r:"hakken",e:"discovery"}]},
+  {k:"聞",r:"bun / ki-",m:"Listen / Hear",l:"n5",w:[{j:"聞く",r:"kiku",e:"to listen"},{j:"新聞",r:"shinbun",e:"newspaper"},{j:"聞こえる",r:"kikoeru",e:"can hear"},{j:"見聞",r:"kenbun",e:"experience"}]},
+  {k:"話",r:"wa / hana-",m:"Talk / Story",l:"n5",w:[{j:"話す",r:"hanasu",e:"to speak"},{j:"電話",r:"denwa",e:"telephone"},{j:"会話",r:"kaiwa",e:"conversation"},{j:"童話",r:"douwa",e:"fairy tale"}]},
+  {k:"読",r:"doku / yo-",m:"Read",l:"n5",w:[{j:"読む",r:"yomu",e:"to read"},{j:"読書",r:"dokusho",e:"reading books"},{j:"音読",r:"ondoku",e:"reading aloud"},{j:"読者",r:"dokusha",e:"reader"}]},
+  {k:"書",r:"sho / ka-",m:"Write",l:"n5",w:[{j:"書く",r:"kaku",e:"to write"},{j:"書類",r:"shorui",e:"documents"},{j:"教科書",r:"kyoukasho",e:"textbook"},{j:"図書館",r:"toshokan",e:"library"}]},
+  {k:"語",r:"go / kata-",m:"Language / Word",l:"n5",w:[{j:"日本語",r:"nihongo",e:"Japanese"},{j:"英語",r:"eigo",e:"English"},{j:"語学",r:"gogaku",e:"language study"},{j:"物語",r:"monogatari",e:"story"}]},
+  {k:"言",r:"gen / i-",m:"Say / Word",l:"n5",w:[{j:"言う",r:"iu",e:"to say"},{j:"言葉",r:"kotoba",e:"word / language"},{j:"言語",r:"gengo",e:"language"},{j:"発言",r:"hatsugen",e:"statement"}]},
+  {k:"会",r:"kai / a-",m:"Meet / Society",l:"n5",w:[{j:"会社",r:"kaisha",e:"company"},{j:"会議",r:"kaigi",e:"meeting"},{j:"会う",r:"au",e:"to meet"},{j:"社会",r:"shakai",e:"society"}]},
+  {k:"社",r:"sha",m:"Company / Society",l:"n5",w:[{j:"会社",r:"kaisha",e:"company"},{j:"社長",r:"shachou",e:"president"},{j:"社会",r:"shakai",e:"society"},{j:"神社",r:"jinja",e:"shrine"}]},
+  {k:"道",r:"dou / michi",m:"Road / Way",l:"n5",w:[{j:"道路",r:"douro",e:"road"},{j:"北海道",r:"hokkaidou",e:"Hokkaido"},{j:"道具",r:"dougu",e:"tool"},{j:"柔道",r:"juudou",e:"judo"}]},
+  {k:"新",r:"shin / atara-",m:"New",l:"n5",w:[{j:"新しい",r:"atarashii",e:"new"},{j:"新聞",r:"shinbun",e:"newspaper"},{j:"新幹線",r:"shinkansen",e:"bullet train"},{j:"新年",r:"shinnen",e:"new year"}]},
+  {k:"店",r:"ten / mise",m:"Shop / Store",l:"n5",w:[{j:"お店",r:"omise",e:"shop"},{j:"書店",r:"shoten",e:"bookstore"},{j:"喫茶店",r:"kissaten",e:"café"},{j:"店員",r:"ten'in",e:"store clerk"}]},
+  {k:"魚",r:"gyo / sakana",m:"Fish",l:"n5",w:[{j:"魚屋",r:"sakanaya",e:"fish shop"},{j:"金魚",r:"kingyo",e:"goldfish"},{j:"魚介",r:"gyokai",e:"seafood"},{j:"魚類",r:"gyorui",e:"fish species"}]},
+  {k:"古",r:"ko / furu-",m:"Old",l:"n5",w:[{j:"古い",r:"furui",e:"old"},{j:"古代",r:"kodai",e:"ancient times"},{j:"古典",r:"koten",e:"classics"},{j:"中古",r:"chuuko",e:"used / secondhand"}]},
+  {k:"円",r:"en / maru",m:"Yen / Circle",l:"n5",w:[{j:"円高",r:"endaka",e:"strong yen"},{j:"円形",r:"enkei",e:"circular"},{j:"百円",r:"hyakuen",e:"100 yen"},{j:"半円",r:"han'en",e:"semicircle"}]},
+  {k:"立",r:"ritsu / ta-",m:"Stand",l:"n5",w:[{j:"立つ",r:"tatsu",e:"to stand"},{j:"立場",r:"tachiba",e:"standpoint"},{j:"国立",r:"kokuritsu",e:"national"},{j:"独立",r:"dokuritsu",e:"independence"}]},
+  {k:"週",r:"shuu",m:"Week",l:"n5",w:[{j:"今週",r:"konshuu",e:"this week"},{j:"来週",r:"raishuu",e:"next week"},{j:"先週",r:"senshuu",e:"last week"},{j:"週末",r:"shuumatsu",e:"weekend"}]},
+  {k:"毎",r:"mai",m:"Every",l:"n5",w:[{j:"毎日",r:"mainichi",e:"every day"},{j:"毎朝",r:"maiasa",e:"every morning"},{j:"毎週",r:"maishuu",e:"every week"},{j:"毎月",r:"maitsuki",e:"every month"}]},
+  {k:"午",r:"go",m:"Noon",l:"n5",w:[{j:"午前",r:"gozen",e:"AM / morning"},{j:"午後",r:"gogo",e:"PM / afternoon"},{j:"正午",r:"shougo",e:"noon"},{j:"午前中",r:"gozenchuu",e:"during the morning"}]},
+  {k:"花",r:"ka / hana",m:"Flower",l:"n5",w:[{j:"花火",r:"hanabi",e:"fireworks"},{j:"花見",r:"hanami",e:"flower viewing"},{j:"桜花",r:"ouka",e:"cherry blossom"},{j:"花壇",r:"kadan",e:"flowerbed"}]},
+  {k:"空",r:"kuu / sora",m:"Sky / Empty",l:"n5",w:[{j:"空港",r:"kuukou",e:"airport"},{j:"空気",r:"kuuki",e:"air"},{j:"青空",r:"aozora",e:"blue sky"},{j:"空白",r:"kuuhaku",e:"blank space"}]},
+  {k:"多",r:"ta / oo-",m:"Many / Much",l:"n5",w:[{j:"多い",r:"ooi",e:"many"},{j:"多分",r:"tabun",e:"probably"},{j:"多様",r:"tayou",e:"diverse"},{j:"多数",r:"tasuu",e:"many"}]},
+  {k:"目",r:"moku / me",m:"Eye",l:"n5",w:[{j:"目玉",r:"medama",e:"eyeball"},{j:"目的",r:"mokuteki",e:"purpose"},{j:"注目",r:"chuumoku",e:"attention"},{j:"目標",r:"mokuhyou",e:"goal"}]},
+  {k:"口",r:"kou / kuchi",m:"Mouth",l:"n5",w:[{j:"出口",r:"deguchi",e:"exit"},{j:"入口",r:"iriguchi",e:"entrance"},{j:"口座",r:"kouza",e:"bank account"},{j:"窓口",r:"madoguchi",e:"counter"}]},
+  {k:"耳",r:"ji / mimi",m:"Ear",l:"n5",w:[{j:"耳元",r:"mimamoto",e:"near one's ear"},{j:"耳鳴り",r:"miminari",e:"ringing in ears"},{j:"耳打ち",r:"mimiuchi",e:"whisper"},{j:"中耳炎",r:"chuujien",e:"otitis media"}]},
+  {k:"手",r:"shu / te",m:"Hand",l:"n5",w:[{j:"手紙",r:"tegami",e:"letter"},{j:"上手",r:"jouzu",e:"skillful"},{j:"選手",r:"senshu",e:"athlete"},{j:"握手",r:"akushu",e:"handshake"}]},
+  {k:"足",r:"soku / ashi",m:"Foot / Leg",l:"n5",w:[{j:"足りる",r:"tariru",e:"to be enough"},{j:"手足",r:"teashi",e:"limbs"},{j:"足元",r:"ashimoto",e:"at one's feet"},{j:"裸足",r:"hadashi",e:"barefoot"}]},
+  {k:"安",r:"an / yasu-",m:"Cheap / Safe",l:"n5",w:[{j:"安全",r:"anzen",e:"safety"},{j:"安心",r:"anshin",e:"relief"},{j:"安い",r:"yasui",e:"cheap"},{j:"不安",r:"fuan",e:"anxiety"}]},
+  {k:"飲",r:"in / no-",m:"Drink",l:"n5",w:[{j:"飲む",r:"nomu",e:"to drink"},{j:"飲み物",r:"nomimono",e:"beverage"},{j:"飲食",r:"inshoku",e:"eating and drinking"},{j:"飲み会",r:"nomikai",e:"drinking party"}]},
+  {k:"買",r:"bai / ka-",m:"Buy",l:"n5",w:[{j:"買う",r:"kau",e:"to buy"},{j:"買い物",r:"kaimono",e:"shopping"},{j:"売買",r:"baibai",e:"buying and selling"},{j:"買い手",r:"kaite",e:"buyer"}]},
+  {k:"間",r:"kan / ma",m:"Between / Space",l:"n5",w:[{j:"時間",r:"jikan",e:"time"},{j:"人間",r:"ningen",e:"human being"},{j:"間違い",r:"machigai",e:"mistake"},{j:"仲間",r:"nakama",e:"companion"}]},
+  {k:"電",r:"den",m:"Electricity",l:"n5",w:[{j:"電車",r:"densha",e:"electric train"},{j:"電話",r:"denwa",e:"telephone"},{j:"電気",r:"denki",e:"electricity"},{j:"電子",r:"denshi",e:"electron"}]},
+  {k:"駅",r:"eki",m:"Station",l:"n5",w:[{j:"駅前",r:"ekimae",e:"in front of station"},{j:"駅員",r:"ekiin",e:"station staff"},{j:"終点駅",r:"shuuten eki",e:"terminal station"},{j:"乗換駅",r:"norikae eki",e:"transfer station"}]},
+  // N4
+  {k:"止",r:"shi / to-",m:"Stop",l:"n4",w:[{j:"止まる",r:"tomaru",e:"to stop"},{j:"禁止",r:"kinshi",e:"prohibition"},{j:"中止",r:"chuushi",e:"cancellation"},{j:"止血",r:"shiketsu",e:"stop bleeding"}]},
+  {k:"売",r:"bai / u-",m:"Sell",l:"n4",w:[{j:"売る",r:"uru",e:"to sell"},{j:"売り場",r:"uriba",e:"sales counter"},{j:"販売",r:"hanbai",e:"sales"},{j:"売上",r:"uriage",e:"sales revenue"}]},
+  {k:"帰",r:"ki / kae-",m:"Return Home",l:"n4",w:[{j:"帰る",r:"kaeru",e:"to return"},{j:"帰国",r:"kikoku",e:"return to country"},{j:"帰宅",r:"kitaku",e:"return home"},{j:"帰り道",r:"kaerimichi",e:"way home"}]},
+  {k:"方",r:"hou / kata",m:"Direction / Way",l:"n4",w:[{j:"方法",r:"houhou",e:"method"},{j:"方向",r:"houkou",e:"direction"},{j:"地方",r:"chihou",e:"region"},{j:"仕方",r:"shikata",e:"way of doing"}]},
+  {k:"体",r:"tai / karada",m:"Body",l:"n4",w:[{j:"体育",r:"taiiku",e:"physical education"},{j:"体験",r:"taiken",e:"experience"},{j:"身体",r:"shintai",e:"body"},{j:"体力",r:"tairyoku",e:"physical strength"}]},
+  {k:"力",r:"ryoku / chikara",m:"Strength / Power",l:"n4",w:[{j:"力強い",r:"chikarazuyoi",e:"powerful"},{j:"体力",r:"tairyoku",e:"physical strength"},{j:"努力",r:"doryoku",e:"effort"},{j:"電力",r:"denryoku",e:"electric power"}]},
+  {k:"強",r:"kyou / tsuyo-",m:"Strong",l:"n4",w:[{j:"強い",r:"tsuyoi",e:"strong"},{j:"勉強",r:"benkyou",e:"study"},{j:"強化",r:"kyouka",e:"strengthening"},{j:"最強",r:"saikyou",e:"strongest"}]},
+  {k:"弱",r:"jaku / yowa-",m:"Weak",l:"n4",w:[{j:"弱い",r:"yowai",e:"weak"},{j:"弱点",r:"jakuten",e:"weak point"},{j:"弱者",r:"jakusha",e:"the weak"},{j:"強弱",r:"kyoujaku",e:"strength and weakness"}]},
+  {k:"色",r:"shoku / iro",m:"Color",l:"n4",w:[{j:"色々",r:"iroiro",e:"various"},{j:"景色",r:"keshiki",e:"scenery"},{j:"白色",r:"hakushoku",e:"white color"},{j:"原色",r:"genshoku",e:"primary color"}]},
+  {k:"海",r:"kai / umi",m:"Sea / Ocean",l:"n4",w:[{j:"海外",r:"kaigai",e:"overseas"},{j:"海岸",r:"kaigan",e:"coast"},{j:"海水浴",r:"kaisuiyoku",e:"sea bathing"},{j:"日本海",r:"nihonkai",e:"Sea of Japan"}]},
+  {k:"門",r:"mon / kado",m:"Gate",l:"n4",w:[{j:"正門",r:"seimon",e:"main gate"},{j:"専門",r:"senmon",e:"specialty"},{j:"門限",r:"mongen",e:"curfew"},{j:"入門",r:"nyuumon",e:"introduction"}]},
+  {k:"田",r:"den / ta",m:"Rice field",l:"n4",w:[{j:"田舎",r:"inaka",e:"countryside"},{j:"田んぼ",r:"tanbo",e:"rice paddy"},{j:"水田",r:"suiden",e:"paddy field"},{j:"田園",r:"den'en",e:"rural area"}]},
+  {k:"好",r:"kou / su-",m:"Like / Good",l:"n4",w:[{j:"好き",r:"suki",e:"like"},{j:"好む",r:"konomu",e:"to prefer"},{j:"好意",r:"koui",e:"goodwill"},{j:"好奇心",r:"koukishin",e:"curiosity"}]},
+  {k:"私",r:"shi / watashi",m:"I / Private",l:"n4",w:[{j:"私",r:"watashi",e:"I / me"},{j:"私立",r:"shiritsu",e:"private school"},{j:"私服",r:"shifuku",e:"casual clothes"},{j:"私鉄",r:"shitetsu",e:"private railway"}]},
+  {k:"仕",r:"shi / tsuka-",m:"Serve / Work",l:"n4",w:[{j:"仕事",r:"shigoto",e:"work/job"},{j:"仕方",r:"shikata",e:"way of doing"},{j:"仕組み",r:"shikumi",e:"mechanism"},{j:"給仕",r:"kyuuji",e:"waiter"}]},
+  {k:"事",r:"ji / koto",m:"Thing / Fact",l:"n4",w:[{j:"仕事",r:"shigoto",e:"work"},{j:"大事",r:"daiji",e:"important"},{j:"事故",r:"jiko",e:"accident"},{j:"事実",r:"jijitsu",e:"fact"}]},
+  {k:"正",r:"sei / tada-",m:"Correct / Right",l:"n4",w:[{j:"正しい",r:"tadashii",e:"correct"},{j:"正直",r:"shoujiki",e:"honest"},{j:"正式",r:"seishiki",e:"formal"},{j:"修正",r:"shuusei",e:"correction"}]},
+  {k:"歩",r:"ho / aru-",m:"Walk / Step",l:"n4",w:[{j:"歩く",r:"aruku",e:"to walk"},{j:"一歩",r:"ippo",e:"one step"},{j:"散歩",r:"sanpo",e:"walk/stroll"},{j:"進歩",r:"shinpo",e:"progress"}]},
+  {k:"走",r:"sou / hashi-",m:"Run",l:"n4",w:[{j:"走る",r:"hashiru",e:"to run"},{j:"競走",r:"kyousou",e:"race"},{j:"逃走",r:"tousou",e:"escape"},{j:"走行",r:"soukou",e:"running"}]},
+  {k:"声",r:"sei / koe",m:"Voice",l:"n4",w:[{j:"声楽",r:"seigaku",e:"vocal music"},{j:"大声",r:"oogoe",e:"loud voice"},{j:"声優",r:"seiyuu",e:"voice actor"},{j:"音声",r:"onsei",e:"voice/sound"}]},
+  {k:"犬",r:"ken / inu",m:"Dog",l:"n4",w:[{j:"子犬",r:"koinu",e:"puppy"},{j:"番犬",r:"banken",e:"guard dog"},{j:"野犬",r:"yaken",e:"stray dog"},{j:"犬小屋",r:"inugoya",e:"doghouse"}]},
+  {k:"近",r:"kin / chika-",m:"Near",l:"n4",w:[{j:"近い",r:"chikai",e:"near"},{j:"最近",r:"saikin",e:"recently"},{j:"近所",r:"kinjo",e:"neighborhood"},{j:"近代",r:"kindai",e:"modern era"}]},
+  {k:"遠",r:"en / too-",m:"Far",l:"n4",w:[{j:"遠い",r:"tooi",e:"far"},{j:"遠足",r:"ensoku",e:"excursion"},{j:"遠慮",r:"enryo",e:"restraint"},{j:"永遠",r:"eien",e:"eternity"}]},
+  {k:"短",r:"tan / mijika-",m:"Short",l:"n4",w:[{j:"短い",r:"mijikai",e:"short"},{j:"短所",r:"tansho",e:"weak point"},{j:"短期",r:"tanki",e:"short term"},{j:"短縮",r:"tanshuku",e:"shortening"}]},
+  {k:"広",r:"kou / hiro-",m:"Wide / Broad",l:"n4",w:[{j:"広い",r:"hiroi",e:"wide"},{j:"広場",r:"hiroba",e:"plaza"},{j:"広告",r:"koukoku",e:"advertisement"},{j:"拡広",r:"kakukou",e:"expansion"}]},
+  {k:"世",r:"sei / yo",m:"World / Generation",l:"n4",w:[{j:"世界",r:"sekai",e:"world"},{j:"世紀",r:"seiki",e:"century"},{j:"世話",r:"sewa",e:"care/help"},{j:"世代",r:"sedai",e:"generation"}]},
+  {k:"界",r:"kai",m:"World / Boundary",l:"n4",w:[{j:"世界",r:"sekai",e:"world"},{j:"限界",r:"genkai",e:"limit"},{j:"業界",r:"gyoukai",e:"industry"},{j:"境界",r:"kyoukai",e:"boundary"}]},
+  {k:"青",r:"sei / ao-",m:"Blue / Green",l:"n4",w:[{j:"青い",r:"aoi",e:"blue/green"},{j:"青空",r:"aozora",e:"blue sky"},{j:"青春",r:"seishun",e:"youth"},{j:"青年",r:"seinen",e:"young person"}]},
+  {k:"黒",r:"koku / kuro",m:"Black",l:"n4",w:[{j:"黒い",r:"kuroi",e:"black"},{j:"黒板",r:"kokuban",e:"blackboard"},{j:"黒字",r:"kuroji",e:"profit"},{j:"黒白",r:"shirokuro",e:"black and white"}]},
+  {k:"赤",r:"seki / aka",m:"Red",l:"n4",w:[{j:"赤い",r:"akai",e:"red"},{j:"赤ちゃん",r:"akachan",e:"baby"},{j:"赤字",r:"akaji",e:"deficit"},{j:"真っ赤",r:"makka",e:"bright red"}]},
+  {k:"銀",r:"gin",m:"Silver",l:"n4",w:[{j:"銀行",r:"ginkou",e:"bank"},{j:"銀色",r:"gin'iro",e:"silver color"},{j:"銀座",r:"ginza",e:"Ginza"},{j:"水銀",r:"suigin",e:"mercury"}]},
+  {k:"肉",r:"niku",m:"Meat / Flesh",l:"n4",w:[{j:"牛肉",r:"gyuuniku",e:"beef"},{j:"豚肉",r:"butaniku",e:"pork"},{j:"肉体",r:"nikutai",e:"physical body"},{j:"肉親",r:"nikushin",e:"blood relative"}]},
+  {k:"屋",r:"oku / ya",m:"Shop / Roof",l:"n4",w:[{j:"部屋",r:"heya",e:"room"},{j:"本屋",r:"hon'ya",e:"bookshop"},{j:"八百屋",r:"yaoya",e:"greengrocer"},{j:"屋根",r:"yane",e:"roof"}]},
+  {k:"味",r:"mi / aji",m:"Taste / Flavor",l:"n4",w:[{j:"味方",r:"mikata",e:"ally"},{j:"趣味",r:"shumi",e:"hobby"},{j:"味わう",r:"ajiwau",e:"to taste"},{j:"調味料",r:"choumiryou",e:"seasoning"}]},
+  {k:"料",r:"ryou",m:"Fee / Material",l:"n4",w:[{j:"料理",r:"ryouri",e:"cooking"},{j:"材料",r:"zairyou",e:"material"},{j:"無料",r:"muryou",e:"free of charge"},{j:"料金",r:"ryoukin",e:"charge/fee"}]},
+  {k:"理",r:"ri",m:"Reason / Logic",l:"n4",w:[{j:"料理",r:"ryouri",e:"cooking"},{j:"理由",r:"riyuu",e:"reason"},{j:"理解",r:"rikai",e:"understanding"},{j:"地理",r:"chiri",e:"geography"}]},
+  {k:"作",r:"saku / tsuku-",m:"Make / Create",l:"n4",w:[{j:"作る",r:"tsukuru",e:"to make"},{j:"作品",r:"sakuhin",e:"work/piece"},{j:"作文",r:"sakubun",e:"composition"},{j:"製作",r:"seisaku",e:"production"}]},
+  {k:"使",r:"shi / tsuka-",m:"Use",l:"n4",w:[{j:"使う",r:"tsukau",e:"to use"},{j:"使用",r:"shiyou",e:"usage"},{j:"使い方",r:"tsukaikata",e:"how to use"},{j:"大使",r:"taishi",e:"ambassador"}]},
+  {k:"引",r:"in / hi-",m:"Pull / Attract",l:"n4",w:[{j:"引く",r:"hiku",e:"to pull"},{j:"引っ越し",r:"hikkoshi",e:"moving house"},{j:"引退",r:"intai",e:"retirement"},{j:"取引",r:"torihiki",e:"transaction"}]},
+  {k:"用",r:"you / mo-",m:"Use / Purpose",l:"n4",w:[{j:"使用",r:"shiyou",e:"usage"},{j:"用意",r:"youi",e:"preparation"},{j:"用事",r:"youji",e:"errand"},{j:"利用",r:"riyou",e:"utilization"}]},
+  {k:"品",r:"hin / shina",m:"Goods / Quality",l:"n4",w:[{j:"商品",r:"shouhin",e:"product"},{j:"品質",r:"hinshitsu",e:"quality"},{j:"作品",r:"sakuhin",e:"artwork"},{j:"食品",r:"shokuhin",e:"food item"}]},
+  {k:"春",r:"shun / haru",m:"Spring",l:"n4",w:[{j:"春休み",r:"haruyasumi",e:"spring break"},{j:"青春",r:"seishun",e:"youth"},{j:"春分",r:"shunbun",e:"spring equinox"},{j:"春先",r:"harusaki",e:"early spring"}]},
+  {k:"夏",r:"ka / natsu",m:"Summer",l:"n4",w:[{j:"夏休み",r:"natsuyasumi",e:"summer break"},{j:"夏至",r:"geshi",e:"summer solstice"},{j:"真夏",r:"manatsu",e:"midsummer"},{j:"夏祭り",r:"natsumatsuri",e:"summer festival"}]},
+  {k:"秋",r:"shuu / aki",m:"Autumn",l:"n4",w:[{j:"秋分",r:"shuubun",e:"autumn equinox"},{j:"秋田",r:"akita",e:"Akita"},{j:"晩秋",r:"banshuu",e:"late autumn"},{j:"秋空",r:"akizora",e:"autumn sky"}]},
+  {k:"冬",r:"tou / fuyu",m:"Winter",l:"n4",w:[{j:"冬休み",r:"fuyuyasumi",e:"winter break"},{j:"冬至",r:"touji",e:"winter solstice"},{j:"真冬",r:"mafuyu",e:"midwinter"},{j:"冬服",r:"fuyufuku",e:"winter clothes"}]},
+  {k:"暑",r:"sho / atsu-",m:"Hot (weather)",l:"n4",w:[{j:"暑い",r:"atsui",e:"hot (weather)"},{j:"暑さ",r:"atsusa",e:"heat"},{j:"猛暑",r:"mousho",e:"intense heat"},{j:"暑中",r:"shocchuu",e:"midsummer"}]},
+  {k:"寒",r:"kan / samu-",m:"Cold",l:"n4",w:[{j:"寒い",r:"samui",e:"cold"},{j:"寒さ",r:"samusa",e:"coldness"},{j:"厳寒",r:"genkan",e:"severe cold"},{j:"寒気",r:"kanki",e:"cold weather"}]},
+  {k:"風",r:"fuu / kaze",m:"Wind",l:"n4",w:[{j:"台風",r:"taifuu",e:"typhoon"},{j:"風景",r:"fuukei",e:"scenery"},{j:"北風",r:"kitakaze",e:"north wind"},{j:"風邪",r:"kaze",e:"cold (illness)"}]},
+  {k:"悪",r:"aku / waru-",m:"Bad / Evil",l:"n4",w:[{j:"悪い",r:"warui",e:"bad"},{j:"最悪",r:"saiaku",e:"worst"},{j:"悪化",r:"akka",e:"worsening"},{j:"罪悪",r:"zaiaku",e:"crime/evil"}]},
+  {k:"考",r:"kou / kanga-",m:"Think / Consider",l:"n4",w:[{j:"考える",r:"kangaeru",e:"to think"},{j:"考え方",r:"kangaekata",e:"way of thinking"},{j:"参考",r:"sankou",e:"reference"},{j:"思考",r:"shikou",e:"thought"}]},
+  {k:"知",r:"chi / shi-",m:"Know",l:"n4",w:[{j:"知る",r:"shiru",e:"to know"},{j:"知識",r:"chishiki",e:"knowledge"},{j:"知らせ",r:"shirase",e:"notice"},{j:"知人",r:"chijin",e:"acquaintance"}]},
+  {k:"不",r:"fu / bu",m:"Not / Un-",l:"n4",w:[{j:"不安",r:"fuan",e:"anxiety"},{j:"不便",r:"fuben",e:"inconvenient"},{j:"不満",r:"fuman",e:"dissatisfied"},{j:"不可能",r:"fukanou",e:"impossible"}]},
+  {k:"便",r:"ben / tayo-",m:"Convenient",l:"n4",w:[{j:"便利",r:"benri",e:"convenient"},{j:"不便",r:"fuben",e:"inconvenient"},{j:"郵便",r:"yuubin",e:"mail/post"},{j:"便所",r:"benjo",e:"restroom"}]},
+  {k:"住",r:"juu / su-",m:"Live / Reside",l:"n4",w:[{j:"住む",r:"sumu",e:"to live"},{j:"住所",r:"juusho",e:"address"},{j:"住民",r:"juumin",e:"resident"},{j:"移住",r:"ijuu",e:"migration"}]},
+  {k:"所",r:"sho / tokoro",m:"Place",l:"n4",w:[{j:"所",r:"tokoro",e:"place"},{j:"住所",r:"juusho",e:"address"},{j:"場所",r:"basho",e:"location"},{j:"研究所",r:"kenkyuujo",e:"research institute"}]},
+  {k:"物",r:"butsu / mono",m:"Thing / Object",l:"n4",w:[{j:"買い物",r:"kaimono",e:"shopping"},{j:"動物",r:"doubutsu",e:"animal"},{j:"食べ物",r:"tabemono",e:"food"},{j:"荷物",r:"nimotsu",e:"luggage"}]},
+  {k:"軽",r:"kei / karu-",m:"Light (weight)",l:"n4",w:[{j:"軽い",r:"karui",e:"light"},{j:"軽食",r:"keishoku",e:"light meal"},{j:"軽減",r:"keigen",e:"reduction"},{j:"気軽",r:"kigaru",e:"casual"}]},
+  {k:"重",r:"juu / omo-",m:"Heavy",l:"n4",w:[{j:"重い",r:"omoi",e:"heavy"},{j:"重要",r:"juuyou",e:"important"},{j:"体重",r:"taijuu",e:"body weight"},{j:"重力",r:"juryoku",e:"gravity"}]},
+  {k:"送",r:"sou / oku-",m:"Send",l:"n4",w:[{j:"送る",r:"okuru",e:"to send"},{j:"放送",r:"housou",e:"broadcast"},{j:"送料",r:"souryou",e:"shipping fee"},{j:"見送り",r:"miokuri",e:"send-off"}]},
+  {k:"受",r:"ju / u-",m:"Receive",l:"n4",w:[{j:"受ける",r:"ukeru",e:"to receive"},{j:"受付",r:"uketsuke",e:"reception"},{j:"受験",r:"juken",e:"exam"},{j:"受信",r:"jushin",e:"receive signal"}]},
+  {k:"開",r:"kai / a-",m:"Open",l:"n4",w:[{j:"開く",r:"hiraku",e:"to open"},{j:"開始",r:"kaishi",e:"start"},{j:"公開",r:"koukai",e:"public release"},{j:"開発",r:"kaihatsu",e:"development"}]},
+  {k:"閉",r:"hei / shi-",m:"Close",l:"n4",w:[{j:"閉める",r:"shimeru",e:"to close"},{j:"閉店",r:"heiten",e:"closing time"},{j:"密閉",r:"mippei",e:"airtight"},{j:"閉じる",r:"tojiru",e:"to shut"}]},
+  {k:"意",r:"i",m:"Meaning / Will",l:"n4",w:[{j:"意味",r:"imi",e:"meaning"},{j:"意見",r:"iken",e:"opinion"},{j:"注意",r:"chuui",e:"attention/caution"},{j:"意識",r:"ishiki",e:"consciousness"}]},
+  {k:"味",r:"mi / aji",m:"Taste / Flavor",l:"n4",w:[{j:"意味",r:"imi",e:"meaning"},{j:"趣味",r:"shumi",e:"hobby"},{j:"味わう",r:"ajiwau",e:"to taste"},{j:"三味線",r:"shamisen",e:"shamisen"}]},
+  {k:"質",r:"shitsu / chi",m:"Quality / Nature",l:"n4",w:[{j:"品質",r:"hinshitsu",e:"quality"},{j:"質問",r:"shitsumon",e:"question"},{j:"体質",r:"taishitsu",e:"constitution"},{j:"素質",r:"soshitsu",e:"talent"}]},
+  {k:"問",r:"mon / to-",m:"Question / Problem",l:"n4",w:[{j:"質問",r:"shitsumon",e:"question"},{j:"問題",r:"mondai",e:"problem"},{j:"問い合わせ",r:"toiawase",e:"inquiry"},{j:"訪問",r:"houmon",e:"visit"}]},
+  {k:"題",r:"dai",m:"Topic / Title",l:"n4",w:[{j:"問題",r:"mondai",e:"problem"},{j:"題名",r:"daimei",e:"title"},{j:"宿題",r:"shukudai",e:"homework"},{j:"話題",r:"wadai",e:"topic"}]},
+  {k:"回",r:"kai / mawa-",m:"Turn / Times",l:"n4",w:[{j:"回す",r:"mawasu",e:"to turn"},{j:"今回",r:"konkai",e:"this time"},{j:"回答",r:"kaitou",e:"answer"},{j:"回数",r:"kaisuu",e:"number of times"}]},
+  {k:"計",r:"kei / haka-",m:"Measure / Plan",l:"n4",w:[{j:"時計",r:"tokei",e:"clock/watch"},{j:"計画",r:"keikaku",e:"plan"},{j:"合計",r:"goukei",e:"total"},{j:"計算",r:"keisan",e:"calculation"}]},
+  {k:"借",r:"shaku / ka-",m:"Borrow",l:"n4",w:[{j:"借りる",r:"kariru",e:"to borrow"},{j:"借金",r:"shakkin",e:"debt"},{j:"賃借",r:"chinshaku",e:"lease"},{j:"借家",r:"shakuya",e:"rented house"}]},
+  {k:"貸",r:"tai / ka-",m:"Lend",l:"n4",w:[{j:"貸す",r:"kasu",e:"to lend"},{j:"貸し出し",r:"kashidashi",e:"lending"},{j:"貸家",r:"kashiya",e:"house for rent"},{j:"賃貸",r:"chintai",e:"rental"}]},
+  {k:"急",r:"kyuu / iso-",m:"Urgent / Rush",l:"n4",w:[{j:"急ぐ",r:"isogu",e:"to hurry"},{j:"急行",r:"kyuukou",e:"express"},{j:"急に",r:"kyuu ni",e:"suddenly"},{j:"緊急",r:"kinkyuu",e:"emergency"}]},
+  {k:"切",r:"setsu / ki-",m:"Cut",l:"n4",w:[{j:"切る",r:"kiru",e:"to cut"},{j:"大切",r:"taisetsu",e:"important"},{j:"切符",r:"kippu",e:"ticket"},{j:"締め切り",r:"shimekiri",e:"deadline"}]},
+  {k:"代",r:"dai / ka-",m:"Replace / Era",l:"n4",w:[{j:"時代",r:"jidai",e:"era"},{j:"代わり",r:"kawari",e:"substitute"},{j:"代金",r:"daikin",e:"price/cost"},{j:"現代",r:"gendai",e:"modern times"}]},
+  {k:"乗",r:"jou / no-",m:"Ride / Board",l:"n4",w:[{j:"乗る",r:"noru",e:"to ride"},{j:"乗客",r:"joukyaku",e:"passenger"},{j:"乗り換え",r:"norikae",e:"transfer"},{j:"乗車",r:"jousha",e:"boarding"}]},
+  {k:"着",r:"chaku / ki-",m:"Wear / Arrive",l:"n4",w:[{j:"着る",r:"kiru",e:"to wear"},{j:"着く",r:"tsuku",e:"to arrive"},{j:"到着",r:"touchaku",e:"arrival"},{j:"着替え",r:"kigae",e:"change of clothes"}]},
+  {k:"地",r:"chi / ji",m:"Ground / Earth",l:"n4",w:[{j:"地図",r:"chizu",e:"map"},{j:"地下",r:"chika",e:"underground"},{j:"地球",r:"chikyuu",e:"Earth"},{j:"土地",r:"tochi",e:"land"}]},
+  {k:"図",r:"zu / to",m:"Map / Diagram",l:"n4",w:[{j:"地図",r:"chizu",e:"map"},{j:"図書館",r:"toshokan",e:"library"},{j:"図形",r:"zukei",e:"figure/shape"},{j:"意図",r:"ito",e:"intention"}]},
+  {k:"運",r:"un / hako-",m:"Transport / Luck",l:"n4",w:[{j:"運動",r:"undou",e:"exercise"},{j:"運転",r:"unten",e:"driving"},{j:"幸運",r:"kouun",e:"good luck"},{j:"運命",r:"unmei",e:"destiny"}]},
+  {k:"転",r:"ten / koro-",m:"Roll / Turn",l:"n4",w:[{j:"自転車",r:"jitensha",e:"bicycle"},{j:"運転",r:"unten",e:"driving"},{j:"転勤",r:"tenkin",e:"job transfer"},{j:"回転",r:"kaiten",e:"rotation"}]},
+  {k:"動",r:"dou / ugo-",m:"Move",l:"n4",w:[{j:"動く",r:"ugoku",e:"to move"},{j:"運動",r:"undou",e:"exercise"},{j:"動物",r:"doubutsu",e:"animal"},{j:"感動",r:"kandou",e:"being moved emotionally"}]},
+  {k:"働",r:"dou / hatara-",m:"Work",l:"n4",w:[{j:"働く",r:"hataraku",e:"to work"},{j:"労働",r:"roudou",e:"labor"},{j:"働き者",r:"hatarakimono",e:"hard worker"},{j:"共働き",r:"tomobataraki",e:"dual income"}]},
+  {k:"始",r:"shi / haji-",m:"Begin / Start",l:"n4",w:[{j:"始まる",r:"hajimaru",e:"to begin"},{j:"開始",r:"kaishi",e:"start"},{j:"始業",r:"shigyou",e:"start of work"},{j:"始発",r:"shihatsu",e:"first train"}]},
+  {k:"終",r:"shuu / o-",m:"End / Finish",l:"n4",w:[{j:"終わる",r:"owaru",e:"to end"},{j:"最終",r:"saishuu",e:"last/final"},{j:"終点",r:"shuuten",e:"terminal"},{j:"終電",r:"shuuden",e:"last train"}]},
+  {k:"去",r:"kyo / sa-",m:"Leave / Past",l:"n4",w:[{j:"去年",r:"kyonen",e:"last year"},{j:"過去",r:"kako",e:"past"},{j:"去る",r:"saru",e:"to leave"},{j:"消去",r:"shougo",e:"erasure"}]},
+  {k:"発",r:"hatsu",m:"Depart / Emit",l:"n4",w:[{j:"出発",r:"shuppatsu",e:"departure"},{j:"発見",r:"hakken",e:"discovery"},{j:"発表",r:"happyou",e:"announcement"},{j:"発音",r:"hatsuon",e:"pronunciation"}]},
+  {k:"紙",r:"shi / kami",m:"Paper",l:"n4",w:[{j:"手紙",r:"tegami",e:"letter"},{j:"新聞紙",r:"shinbunshi",e:"newspaper"},{j:"紙幣",r:"shihei",e:"paper money"},{j:"折り紙",r:"origami",e:"origami"}]},
+  {k:"楽",r:"gaku / raku",m:"Music / Easy",l:"n4",w:[{j:"音楽",r:"ongaku",e:"music"},{j:"楽しい",r:"tanoshii",e:"fun"},{j:"気楽",r:"kiraku",e:"relaxed"},{j:"楽器",r:"gakki",e:"instrument"}]},
+  {k:"薬",r:"yaku / kusuri",m:"Medicine",l:"n4",w:[{j:"薬局",r:"yakkyoku",e:"pharmacy"},{j:"薬品",r:"yakuhin",e:"medicine/drug"},{j:"漢方薬",r:"kanpouyaku",e:"herbal medicine"},{j:"薬剤師",r:"yakuzaishi",e:"pharmacist"}]},
+  {k:"歌",r:"ka / uta",m:"Song / Sing",l:"n4",w:[{j:"歌う",r:"utau",e:"to sing"},{j:"歌手",r:"kashu",e:"singer"},{j:"歌詞",r:"kashi",e:"lyrics"},{j:"国歌",r:"kokka",e:"national anthem"}]},
+  {k:"映",r:"ei / ha-",m:"Reflect / Project",l:"n4",w:[{j:"映画",r:"eiga",e:"movie"},{j:"映す",r:"utsusu",e:"to project"},{j:"上映",r:"jouei",e:"screening"},{j:"映像",r:"eizou",e:"image/footage"}]},
+  {k:"画",r:"ga / kaku",m:"Picture / Drawing",l:"n4",w:[{j:"映画",r:"eiga",e:"movie"},{j:"絵画",r:"kaiga",e:"painting"},{j:"計画",r:"keikaku",e:"plan"},{j:"漫画",r:"manga",e:"manga"}]},
+  {k:"写",r:"sha / utsu-",m:"Copy / Photograph",l:"n4",w:[{j:"写真",r:"shashin",e:"photograph"},{j:"写す",r:"utsusu",e:"to copy"},{j:"描写",r:"byousha",e:"description"},{j:"複写",r:"fukusha",e:"duplicate"}]},
+  {k:"真",r:"shin / ma",m:"True / Reality",l:"n4",w:[{j:"写真",r:"shashin",e:"photograph"},{j:"真剣",r:"shinken",e:"serious"},{j:"真実",r:"shinjitsu",e:"truth"},{j:"真っ直ぐ",r:"massugu",e:"straight"}]},
+  {k:"以",r:"i",m:"By means of",l:"n4",w:[{j:"以上",r:"ijou",e:"above/or more"},{j:"以下",r:"ika",e:"below/or less"},{j:"以外",r:"igai",e:"other than"},{j:"以内",r:"inai",e:"within"}]},
+  {k:"旅",r:"ryo / tabi",m:"Travel",l:"n4",w:[{j:"旅行",r:"ryokou",e:"travel/trip"},{j:"旅館",r:"ryokan",e:"Japanese inn"},{j:"旅人",r:"tabibito",e:"traveler"},{j:"一人旅",r:"hitoribito",e:"solo travel"}]},
+  {k:"館",r:"kan",m:"Hall / Building",l:"n4",w:[{j:"旅館",r:"ryokan",e:"Japanese inn"},{j:"図書館",r:"toshokan",e:"library"},{j:"博物館",r:"hakubutsukan",e:"museum"},{j:"大使館",r:"taishikan",e:"embassy"}]},
+  {k:"洋",r:"you",m:"Western / Ocean",l:"n4",w:[{j:"洋服",r:"youfuku",e:"Western clothes"},{j:"西洋",r:"seiyou",e:"the West"},{j:"洋食",r:"youshoku",e:"Western food"},{j:"洋室",r:"youshitsu",e:"Western-style room"}]},
+  {k:"服",r:"fuku",m:"Clothes",l:"n4",w:[{j:"洋服",r:"youfuku",e:"Western clothes"},{j:"制服",r:"seifuku",e:"uniform"},{j:"服装",r:"fukusou",e:"attire"},{j:"服用",r:"fukuyou",e:"taking medicine"}]},
+  {k:"室",r:"shitsu / muro",m:"Room / Chamber",l:"n4",w:[{j:"教室",r:"kyoushitsu",e:"classroom"},{j:"和室",r:"washitsu",e:"Japanese-style room"},{j:"研究室",r:"kenkyuushitsu",e:"research room"},{j:"室内",r:"shitsunai",e:"indoors"}]},
+  {k:"兄",r:"kei / ani",m:"Older brother",l:"n4",w:[{j:"お兄さん",r:"oniisan",e:"older brother"},{j:"兄弟",r:"kyoudai",e:"brothers"},{j:"実兄",r:"jikkei",e:"one's real brother"},{j:"長兄",r:"choukei",e:"eldest brother"}]},
+  {k:"弟",r:"tei / otouto",m:"Younger brother",l:"n4",w:[{j:"兄弟",r:"kyoudai",e:"brothers"},{j:"弟子",r:"deshi",e:"disciple"},{j:"義弟",r:"gitei",e:"brother-in-law"},{j:"師弟",r:"shitei",e:"master and disciple"}]},
+  {k:"姉",r:"shi / ane",m:"Older sister",l:"n4",w:[{j:"お姉さん",r:"oneesan",e:"older sister"},{j:"姉妹",r:"shimai",e:"sisters"},{j:"実姉",r:"jisshi",e:"one's real sister"},{j:"義姉",r:"gishi",e:"sister-in-law"}]},
+  {k:"妹",r:"mai / imouto",m:"Younger sister",l:"n4",w:[{j:"姉妹",r:"shimai",e:"sisters"},{j:"義妹",r:"gimai",e:"sister-in-law"},{j:"実妹",r:"jitsumai",e:"one's real sister"},{j:"妹分",r:"imoutobun",e:"like a younger sister"}]},
+  {k:"親",r:"shin / oya",m:"Parent",l:"n4",w:[{j:"親切",r:"shinsetsu",e:"kind"},{j:"両親",r:"ryoushin",e:"parents"},{j:"親友",r:"shin'yuu",e:"best friend"},{j:"親子",r:"oyako",e:"parent and child"}]},
+  {k:"族",r:"zoku",m:"Tribe / Family",l:"n4",w:[{j:"家族",r:"kazoku",e:"family"},{j:"民族",r:"minzoku",e:"ethnic group"},{j:"部族",r:"buzoku",e:"tribe"},{j:"遺族",r:"izoku",e:"bereaved family"}]},
+  {k:"者",r:"sha / mono",m:"Person",l:"n4",w:[{j:"記者",r:"kisha",e:"journalist"},{j:"医者",r:"isha",e:"doctor"},{j:"患者",r:"kanja",e:"patient"},{j:"若者",r:"wakamono",e:"young person"}]},
+  {k:"自",r:"ji / shi",m:"Self",l:"n4",w:[{j:"自分",r:"jibun",e:"oneself"},{j:"自動車",r:"jidousha",e:"automobile"},{j:"自然",r:"shizen",e:"nature"},{j:"自由",r:"jiyuu",e:"freedom"}]},
+  {k:"民",r:"min / tami",m:"People / Nation",l:"n4",w:[{j:"市民",r:"shimin",e:"citizen"},{j:"民族",r:"minzoku",e:"ethnic group"},{j:"国民",r:"kokumin",e:"national citizen"},{j:"難民",r:"nanmin",e:"refugee"}]},
+  {k:"説",r:"setsu / to-",m:"Explain / Theory",l:"n4",w:[{j:"説明",r:"setsumei",e:"explanation"},{j:"小説",r:"shousetsu",e:"novel"},{j:"解説",r:"kaisetsu",e:"commentary"},{j:"演説",r:"enzetsu",e:"speech"}]},
+  {k:"首",r:"shu / kubi",m:"Neck / Head",l:"n4",w:[{j:"首相",r:"shushou",e:"prime minister"},{j:"首都",r:"shuto",e:"capital city"},{j:"手首",r:"tekubi",e:"wrist"},{j:"足首",r:"ashikubi",e:"ankle"}]},
+  {k:"頭",r:"tou / atama",m:"Head",l:"n4",w:[{j:"頭が良い",r:"atama ga yoi",e:"smart"},{j:"頭痛",r:"zutsuu",e:"headache"},{j:"先頭",r:"sentou",e:"the front"},{j:"頭脳",r:"zunou",e:"brain"}]},
+  {k:"顔",r:"gan / kao",m:"Face",l:"n4",w:[{j:"顔色",r:"kaoiro",e:"complexion"},{j:"笑顔",r:"egao",e:"smiling face"},{j:"顔見知り",r:"kaomijiri",e:"acquaintance"},{j:"洗顔",r:"sengan",e:"face washing"}]},
+  {k:"進",r:"shin / susu-",m:"Advance",l:"n4",w:[{j:"進む",r:"susumu",e:"to advance"},{j:"進歩",r:"shinpo",e:"progress"},{j:"前進",r:"zenshin",e:"forward progress"},{j:"進学",r:"shingaku",e:"advancing to next school"}]},
+  {k:"集",r:"shuu / atsu-",m:"Gather / Collect",l:"n4",w:[{j:"集まる",r:"atsumaru",e:"to gather"},{j:"集中",r:"shuuchuu",e:"concentration"},{j:"収集",r:"shuushuu",e:"collection"},{j:"募集",r:"boshuu",e:"recruitment"}]},
+  {k:"洗",r:"sen / ara-",m:"Wash",l:"n4",w:[{j:"洗う",r:"arau",e:"to wash"},{j:"洗濯",r:"sentaku",e:"laundry"},{j:"洗面所",r:"senmenjo",e:"washroom"},{j:"洗剤",r:"senzai",e:"detergent"}]},
+  {k:"光",r:"kou / hikari",m:"Light",l:"n4",w:[{j:"光る",r:"hikaru",e:"to shine"},{j:"日光",r:"nikkou",e:"sunlight"},{j:"観光",r:"kankou",e:"sightseeing"},{j:"光景",r:"koukei",e:"scene/sight"}]},
+  {k:"太",r:"tai / futo-",m:"Fat / Thick",l:"n4",w:[{j:"太い",r:"futoi",e:"thick/fat"},{j:"太陽",r:"taiyou",e:"sun"},{j:"太平洋",r:"taiheiyou",e:"Pacific Ocean"},{j:"太鼓",r:"taiko",e:"drum"}]},
+  {k:"建",r:"ken / ta-",m:"Build / Construct",l:"n4",w:[{j:"建てる",r:"tateru",e:"to build"},{j:"建物",r:"tatemono",e:"building"},{j:"建設",r:"kensetsu",e:"construction"},{j:"建築",r:"kenchiku",e:"architecture"}]},
+  {k:"起",r:"ki / o-",m:"Wake / Rise",l:"n4",w:[{j:"起きる",r:"okiru",e:"to wake up"},{j:"起こす",r:"okosu",e:"to cause/wake"},{j:"起源",r:"kigen",e:"origin"},{j:"早起き",r:"hayaoki",e:"early rising"}]},
+  {k:"鳥",r:"chou / tori",m:"Bird",l:"n4",w:[{j:"小鳥",r:"kotori",e:"small bird"},{j:"鳥居",r:"torii",e:"shrine gate"},{j:"渡り鳥",r:"wataridori",e:"migratory bird"},{j:"鳥肌",r:"torihada",e:"goosebumps"}]},
+  {k:"飯",r:"han / meshi",m:"Rice / Meal",l:"n4",w:[{j:"ご飯",r:"gohan",e:"rice/meal"},{j:"朝飯",r:"asameshi",e:"breakfast"},{j:"夕飯",r:"yuuhan",e:"dinner"},{j:"炊飯器",r:"suihanki",e:"rice cooker"}]},
+  {k:"野",r:"ya / no",m:"Field / Wild",l:"n4",w:[{j:"野菜",r:"yasai",e:"vegetable"},{j:"野球",r:"yakyuu",e:"baseball"},{j:"野原",r:"nohara",e:"field/plain"},{j:"分野",r:"bunya",e:"field/domain"}]},
+  {k:"菜",r:"sai / na",m:"Vegetable",l:"n4",w:[{j:"野菜",r:"yasai",e:"vegetable"},{j:"菜の花",r:"nanohana",e:"rapeseed flower"},{j:"白菜",r:"hakusai",e:"Chinese cabbage"},{j:"山菜",r:"sansai",e:"wild vegetable"}]},
+  {k:"林",r:"rin / hayashi",m:"Forest / Grove",l:"n4",w:[{j:"林業",r:"ringuyo",e:"forestry"},{j:"山林",r:"sanrin",e:"mountain forest"},{j:"竹林",r:"chikurin",e:"bamboo grove"},{j:"森林",r:"shinrin",e:"forest"}]},
+  {k:"森",r:"shin / mori",m:"Forest",l:"n4",w:[{j:"森林",r:"shinrin",e:"forest"},{j:"森の中",r:"mori no naka",e:"inside the forest"},{j:"原生林",r:"genseirin",e:"primeval forest"},{j:"緑の森",r:"midori no mori",e:"green forest"}]},
+  {k:"池",r:"chi / ike",m:"Pond",l:"n4",w:[{j:"池",r:"ike",e:"pond"},{j:"電池",r:"denchi",e:"battery"},{j:"溜め池",r:"tameike",e:"reservoir"},{j:"池畔",r:"chihan",e:"lakeside"}]},
+  {k:"県",r:"ken",m:"Prefecture",l:"n4",w:[{j:"都道府県",r:"todouhuken",e:"prefecture"},{j:"県庁",r:"kenchou",e:"prefectural office"},{j:"県民",r:"kenmin",e:"prefectural resident"},{j:"出身県",r:"shusshinken",e:"home prefecture"}]},
+  {k:"市",r:"shi / ichi",m:"City / Market",l:"n4",w:[{j:"市場",r:"shijou",e:"market"},{j:"市民",r:"shimin",e:"citizen"},{j:"都市",r:"toshi",e:"urban city"},{j:"市役所",r:"shiyakusho",e:"city hall"}]},
+  {k:"町",r:"chou / machi",m:"Town",l:"n4",w:[{j:"町中",r:"machinaka",e:"downtown"},{j:"下町",r:"shitamachi",e:"old part of town"},{j:"町役場",r:"machiyakuba",e:"town hall"},{j:"商店街",r:"shoutengai",e:"shopping street"}]},
+  {k:"村",r:"son / mura",m:"Village",l:"n4",w:[{j:"村人",r:"murabito",e:"villager"},{j:"農村",r:"nouson",e:"farming village"},{j:"村長",r:"sonchoo",e:"village head"},{j:"村落",r:"sonraku",e:"hamlet"}]},
+  {k:"区",r:"ku",m:"Ward / District",l:"n4",w:[{j:"地区",r:"chiku",e:"district"},{j:"区役所",r:"kuyakusho",e:"ward office"},{j:"区別",r:"kubetsu",e:"distinction"},{j:"区間",r:"kukan",e:"section"}]},
+  {k:"京",r:"kyou / kei",m:"Capital",l:"n4",w:[{j:"東京",r:"toukyou",e:"Tokyo"},{j:"京都",r:"kyouto",e:"Kyoto"},{j:"京阪",r:"keihan",e:"Kyoto-Osaka area"},{j:"上京",r:"joukyou",e:"going to Tokyo"}]},
+  {k:"都",r:"to / miyako",m:"Capital City",l:"n4",w:[{j:"東京都",r:"toukyouto",e:"Tokyo Metropolis"},{j:"京都",r:"kyouto",e:"Kyoto"},{j:"首都",r:"shuto",e:"capital city"},{j:"都市",r:"toshi",e:"city"}]},
+  {k:"工",r:"kou / ku",m:"Work / Craft",l:"n4",w:[{j:"工場",r:"koujou",e:"factory"},{j:"工事",r:"kouji",e:"construction"},{j:"工業",r:"kougyou",e:"industry"},{j:"工夫",r:"kufu",e:"ingenuity"}]},
+  {k:"場",r:"jou / ba",m:"Place / Scene",l:"n4",w:[{j:"工場",r:"koujou",e:"factory"},{j:"場所",r:"basho",e:"place"},{j:"広場",r:"hiroba",e:"plaza"},{j:"市場",r:"ichiba",e:"market"}]},
+  {k:"台",r:"dai / tai",m:"Stand / Level",l:"n4",w:[{j:"台所",r:"daidokoro",e:"kitchen"},{j:"台風",r:"taifuu",e:"typhoon"},{j:"舞台",r:"butai",e:"stage"},{j:"台数",r:"daisuu",e:"number of machines"}]},
+  {k:"員",r:"in",m:"Member / Staff",l:"n4",w:[{j:"社員",r:"shain",e:"company employee"},{j:"店員",r:"ten'in",e:"store clerk"},{j:"会員",r:"kaiin",e:"member"},{j:"全員",r:"zen'in",e:"all members"}]},
+  {k:"業",r:"gyou / gou",m:"Business / Work",l:"n4",w:[{j:"産業",r:"sangyou",e:"industry"},{j:"卒業",r:"sotsugyou",e:"graduation"},{j:"職業",r:"shokugyou",e:"occupation"},{j:"作業",r:"sagyou",e:"work/task"}]},
+  {k:"度",r:"do / tabi",m:"Degree / Time",l:"n4",w:[{j:"温度",r:"ondo",e:"temperature"},{j:"態度",r:"taido",e:"attitude"},{j:"今度",r:"kondo",e:"next time"},{j:"制度",r:"seido",e:"system"}]},
+  {k:"有",r:"yuu / a-",m:"Exist / Have",l:"n4",w:[{j:"有名",r:"yuumei",e:"famous"},{j:"有利",r:"yuuri",e:"advantageous"},{j:"所有",r:"shoyuu",e:"possession"},{j:"有効",r:"yuukou",e:"valid"}]},
+  {k:"堂",r:"dou",m:"Hall / Temple",l:"n4",w:[{j:"食堂",r:"shokudou",e:"cafeteria"},{j:"礼堂",r:"reidou",e:"chapel"},{j:"講堂",r:"koudou",e:"auditorium"},{j:"仏堂",r:"butsudou",e:"Buddhist hall"}]},
+];
+
+// ── DEDUP ──
+const seen = new Set();
+const KANJI_UNIQUE = KANJI.filter(k => { if(seen.has(k.k)) return false; seen.add(k.k); return true; });
+
+// ── STATE ──
+let progress = JSON.parse(localStorage.getItem('kanji-progress') || '{}');
+let currentFilter = 'all';
+let currentSearch = '';
+let cardIndex = 0;
+let cardFlipped = false;
+let studyDeck = [...KANJI_UNIQUE];
+let quizMode = 'kanji';
+let quizScore = {r:0,t:0};
+let quizAnswered = false;
+let currentQuiz = null;
+let modalKanji = null;
+
+// ── SPEAK ──
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ja-JP'; u.rate = 0.8;
+  window.speechSynthesis.speak(u);
+}
+
+// ── NAV ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+  document.getElementById('nav-' + tab).classList.add('active');
+  document.body.dataset.tab = tab;
+  if (tab !== 'browse') closeMenu();
+  if (tab === 'progress') renderProgress();
+}
+
+function toggleMenu() {
+  const h = document.getElementById('hamburger');
+  const bar = document.querySelector('#panel-browse .filter-bar');
+  const open = h.classList.toggle('open');
+  bar.classList.toggle('open', open);
+  h.setAttribute('aria-expanded', open);
+}
+
+function closeMenu() {
+  const h = document.getElementById('hamburger');
+  h.classList.remove('open');
+  document.querySelector('#panel-browse .filter-bar').classList.remove('open');
+  h.setAttribute('aria-expanded', 'false');
+}
+
+// ── BROWSE ──
+function getFilteredKanji() {
+  let pool = currentFilter === 'all' ? KANJI_UNIQUE : KANJI_UNIQUE.filter(k => k.l === currentFilter);
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    pool = pool.filter(k => k.k.includes(q) || k.m.toLowerCase().includes(q) || k.r.toLowerCase().includes(q) || k.w.some(w => w.j.includes(q) || w.e.toLowerCase().includes(q)));
+  }
+  return pool;
+}
+
+function renderBrowse() {
+  const pool = getFilteredKanji();
+  document.getElementById('countTag').textContent = pool.length;
+  const grid = document.getElementById('kanjiGrid');
+  if (pool.length === 0) { grid.innerHTML = '<div class="no-results">NO RESULTS</div>'; return; }
+  grid.innerHTML = pool.map(k => {
+    const prog = progress[k.k] || '';
+    let progStyle = '';
+    if (prog === 'mastered') progStyle = 'border-top:4px solid var(--green)';
+    if (prog === 'struggling') progStyle = 'border-top:4px solid var(--red)';
+    return `<div class="k-card ${k.l}" style="${progStyle}" onclick="openModal('${k.k}')">
+      <div class="k-card-top">
+        <div class="k-char">${k.k}</div>
+        <div class="k-meta">
+          <div class="level-tag">${k.l.toUpperCase()}</div>
+          <div class="k-rom">${k.r}</div>
+        </div>
+      </div>
+      <div class="k-body">
+        <div class="k-meaning">${k.m}</div>
+        <div class="k-words">
+          ${k.w.slice(0,2).map(w=>`<div class="k-word" onclick="event.stopPropagation();speak('${w.j}')">
+            <span class="k-word-jp">${w.j}</span>
+            <span class="k-word-rom">${w.r}</span>
+            <span class="k-word-en">${w.e}</span>
+          </div>`).join('')}
+        </div>
+        <button class="speak-btn" onclick="event.stopPropagation();speak('${k.k}')">🔊 LISTEN</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterCards(level, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn');
+  btn.classList.add('active-' + level);
+  currentFilter = level;
+  renderBrowse();
+}
+
+function searchCards() {
+  currentSearch = document.getElementById('searchBox').value;
+  renderBrowse();
+}
+
+// ── MODAL ──
+function openModal(kanji) {
+  const k = KANJI_UNIQUE.find(x => x.k === kanji);
+  if (!k) return;
+  modalKanji = k;
+  document.getElementById('modal-char').textContent = k.k;
+  document.getElementById('modal-level').textContent = k.l.toUpperCase();
+  document.getElementById('modal-meaning').textContent = k.m;
+  document.getElementById('modal-romaji').textContent = k.r;
+  document.getElementById('modal-words').innerHTML = k.w.map(w =>
+    `<div class="modal-word" onclick="speak('${w.j}')">
+      <span class="modal-word-jp">${w.j}</span>
+      <span class="modal-word-rom">${w.r}</span>
+      <span class="modal-word-en">${w.e}</span>
+    </div>`
+  ).join('');
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modal-overlay')) {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+}
+
+function speakModal() { if (modalKanji) speak(modalKanji.k); }
+
+// ── STUDY ──
+function renderStudyCard() {
+  const k = studyDeck[cardIndex];
+  cardFlipped = false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('fc-level').textContent = k.l.toUpperCase();
+  document.getElementById('fc-char').textContent = k.k;
+  document.getElementById('fc-char-back').textContent = k.k;
+  document.getElementById('fc-meaning').textContent = k.m.toUpperCase();
+  document.getElementById('fc-romaji').textContent = k.r;
+  document.getElementById('fc-example').textContent = k.w[0].j + ' — ' + k.w[0].e;
+  document.getElementById('study-counter').textContent = `Card ${cardIndex+1} of ${studyDeck.length}`;
+  document.getElementById('study-progress').style.width = ((cardIndex+1)/studyDeck.length*100) + '%';
+}
+
+function flipCard() {
+  cardFlipped = !cardFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', cardFlipped);
+  if (cardFlipped) speak(studyDeck[cardIndex].k);
+}
+
+function speakCurrent() { speak(studyDeck[cardIndex].k); }
+
+function markCard(know) {
+  const k = studyDeck[cardIndex];
+  progress[k.k] = know ? 'mastered' : 'struggling';
+  saveProgress();
+  cardIndex = (cardIndex + 1) % studyDeck.length;
+  renderStudyCard();
+  showToast(know ? '✓ Marked as known!' : '✕ Will review again');
+}
+
+// ── QUIZ ──
+function setQuizMode(mode) {
+  quizMode = mode;
+  document.querySelectorAll('.quiz-mode-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('qm-' + mode).classList.add('active');
+  quizScore = {r:0,t:0};
+  renderQuiz();
+}
+
+function renderQuiz() {
+  quizAnswered = false;
+  document.getElementById('quiz-result').style.display = 'none';
+  const pool = KANJI_UNIQUE;
+  currentQuiz = pool[Math.floor(Math.random() * pool.length)];
+  const qDisplay = document.getElementById('quiz-q-display');
+  const qPrompt = document.getElementById('quiz-q-prompt');
+
+  if (quizMode === 'kanji') {
+    qDisplay.textContent = currentQuiz.k;
+    qDisplay.style.fontSize = '4rem';
+    qPrompt.textContent = 'Pick the correct meaning';
+  } else if (quizMode === 'meaning') {
+    qDisplay.textContent = currentQuiz.m;
+    qDisplay.style.fontSize = '1.8rem';
+    qPrompt.textContent = 'Pick the correct kanji';
+  } else {
+    const word = currentQuiz.w[Math.floor(Math.random()*currentQuiz.w.length)];
+    currentQuiz._word = word;
+    qDisplay.textContent = word.j;
+    qDisplay.style.fontSize = '2rem';
+    qPrompt.textContent = 'What does this word mean?';
+  }
+
+  let opts = [currentQuiz];
+  while (opts.length < 4) {
+    const rand = pool[Math.floor(Math.random()*pool.length)];
+    if (!opts.find(o => o.k === rand.k)) opts.push(rand);
+  }
+  opts = opts.sort(() => Math.random() - 0.5);
+
+  const container = document.getElementById('quiz-opts');
+  container.innerHTML = '';
+  opts.forEach(opt => {
+    const btn = document.createElement('div');
+    btn.className = 'quiz-opt';
+    if (quizMode === 'kanji') btn.textContent = opt.m;
+    else if (quizMode === 'meaning') btn.textContent = opt.k;
+    else btn.textContent = (opt.k === currentQuiz.k && currentQuiz._word) ? currentQuiz._word.e : opt.w[0].e;
+    btn.onclick = () => checkQuiz(btn, opt.k === currentQuiz.k);
+    container.appendChild(btn);
+  });
+  document.getElementById('quiz-score').textContent = `Score: ${quizScore.r} / ${quizScore.t}`;
+}
+
+function checkQuiz(btn, correct) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  quizScore.t++;
+  if (correct) { btn.classList.add('correct'); quizScore.r++; progress[currentQuiz.k] = 'mastered'; speak(currentQuiz.k); }
+  else {
+    btn.classList.add('wrong');
+    progress[currentQuiz.k] = 'struggling';
+    const correctVal = quizMode === 'kanji' ? currentQuiz.m : quizMode === 'meaning' ? currentQuiz.k : (currentQuiz._word ? currentQuiz._word.e : currentQuiz.w[0].e);
+    document.querySelectorAll('.quiz-opt').forEach(b => { if (b.textContent === correctVal) b.classList.add('reveal'); });
+  }
+  saveProgress();
+  const res = document.getElementById('quiz-result');
+  res.style.display = 'block';
+  res.className = 'quiz-result-bar ' + (correct ? 'correct' : 'wrong');
+  res.textContent = correct ? `✓ Correct! ${currentQuiz.k} = ${currentQuiz.m}` : `✕ It was: ${currentQuiz.k} = ${currentQuiz.m}`;
+  document.getElementById('quiz-score').textContent = `Score: ${quizScore.r} / ${quizScore.t}`;
+  setTimeout(renderQuiz, 1500);
+}
+
+// ── PROGRESS ──
+function renderProgress() {
+  const mastered = Object.values(progress).filter(v=>v==='mastered').length;
+  const struggling = Object.values(progress).filter(v=>v==='struggling').length;
+  const unseen = KANJI_UNIQUE.length - mastered - struggling;
+  document.getElementById('s-mastered').textContent = mastered;
+  document.getElementById('s-struggling').textContent = struggling;
+  document.getElementById('s-unseen').textContent = unseen;
+
+  ['n5','n4'].forEach(level => {
+    const grid = document.getElementById('prog-' + level);
+    const pool = KANJI_UNIQUE.filter(k => k.l === level);
+    grid.innerHTML = pool.map(k => {
+      const p = progress[k.k] || '';
+      return `<div class="kgrid-cell ${p} ${level}c" onclick="speak('${k.k}')">
+        <span class="kc">${k.k}</span>
+        <span class="kr">${k.m.split('/')[0].trim().toLowerCase()}</span>
+      </div>`;
+    }).join('');
+  });
+}
+
+function resetProgress() {
+  if (confirm('Reset all progress?')) { progress = {}; saveProgress(); renderProgress(); showToast('Progress reset!'); }
+}
+
+function saveProgress() { localStorage.setItem('kanji-progress', JSON.stringify(progress)); }
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+// ── INIT ──
+document.body.dataset.tab = 'browse';
+renderBrowse();
+renderStudyCard();
+renderQuiz();
+</script>
+</body>
+</html>
